@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "path": "vendor/vanillajs/modules/math/index.js",
+      "source": "modules/math/index.js",
+      "commit": "68a3e94aa0bd8d44b6c0139742605d9dd9425147",
+      "sha256": "4f4ebf0786b97342c11004b8830a535890b16693458a0436edb1fc581a411da7",
+      "repository": "QSOLKCB/VANILLAJS"
+    },
+    {
+      "path": "vendor/vanillajs/modules/time/index.js",
+      "source": "modules/time/index.js",
+      "commit": "68a3e94aa0bd8d44b6c0139742605d9dd9425147",
+      "sha256": "de94c0bc04e6a269504c5742455ce114f824c2c0d9d59a2fd94555df5d9bb4a2",
+      "repository": "QSOLKCB/VANILLAJS"
+    },
+    {
+      "path": "vendor/vanillajs/modules/audio2d/index.js",
+      "source": "modules/audio2d/index.js",
+      "commit": "68a3e94aa0bd8d44b6c0139742605d9dd9425147",
+      "sha256": "838c90cc71d2ffb89a205eb47d280721bd36e3bfd8b3f7467f31668359d50034",
+      "repository": "QSOLKCB/VANILLAJS"
+    },
+    {
+      "path": "vendor/vanillajs/modules/soundtrack/index.js",
+      "source": "modules/soundtrack/index.js",
+      "commit": "68a3e94aa0bd8d44b6c0139742605d9dd9425147",
+      "sha256": "dd0760175923e4c55d85c19fb441b31890bc1bf6c138965f301cfbbb1eddaaee",
+      "repository": "QSOLKCB/VANILLAJS"
+    },
+    {
+      "path": "vendor/vanillajs/api/audio/index.js",
+      "source": "api/audio/index.js",
+      "commit": "68a3e94aa0bd8d44b6c0139742605d9dd9425147",
+      "sha256": "66c37457ca606c41451cfcf1ae744d7fbc636e1c7523812c94ebedbcc920a2a8",
+      "repository": "QSOLKCB/VANILLAJS"
+    },
+    {
+      "path": "vendor/vanillajs/api/audio/effects.js",
+      "source": "api/audio/effects.js",
+      "commit": "68a3e94aa0bd8d44b6c0139742605d9dd9425147",
+      "sha256": "fc026d3cb208e3a915ad06c6bffae73f267c1ce7d5748ef5a6205b4df594fc5b",
+      "repository": "QSOLKCB/VANILLAJS"
+    },
+    {
+      "path": "vendor/vanillajs/LICENSE",
+      "source": "LICENSE",
+      "commit": "68a3e94aa0bd8d44b6c0139742605d9dd9425147",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "repository": "QSOLKCB/VANILLAJS"
+    },
+    {
+      "path": "vendor/vanillajs/NOTICE",
+      "source": "NOTICE",
+      "commit": "68a3e94aa0bd8d44b6c0139742605d9dd9425147",
+      "sha256": "7d23146b1ff38d86ba989e18be669fe86d1c047025c1b65ea6339b2faa62c861",
+      "repository": "QSOLKCB/VANILLAJS"
+    },
+    {
+      "path": "vendor/synergetics95/js/math.js",
+      "source": "js/math.js",
+      "commit": "96aae2de4a02cd4df86ff2db68af07b1ce7ea1a3",
+      "sha256": "d57d0f57eed5068e7ac4d9fe2f86e6c591428579b31e0f7fc68d5fe4d4a20342",
+      "repository": "QSOLKCB/synergetics2"
+    },
+    {
+      "path": "vendor/synergetics95/LICENSE",
+      "source": "LICENSE",
+      "commit": "96aae2de4a02cd4df86ff2db68af07b1ce7ea1a3",
+      "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04",
+      "repository": "QSOLKCB/synergetics2"
+    },
+    {
+      "path": "vendor/synergetics95/NOTICE.md",
+      "source": "NOTICE.md",
+      "commit": "96aae2de4a02cd4df86ff2db68af07b1ce7ea1a3",
+      "sha256": "735e253f0c4f04370ed6355308c0cb305e86332369ac68512748d4b6d85ee8a3",
+      "repository": "QSOLKCB/synergetics2"
+    },
+    {
+      "path": "vendor/rayshare/LICENSE",
+      "source": "LICENSE",
+      "commit": "e0f7fe59331b5a09ac1e20164a12280202ab44d0",
+      "sha256": "6cea8f1d75f8cc9608a11bb4d9a48c26fbfa221f75823c6bc49c8ef6222aefe3",
+      "repository": "RyanJBuchanan/RayShare"
+    },
+    {
+      "path": "vendor/rayshare/raycast.js",
+      "source": "app.js",
+      "repository": "RyanJBuchanan/RayShare",
+      "commit": "e0f7fe59331b5a09ac1e20164a12280202ab44d0",
+      "sourceSha256": "cd5410c4a240020e45b7d03a3add1147029aaed2c76debedf4acff3746942a5b",
+      "sha256": "c44e5c0234d0253cacdfb760d81e159859c11d52f169d47ed131314a00b64e77",
+      "adapted": true,
+      "changes": "Pure DDA map interface, bounded ray misses, grid traversal sight, mutual cones and disk collision"
+    }
+  ]
+}

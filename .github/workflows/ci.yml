@@ -1,0 +1,60 @@
+name: Validate and deploy Concentric
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: concentric-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+      - name: Install pinned Python tooling
+        run: python3 -m pip install --user uv==0.9.18
+      - name: Geometry, simulation, PCM and provenance
+        run: node --test tests/*.test.js
+      - name: Install development-only browser
+        run: uv run --no-project --python 3.12 --with playwright==1.62.0 python -m playwright install --with-deps chromium
+      - name: Play the packaged expedition
+        run: uv run --no-project --python 3.12 --with playwright==1.62.0 python tests/browser.py
+      - name: Preserve browser evidence, including failures
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: browser-evidence
+          path: test-results/
+          if-no-files-found: warn
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: validate
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
+      - name: Stage only distributable files
+        run: |
+          mkdir _site
+          cp index.html style.css sw.js .nojekyll LICENSE NOTICE.md _site/
+          cp -r js vendor assets _site/
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
+        with:
+          path: _site
+      - uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
+        id: deployment

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#102d38">
+  <meta name="description" content="A funny little expedition into a very geometric universe. A RayShare × VANILLAJS synergetics game by QSOL-IMC.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Concentric — SynergeticGames</title>
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="./" aria-label="SynergeticGames home"><span class="brand-mark">◈</span><span>QSOL–IMC <small>SYNERGETIC GAMES / 001</small></span></a>
+    <span class="edition">BUILT FOR THE SCHOOL OF TOMORROW <i>v0.1</i></span>
+  </header>
+  <main>
+    <div class="heading-row"><div><p class="eyebrow">THE DEPARTMENT OF UNNECESSARY CUBES PRESENTS</p><h1>Concentric<span>.</span></h1></div><p class="tagline">A small adventure.<br>A whole different way to see.</p></div>
+    <div class="toolbar" aria-label="Expedition tools">
+      <div class="tool-group"><button id="pause" disabled>Pause <kbd>P</kbd></button><button id="switch" disabled>Switch probe <kbd>Q</kbd></button><button id="face" disabled>Face partner <kbd>F</kbd></button></div>
+      <div class="tool-group"><button id="sound" aria-pressed="false">Sound off</button><button id="notes">Field notes</button><button id="save">Save</button><button id="load">Load</button><input id="file" type="file" accept="application/json,.json" hidden></div>
+    </div>
+    <div class="expedition">
+      <section class="viewport" aria-label="Expedition view">
+        <div class="view-frame">
+        <canvas id="world" width="960" height="600" tabindex="0" aria-label="3D expedition. W A S D move, arrow keys turn or move, E inspect, Q switch probe, F face partner, Space synchronise, P pause."></canvas>
+        <div class="view-label"><span class="live-dot"></span> FIELD STATION / <span id="probe-label">PIP · 01</span></div>
+        <div id="intro" class="intro">
+          <p class="eyebrow">WELCOME, JUNIOR GEOMETER</p><h2>The universe has<br>a paperwork problem.</h2>
+          <p>Four exhibits have lost their connections. You and a second survey probe must put them back together.</p>
+          <button id="start" class="primary">Begin expedition <span>↗</span></button>
+          <p class="intro-foot">Explore. Build. Compare. Connect.<br>No timer. Curiosity is the only prerequisite.</p>
+        </div>
+        <div id="paused" class="pause-panel" hidden><p class="eyebrow">TIME FOR A DIFFERENT PERSPECTIVE</p><h2>Expedition paused.</h2><p>The geometry will wait for you.</p><button id="resume" class="primary">Resume expedition</button></div>
+        <div id="victory" class="pause-panel" hidden><p class="eyebrow">ALL SYSTEMS: SYNERGETIC</p><h2>The whole is back.</h2><p>Four exhibits. Two perspectives. One connected system.<br>The Department has approved a triangle-shaped biscuit.</p><button id="continue" class="primary">Keep exploring</button></div>
+        <div class="interaction"><span id="prompt">Your field station is ready.</span><button id="inspect" disabled>Inspect <kbd>E</kbd></button></div>
+        </div>
+        <div class="touch-controls" aria-label="Touch movement controls">
+          <button data-hold="ArrowLeft" aria-label="Turn left">↶</button><button data-hold="KeyW" aria-label="Move forward">↑</button><button data-hold="ArrowRight" aria-label="Turn right">↷</button><button data-hold="KeyA" aria-label="Strafe left">←</button><button data-hold="KeyS" aria-label="Move backward">↓</button><button data-hold="KeyD" aria-label="Strafe right">→</button><button data-hold="Space" class="sync-button">Hold to link</button>
+        </div>
+      </section>
+      <aside class="sidebar">
+        <div class="mission-heading"><p class="eyebrow">FIELD OBJECTIVE</p><span id="seal-count">00 / 04</span></div>
+        <h2 id="objective">Restore the connections.</h2>
+        <p id="objective-detail">Visit the four coloured exhibits. Each one is a small experiment you can solve by doing.</p>
+        <ol id="checklist" class="checklist"></ol>
+        <div class="station-map"><canvas id="map" width="190" height="190" aria-label="Station map. Build north, Measure west, Connect east, Locate south. The engine is in the centre."></canvas><div><p class="eyebrow">STATION PLAN</p><p>North · Build<br>West · Measure<br>East · Connect<br>South · Locate</p><p><span class="pip">●</span> Pip <span class="mica">●</span> Mica</p></div></div>
+        <div class="relay"><div><span>Shared perspective</span><strong id="link-label">Find your partner</strong></div><progress id="sync-progress" max="120" value="0" aria-label="Relay synchronisation"></progress></div>
+        <p class="aside-joke" id="quip">“Please keep all four dimensions of your address legible.”<span>— The Coordinate Office</span></p>
+      </aside>
+    </div>
+    <div class="controls-bar"><p><kbd>W A S D</kbd> Move · <kbd>← →</kbd> Turn · drag view to look · <kbd>E</kbd> Inspect · <kbd>Space</kbd> Link</p><label><input id="motion" type="checkbox"> Still exhibits</label></div>
+    <p id="status" class="status" role="status" aria-live="polite">Built with RayShare × VANILLAJS. Inspired by Synergetics 95 and Kirby Urner’s geometry teaching.</p>
+  </main>
+  <footer><span>BUILT FOR THE SCHOOL OF TOMORROW.</span><span>Created by QSOL–IMC as independent contributors to open science. We are not members of the School of Tomorrow.</span></footer>
+  <dialog id="lab" aria-labelledby="lab-title">
+    <div class="dialog-top"><p id="lab-kicker" class="eyebrow">FIELD EXPERIMENT</p><button id="close-lab" aria-label="Close experiment">×</button></div>
+    <h2 id="lab-title"></h2><p id="lab-brief"></p>
+    <canvas id="lab-canvas" width="640" height="300" aria-label="Rotating geometric construction"></canvas>
+    <p id="lab-readout" class="readout"></p><div id="lab-controls" class="lab-controls"></div><p id="lab-feedback" role="status" aria-live="polite"></p>
+    <div class="lab-footer"><span>COMPUTED GEOMETRY · DECLARED UNITS</span><a id="lab-source" target="_blank" rel="noopener">Read the field reference ↗</a></div>
+  </dialog>
+  <dialog id="notebook" aria-labelledby="notebook-title">
+    <div class="dialog-top"><p class="eyebrow">THE FIELD NOTEBOOK</p><button id="close-notes" aria-label="Close field notes">×</button></div>
+    <h2 id="notebook-title">A few useful connections.</h2>
+    <p><strong>Built for the School of Tomorrow.</strong> Created by QSOL–IMC as independent contributors to open science. We are not members of the School of Tomorrow. This is an independent contribution, not an official School of Tomorrow publication or endorsement.</p>
+    <p>Walk to a coloured exhibit and choose <strong>Inspect</strong>. Build its connection, then return to the station. You can do the four experiments in any order.</p>
+    <p>For the finale, park both probes near the central engine. <strong>Q</strong> switches the probe you control; <strong>F</strong> turns it toward its partner. Face each other with a clear view, then hold <strong>Space</strong> for two seconds. Use the map to see both headings.</p>
+    <h3>Where the ideas come from</h3>
+    <p><a href="https://qsolkcb.github.io/synergetics2/#/home" target="_blank" rel="noopener">Synergetics 95 — Educator Edition</a> is the teaching reference and geometry source. Tetravolumes here use a regular tetrahedron of edge 1 as the unit. The equal-edge octahedron has volume 4; the cuboctahedron has volume 20. These comparisons do not mean that four regular tetrahedra tile a regular octahedron.</p>
+    <p><a href="https://www.youtube.com/watch?v=wxMmUJygIRg" target="_blank" rel="noopener">Kirby Urner: The Proposal (Martian Math Portfolio)</a> supplies the curriculum direction: make tetrahedral accounting and relationships something people can explore.</p>
+    <p><a href="https://github.com/RyanJBuchanan/RayShare" target="_blank" rel="noopener">Ryan’s RayShare</a> supplies the raycaster and the two-observer connection idea. The relay is a game metaphor for sharing perspectives, not a physical law.</p>
+    <p><a href="https://www.youtube.com/playlist?list=PLbcn_8NsfcIrKQPqpC8VTEeTPBVlRe0E4" target="_blank" rel="noopener">Polydactica’s Earthbound Music playlist</a> is a mood reference. Our score, <em>A Small Department on a Very Large Planet</em>, is original procedural music, made with <a href="https://github.com/QSOLKCB/VANILLAJS" target="_blank" rel="noopener">VANILLAJS</a>.</p>
+    <div class="notebook-actions"><button id="wav">Download original soundtrack</button><button id="restart">Start a new expedition</button><button id="confirm-restart" hidden>Confirm new expedition</button></div>
+    <p class="smallprint">Game code: Apache-2.0. RayShare adaptation: MIT. Synergetics 95 geometry: MPL-2.0. Source and retained notices are in the repository. This game explores Fuller’s geometry; it does not model Haken’s separate synergetics tradition.</p>
+  </dialog>
+  <noscript>This expedition needs JavaScript. Its code and geometry run locally in your browser.</noscript>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
