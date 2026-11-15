@@ -113,9 +113,10 @@ try:
         page.keyboard.down('w')
         page.locator('#view-mode').click()
         expect(page.locator('body')).to_have_attribute('data-view', 'fit')
+        advance(page, 100)  # Publish the settled pose after the layout-changing click.
         stopped = pose(page)
         advance(page, 400)
-        assert pose(page) == stopped
+        assert pose(page) == stopped, f'Display transition retained movement: {stopped} -> {pose(page)}'
         page.keyboard.up('w')
         page.screenshot(path=str(OUT / 'desktop-fit.png'), full_page=True)
         page.locator('#view-mode').click()
@@ -247,6 +248,7 @@ try:
         for _ in range(3):
             page.get_by_role('button', name='Subtract 1 from all four', exact=True).click()
         expect(page.locator('#lab-readout')).to_contain_text('[2, 0, 1, 0]')
+        page.screenshot(path=str(OUT / 'quadray-lab.png'), full_page=True)
         close_lab(page)
         expect(page.locator('#seal-count')).to_have_text('04 / 04')
         record('all four experiments completed through actual UI, including a wrong answer')
