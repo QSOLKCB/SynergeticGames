@@ -76,7 +76,7 @@ export function createRenderer(canvas,mapCanvas){
       }
       sc.fillStyle='#081d2be8';sc.fillRect(12,36,296,36);sc.strokeStyle=o.color+'88';sc.strokeRect(12,36,296,36);
       sc.fillStyle=o.color;sc.font='bold 13px monospace';sc.fillText(o.name.toUpperCase(),160,59);
-      const size=Math.min(h*3,focal*(o.id==='core'?2.3:1.8)/o.d),left=w/2+o.side*focal/o.d-size/2,top=horizon+.62*focal/o.d-size*370/320;
+      const size=Math.min(h*3,focal*(o.id==='core'?1.55:1.5)/o.d),left=w/2+o.side*focal/o.d-size/2,top=horizon+.62*focal/o.d-size*370/320;
       for(let x=Math.max(0,Math.floor(left));x<Math.min(w,left+size);x+=2){
         if(o.d>depth[x]+.02)continue;
         const sx=(x-left)*320/size,sw=Math.min(320-sx,2*320/size);
@@ -85,7 +85,7 @@ export function createRenderer(canvas,mapCanvas){
     }
     // Restrained viewfinder; no flashing or camera shake.
     ctx.strokeStyle='#e4eee38a';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(w/2-7,horizon);ctx.lineTo(w/2+7,horizon);ctx.moveTo(w/2,horizon-7);ctx.lineTo(w/2,horizon+7);ctx.stroke();
-    ctx.fillStyle='#061b2888';ctx.fillRect(18,h-48,226,29);ctx.fillStyle='#c2d9d5';ctx.font='11px monospace';ctx.fillText(`${s.active===0?'PIP 01':'MICA 02'}   ${p.x.toFixed(1)} / ${p.y.toFixed(1)}   ${seals(s)}/4`,30,h-29);
+    ctx.fillStyle='#061b2888';ctx.fillRect(18,h-91,226,29);ctx.fillStyle='#c2d9d5';ctx.font='11px monospace';ctx.fillText(`${s.active===0?'PIP 01':'MICA 02'}   ${p.x.toFixed(1)} / ${p.y.toFixed(1)}   ${seals(s)}/4`,30,h-72);
     drawMap(s);
   }
   function drawMap(s){

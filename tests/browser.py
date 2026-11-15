@@ -214,14 +214,19 @@ try:
             page.screenshot(path=str(OUT / f'mobile-{width}.png'), full_page=True)
             page.locator('#start').click()
             advance(page, 150)
+            control = page.get_by_role('button', name='Move forward', exact=True)
+            control.scroll_into_view_if_needed()
             before = pose(page)
-            rect = page.get_by_role('button', name='Move forward', exact=True).bounding_box()
+            rect = control.bounding_box()
+            view = page.locator('#world').bounding_box()
+            assert rect['y'] + rect['height'] <= 844
+            assert view['y'] + view['height'] - max(0, view['y']) >= 200, 'The game must stay visible while steering'
             page.mouse.move(rect['x'] + rect['width']/2, rect['y'] + rect['height']/2)
             page.mouse.down()
             advance(page, 500)
             page.mouse.up()
             advance(page, 100)
-            assert pose(page)['y'] < before['y'] - .8
+            assert pose(page)['y'] < before['y'] - .8, f'Held movement failed at {width}px: {before} -> {pose(page)}'
             stopped = pose(page)
             advance(page, 500)
             assert pose(page) == stopped
@@ -251,7 +256,7 @@ try:
     receipt['status'] = 'PASS'
 except Exception as error:
     receipt['status'] = 'FAIL'
-    receipt['error'] = str(error)
+    receipt['error'] = repr(error)
     raise
 finally:
     receipt['pageErrors'] = errors

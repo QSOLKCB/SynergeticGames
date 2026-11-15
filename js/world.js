@@ -25,7 +25,7 @@ export const MAP=Object.freeze([
 export const EXHIBITS=Object.freeze([
  {id:'tetra',name:'The Minimum Department',short:'Build',x:9.5,y:3.5,color:'#f6b754',mesh:'tetra',
   brief:'Build a tetrahedron from four vertices and six struts. The department tried three points. It was a flat-out failure.',
-  fact:'A regular tetrahedron has 4 vertices, 6 edges and 4 triangular faces. It is the smallest closed polyhedron.',article:'minimum-system'},
+  fact:'A regular tetrahedron has 4 vertices, 6 edges and 4 triangular faces. A tetrahedron has the fewest faces of any closed polyhedron.',article:'minimum-system'},
  {id:'volume',name:'The Volume Bureau',short:'Measure',x:3.5,y:9.5,color:'#66d9cd',mesh:'octa',
   brief:'Calibrate the octahedron, then the vector equilibrium. Your unit is one regular tetrahedron, with the same edge length as each target.',
   fact:'At equal edge length: tetrahedron = 1, octahedron = 4, cuboctahedron (vector equilibrium) = 20 tetravolumes.',article:'tetrahedral-accounting'},

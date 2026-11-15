@@ -23,6 +23,7 @@
     </div>
     <div class="expedition">
       <section class="viewport" aria-label="Expedition view">
+        <div class="view-frame">
         <canvas id="world" width="960" height="600" tabindex="0" aria-label="3D expedition. W A S D move, arrow keys turn or move, E inspect, Q switch probe, F face partner, Space synchronise, P pause."></canvas>
         <div class="view-label"><span class="live-dot"></span> FIELD STATION / <span id="probe-label">PIP · 01</span></div>
         <div id="intro" class="intro">
@@ -34,6 +35,10 @@
         <div id="paused" class="pause-panel" hidden><p class="eyebrow">TIME FOR A DIFFERENT PERSPECTIVE</p><h2>Expedition paused.</h2><p>The geometry will wait for you.</p><button id="resume" class="primary">Resume expedition</button></div>
         <div id="victory" class="pause-panel" hidden><p class="eyebrow">ALL SYSTEMS: SYNERGETIC</p><h2>The whole is back.</h2><p>Four exhibits. Two perspectives. One connected system.<br>The Department has approved a triangle-shaped biscuit.</p><button id="continue" class="primary">Keep exploring</button></div>
         <div class="interaction"><span id="prompt">Your field station is ready.</span><button id="inspect" disabled>Inspect <kbd>E</kbd></button></div>
+        </div>
+        <div class="touch-controls" aria-label="Touch movement controls">
+          <button data-hold="ArrowLeft" aria-label="Turn left">↶</button><button data-hold="KeyW" aria-label="Move forward">↑</button><button data-hold="ArrowRight" aria-label="Turn right">↷</button><button data-hold="KeyA" aria-label="Strafe left">←</button><button data-hold="KeyS" aria-label="Move backward">↓</button><button data-hold="KeyD" aria-label="Strafe right">→</button><button data-hold="Space" class="sync-button">Hold to link</button>
+        </div>
       </section>
       <aside class="sidebar">
         <div class="mission-heading"><p class="eyebrow">FIELD OBJECTIVE</p><span id="seal-count">00 / 04</span></div>
@@ -46,9 +51,6 @@
       </aside>
     </div>
     <div class="controls-bar"><p><kbd>W A S D</kbd> Move · <kbd>← →</kbd> Turn · drag view to look · <kbd>E</kbd> Inspect · <kbd>Space</kbd> Link</p><label><input id="motion" type="checkbox"> Still exhibits</label></div>
-    <div class="touch-controls" aria-label="Touch movement controls">
-      <button data-hold="ArrowLeft" aria-label="Turn left">↶</button><button data-hold="KeyW" aria-label="Move forward">↑</button><button data-hold="ArrowRight" aria-label="Turn right">↷</button><button data-hold="KeyA" aria-label="Strafe left">←</button><button data-hold="KeyS" aria-label="Move backward">↓</button><button data-hold="KeyD" aria-label="Strafe right">→</button><button data-hold="Space" class="sync-button">Hold to link</button>
-    </div>
     <p id="status" class="status" role="status" aria-live="polite">Built with RayShare × VANILLAJS. Inspired by Synergetics 95 and Kirby Urner’s geometry teaching.</p>
   </main>
   <footer><span>BUILT FOR THE SCHOOL OF TOMORROW.</span><span>Created by QSOL–IMC as independent contributors to open science. We are not members of the School of Tomorrow.</span></footer>

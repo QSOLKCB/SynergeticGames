@@ -25,7 +25,14 @@ const chime=createSound2D({frames:24000,events:[
   {id:3,sample:12000,duration:12000,channel:2,frequency:784,gain:2200,wave:'triangle'}]});
 export function audioSystem(report){
   let context=null,player=null,effects=null,enabled=false,failed=false;
-  function fail(error){try{player?.stop();effects?.stopAll();}catch{}failed=true;report('Audio unavailable in this session. You can retry Sound.');console.warn('Concentric audio:',error);}
+  function fail(error){
+    failed=true;
+    try{player?.dispose();}catch{}
+    try{effects?.dispose();}catch{}
+    try{context?.close()?.catch(()=>{});}catch{}
+    context=null;player=null;effects=null;
+    report('Audio unavailable in this session. You can retry Sound.');console.warn('Concentric audio:',error);
+  }
   return {
     async toggle(){
       enabled=!enabled;failed=false;
