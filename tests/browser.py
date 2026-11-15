@@ -95,6 +95,13 @@ try:
         expect(page.locator('footer')).to_contain_text('We are not members of the School of Tomorrow')
         page.locator('#start').click()
         advance(page, 200)
+        expect(page.locator('#wayfinder')).to_be_visible()
+        expect(page.locator('#wayfinder-target')).to_have_text('The Minimum Department')
+        expect(page.locator('#inspect')).to_be_disabled()
+        page.keyboard.press('e')
+        expect(page.locator('#lab')).to_be_hidden()
+        page.locator('#sound').click()
+        expect(page.locator('#sound')).to_have_attribute('aria-pressed', 'true')
         before = pose(page)
         hold(page, 'w', 500)
         assert pose(page)['y'] < before['y'] - .8
@@ -102,6 +109,24 @@ try:
         assert pose(page)['x'] < before['x'] - .5
         travel_axis(page, 'x', 9.5)
         record('actual keyboard movement and lateral strafing')
+
+        page.keyboard.down('w')
+        page.locator('#view-mode').click()
+        expect(page.locator('body')).to_have_attribute('data-view', 'fit')
+        advance(page, 100)  # Publish the settled pose after the layout-changing click.
+        stopped = pose(page)
+        advance(page, 400)
+        assert pose(page) == stopped, f'Display transition retained movement: {stopped} -> {pose(page)}'
+        page.keyboard.up('w')
+        page.screenshot(path=str(OUT / 'desktop-fit.png'), full_page=True)
+        page.locator('#view-mode').click()
+        expect(page.locator('body')).to_have_attribute('data-view', 'page')
+        page.locator('#fullscreen').click()
+        expect(page.locator('body')).to_have_attribute('data-view', 'fullscreen')
+        assert page.evaluate('document.fullscreenElement === document.documentElement')
+        page.locator('#fullscreen').click()
+        expect(page.locator('body')).to_have_attribute('data-view', 'page')
+        record('VANILLAJS fit/fullscreen transitions release held input and restore page view')
 
         page.keyboard.down('w')
         page.keyboard.press('p')
@@ -172,8 +197,19 @@ try:
         record('editable fields and notebook retain their keyboard handling')
 
         travel_axis(page, 'y', 4.8)
+        expect(page.locator('#interaction')).to_have_attribute('data-ready', 'true')
+        expect(page.locator('#inspect-hint')).to_be_visible()
+        expect(page.locator('#inspect')).to_be_enabled()
+        expect(page.locator('#interaction-help')).to_contain_text('Press E or tap')
+        expect(page.locator('#wayfinder')).to_be_hidden()
+        button = page.locator('#inspect').bounding_box()
+        assert button['width'] >= 170 and button['height'] >= 60
         page.screenshot(path=str(OUT / 'desktop-play.png'), full_page=True)
-        open_lab(page, 'The Minimum Department')
+        page.keyboard.press('e')
+        expect(page.locator('#lab-title')).to_have_text('The Minimum Department')
+        expect(page.locator('#lab')).to_be_visible()
+        expect(page.locator('#inspect-hint')).to_be_hidden()
+        record('prominent Inspect prompt opens the reachable experiment with E')
         page.keyboard.press('p')
         expect(page.locator('#lab')).to_be_visible()
         expect(page.locator('#paused')).to_be_hidden()
@@ -212,6 +248,7 @@ try:
         for _ in range(3):
             page.get_by_role('button', name='Subtract 1 from all four', exact=True).click()
         expect(page.locator('#lab-readout')).to_contain_text('[2, 0, 1, 0]')
+        page.screenshot(path=str(OUT / 'quadray-lab.png'), full_page=True)
         close_lab(page)
         expect(page.locator('#seal-count')).to_have_text('04 / 04')
         record('all four experiments completed through actual UI, including a wrong answer')
@@ -248,7 +285,6 @@ try:
         wav = Path(event.value.path()).read_bytes()
         assert hashlib.sha256(wav).hexdigest() == 'b2108a62f79dca00bb515c190d3c021b3d6adf837ea86398a6cf2fea579beee3'
         page.locator('#close-notes').click()
-        page.locator('#sound').click()
         expect(page.locator('#sound')).to_have_attribute('aria-pressed', 'true')
         advance(page, 150)
         page.locator('#sound').click()
@@ -294,17 +330,31 @@ try:
             stopped = pose(page)
             advance(page, 500)
             assert pose(page) == stopped
+            travel_axis(page, 'y', 4.8)
+            expect(page.locator('#inspect-hint')).to_be_visible()
+            expect(page.locator('#inspect')).to_be_enabled()
+            button = page.locator('#inspect').bounding_box()
+            assert button['width'] >= 100 and button['height'] >= 60
+            assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+            page.screenshot(path=str(OUT / f'mobile-inspect-{width}.png'), full_page=True)
+            open_lab(page, 'The Minimum Department')
+            page.keyboard.press('Escape')
+            expect(page.locator('#lab')).to_be_hidden()
             record(f'{width}px touch layout, motion preference and held-control release')
             mobile.close()
 
         fallback = browser.new_context(viewport={'width': 900, 'height': 900})
-        fallback.add_init_script("Object.defineProperty(window,'AudioContext',{value:undefined}); Object.defineProperty(window,'webkitAudioContext',{value:undefined}); Storage.prototype.setItem=function(){throw new Error('storage blocked')};")
+        fallback.add_init_script("Object.defineProperty(window,'AudioContext',{value:undefined}); Object.defineProperty(window,'webkitAudioContext',{value:undefined}); Storage.prototype.setItem=function(){throw new Error('storage blocked')}; Element.prototype.requestFullscreen=async function(){throw new Error('fullscreen denied')};")
         page = fallback.new_page()
         page.on('pageerror', lambda error: errors.append(str(error)))
         page.clock.install()
         page.goto(URL)
         advance(page, 200)
         page.locator('#start').click()
+        page.locator('#fullscreen').click()
+        expect(page.locator('body')).to_have_attribute('data-view', 'fit')
+        expect(page.locator('#status')).to_contain_text('Fullscreen unavailable')
+        expect(page.locator('#view-mode')).to_be_enabled()
         page.locator('#sound').click()
         expect(page.locator('#status')).to_contain_text('Audio unavailable')
         before = pose(page)
@@ -313,7 +363,7 @@ try:
         with page.expect_download() as event:
             page.locator('#save').click()
         assert json.loads(Path(event.value.path()).read_text())['kind'] == 'concentric.save.v1'
-        record('unavailable audio and blocked storage do not stop gameplay or download saves')
+        record('denied fullscreen, unavailable audio and blocked storage do not stop gameplay or download saves')
         fallback.close()
         assert not errors, errors
         browser.close()

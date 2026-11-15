@@ -1,12 +1,13 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 const PREFIX='concentric-'+new URL(self.registration.scope).pathname+'-';
-const CACHE=PREFIX+'v0.1.0-3';
+const CACHE=PREFIX+'v0.2.0-2';
 const ASSETS=['./','./index.html','./style.css','./assets/icon.svg',
   './js/app.js','./js/game.js','./js/world.js','./js/render.js','./js/music.js',
   './vendor/rayshare/raycast.js','./vendor/synergetics95/js/math.js',
   './vendor/vanillajs/modules/math/index.js','./vendor/vanillajs/modules/time/index.js',
   './vendor/vanillajs/modules/audio2d/index.js','./vendor/vanillajs/modules/soundtrack/index.js',
-  './vendor/vanillajs/api/audio/index.js','./vendor/vanillajs/api/audio/effects.js'];
+  './vendor/vanillajs/api/audio/index.js','./vendor/vanillajs/api/audio/effects.js',
+  './vendor/vanillajs/api/display/index.js'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{
   for(const key of await caches.keys())if(key.startsWith(PREFIX)&&key!==CACHE)await caches.delete(key);

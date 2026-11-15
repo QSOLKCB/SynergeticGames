@@ -13,28 +13,33 @@
 <body>
   <header class="masthead">
     <a class="brand" href="./" aria-label="SynergeticGames home"><span class="brand-mark">◈</span><span>QSOL–IMC <small>SYNERGETIC GAMES / 001</small></span></a>
-    <span class="edition">BUILT FOR THE SCHOOL OF TOMORROW <i>v0.1</i></span>
+    <span class="edition">BUILT FOR THE SCHOOL OF TOMORROW <i>v0.2</i></span>
   </header>
   <main>
     <div class="heading-row"><div><p class="eyebrow">THE DEPARTMENT OF UNNECESSARY CUBES PRESENTS</p><h1>Concentric<span>.</span></h1></div><p class="tagline">A small adventure.<br>A whole different way to see.</p></div>
     <div class="toolbar" aria-label="Expedition tools">
       <div class="tool-group"><button id="pause" disabled>Pause <kbd>P</kbd></button><button id="switch" disabled>Switch probe <kbd>Q</kbd></button><button id="face" disabled>Face partner <kbd>F</kbd></button></div>
-      <div class="tool-group"><button id="sound" aria-pressed="false">Sound off</button><button id="notes">Field notes</button><button id="save">Save</button><button id="load">Load</button><input id="file" type="file" accept="application/json,.json" hidden></div>
+      <div class="tool-group"><button id="sound" aria-pressed="false">Sound off</button><button id="view-mode" aria-pressed="false">Fit window</button><button id="fullscreen">Fullscreen ⛶</button><button id="notes">Field notes</button><button id="save">Save</button><button id="load">Load</button><input id="file" type="file" accept="application/json,.json" hidden></div>
     </div>
     <div class="expedition">
       <section class="viewport" aria-label="Expedition view">
         <div class="view-frame">
         <canvas id="world" width="960" height="600" tabindex="0" aria-label="3D expedition. W A S D move, arrow keys turn or move, E inspect, Q switch probe, F face partner, Space synchronise, P pause."></canvas>
         <div class="view-label"><span class="live-dot"></span> FIELD STATION / <span id="probe-label">PIP · 01</span></div>
+        <div id="wayfinder" class="wayfinder" hidden><span id="wayfinder-arrow" aria-hidden="true">↑</span><span><small>NEXT CONNECTION</small><strong id="wayfinder-target">The Minimum Department</strong></span></div>
         <div id="intro" class="intro">
           <p class="eyebrow">WELCOME, JUNIOR GEOMETER</p><h2>The universe has<br>a paperwork problem.</h2>
-          <p>Four exhibits have lost their connections. You and a second survey probe must put them back together.</p>
+          <p>Four exhibits have lost their connections. Follow a coloured trail, then <strong>press E or tap Inspect</strong> to bring each one back.</p>
           <button id="start" class="primary">Begin expedition <span>↗</span></button>
           <p class="intro-foot">Explore. Build. Compare. Connect.<br>No timer. Curiosity is the only prerequisite.</p>
         </div>
         <div id="paused" class="pause-panel" hidden><p class="eyebrow">TIME FOR A DIFFERENT PERSPECTIVE</p><h2>Expedition paused.</h2><p>The geometry will wait for you.</p><button id="resume" class="primary">Resume expedition</button></div>
         <div id="victory" class="pause-panel" hidden><p class="eyebrow">ALL SYSTEMS: SYNERGETIC</p><h2>The whole is back.</h2><p>Four exhibits. Two perspectives. One connected system.<br>The Department has approved a triangle-shaped biscuit.</p><button id="continue" class="primary">Keep exploring</button></div>
-        <div class="interaction"><span id="prompt">Your field station is ready.</span><button id="inspect" disabled>Inspect <kbd>E</kbd></button></div>
+        <div id="inspect-hint" class="inspect-hint" aria-hidden="true" hidden><kbd>E</kbd><span>Press E or tap Inspect</span><span>↓</span></div>
+        <div id="interaction" class="interaction" data-ready="false">
+          <div class="interaction-copy"><span id="interaction-kicker">EXPLORE THE STATION</span><strong id="prompt" aria-live="polite">Your field station is ready.</strong><span id="interaction-help">Walk towards a coloured exhibit.</span></div>
+          <button id="inspect" aria-label="Inspect exhibit (E)" aria-describedby="prompt interaction-help" disabled><kbd>E</kbd><span>INSPECT<small>Open experiment ↗</small></span></button>
+        </div>
         </div>
         <div class="touch-controls" aria-label="Touch movement controls">
           <button data-hold="ArrowLeft" aria-label="Turn left">↶</button><button data-hold="KeyW" aria-label="Move forward">↑</button><button data-hold="ArrowRight" aria-label="Turn right">↷</button><button data-hold="KeyA" aria-label="Strafe left">←</button><button data-hold="KeyS" aria-label="Move backward">↓</button><button data-hold="KeyD" aria-label="Strafe right">→</button><button data-hold="Space" class="sync-button">Hold to link</button>
@@ -65,7 +70,8 @@
     <div class="dialog-top"><p class="eyebrow">THE FIELD NOTEBOOK</p><button id="close-notes" aria-label="Close field notes">×</button></div>
     <h2 id="notebook-title">A few useful connections.</h2>
     <p><strong>Built for the School of Tomorrow.</strong> Created by QSOL–IMC as independent contributors to open science. We are not members of the School of Tomorrow. This is an independent contribution, not an official School of Tomorrow publication or endorsement.</p>
-    <p>Walk to a coloured exhibit and choose <strong>Inspect</strong>. Build its connection, then return to the station. You can do the four experiments in any order.</p>
+    <p>Follow a coloured floor trail to an exhibit. The large <strong>E / Inspect</strong> button lights up when you are close enough. Press <strong>E</strong> or tap the button to begin. You can do the four experiments in any order. The compass points towards the next unfinished exhibit; the map shows the rooms and corridors.</p>
+    <p><strong>Fit window</strong> gives the station more room. <strong>Fullscreen</strong> uses your display when supported. Either transition releases held controls. Sound is optional: connections, experiments and the finale have their own original VANILLAJS chimes.</p>
     <p>For the finale, park both probes near the central engine. <strong>Q</strong> switches the probe you control; <strong>F</strong> turns it toward its partner. Face each other with a clear view, then hold <strong>Space</strong> for two seconds. Use the map to see both headings.</p>
     <h3>Where the ideas come from</h3>
     <p><a href="https://qsolkcb.github.io/synergetics2/#/home" target="_blank" rel="noopener">Synergetics 95 — Educator Edition</a> is the teaching reference and geometry source. Tetravolumes here use a regular tetrahedron of edge 1 as the unit. The equal-edge octahedron has volume 4; the cuboctahedron has volume 20. These comparisons do not mean that four regular tetrahedra tile a regular octahedron.</p>

@@ -8,6 +8,8 @@ A small 2.5D adventure about a whole different way to see. Explore a geometric f
 
 [Play on GitHub Pages](https://qsolkcb.github.io/SynergeticGames/) · [Teaching reference](https://qsolkcb.github.io/synergetics2/#/home) · [Sources and scope](docs/SOURCES.md)
 
+**v0.2 — The Field Station Edition.** Follow coloured floor trails through lit exhibit rooms, with shaded holograms, quiet particles, and a compass towards your next connection. The large gold **E / INSPECT** button lights up when an experiment is within reach; a prompt in the view makes the keyboard and touch action explicit. Seven original VANILLAJS cues distinguish selections, connections, mistakes, discoveries, probe switches and the finale. **Fit window** and **Fullscreen** give the station more room.
+
 ## The expedition
 
 You control **Pip** and **Mica**, two geometric survey probes with a remarkable ability to make a simple task require two perspectives.
@@ -24,7 +26,7 @@ There is no countdown, combat, account, or score penalty for trying something. T
 
 ## Play
 
-Move toward a coloured exhibit until **Inspect** becomes available. Experiments can be completed in any order. Once all four are restored, bring both probes near the central engine, turn each toward its partner, and hold the link control for two seconds.
+Follow a coloured floor trail toward an exhibit. When the gold **E / INSPECT** button lights up, press **E** or tap it to open the experiment. The compass indicates the next unfinished exhibit; use the map for the route through the rooms. Experiments can be completed in any order. Once all four are restored, bring both probes near the central engine, turn each toward its partner, and hold the link control for two seconds.
 
 | Control | Action |
 |---|---|
@@ -53,7 +55,7 @@ Open `http://localhost:8765`. A static HTTP server is needed because the game us
 ## The actual ingredients
 
 - **[Ryan Jamie’s RayShare](https://github.com/RyanJBuchanan/RayShare)**: adapted DDA raycasting and mutual-facing connection mechanics, with grid-exact sight checks and disk collision added here. MIT notice retained.
-- **[QSOL-IMC VANILLAJS](https://github.com/QSOLKCB/VANILLAJS)**: unchanged math, fixed clock, integer PCM synthesis, soundtrack and audio playback modules. The runtime uses those modules directly.
+- **[QSOL-IMC VANILLAJS](https://github.com/QSOLKCB/VANILLAJS)**: unchanged math, fixed clock, integer PCM synthesis, soundtrack, audio playback and display-controller modules. Facet lighting uses the math module; the runtime uses these modules directly.
 - **[Synergetics 95](https://qsolkcb.github.io/synergetics2/#/home)**: unchanged tested geometry helpers, plus the educator edition as the reference for the original game explanations. MPL-2.0 source and notices retained.
 - **[Kirby Urner’s channel](https://www.youtube.com/@kirbyurner)**: curriculum inspiration, especially [The Proposal (Martian Math Portfolio)](https://www.youtube.com/watch?v=wxMmUJygIRg).
 - **[Polydactica’s Earthbound Music playlist](https://www.youtube.com/playlist?list=PLbcn_8NsfcIrKQPqpC8VTEeTPBVlRe0E4)**: musical mood reference. The game contains a new composition, *A Small Department on a Very Large Planet*, with no EarthBound melodies, samples, or recordings.

@@ -9,3 +9,47 @@
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
 .view-frame{position:relative;overflow:hidden}
 .touch-controls{padding:10px;background:#14333e;border-top:1px solid #405d64}
+/* v0.2: the experiment, not the toolbar, is the primary call to action. */
+.toolbar{align-items:start}.toolbar .tool-group:last-child{justify-content:flex-end}
+.interaction{min-height:100px;padding:15px 18px;gap:18px;background:#0a202ef5;border-top:1px solid #668f89}
+.interaction-copy{display:flex;flex-direction:column;gap:5px;min-width:0}
+#interaction-kicker{font:8px LocalMono,monospace;letter-spacing:1.6px;color:#99b8b3}
+#prompt{font:600 16px/1.2 Arial,Helvetica,sans-serif;color:#eef1dc}
+#interaction-help{font:10px/1.4 Arial,Helvetica,sans-serif;color:#a9c2bd}
+#inspect{display:flex;align-items:center;gap:13px;flex-shrink:0;min-width:174px;min-height:62px;padding:10px 15px;text-align:left;border-radius:5px;border:1px solid #c68b38;background:#efb959;color:#102d38;box-shadow:0 3px 0 #956125,0 0 28px #e7ae5324}
+#inspect>kbd{display:grid;place-items:center;margin:0;opacity:1;border:1px solid #19394590;border-bottom-width:3px;background:#fff3;font:bold 24px LocalMono,monospace;width:38px;height:39px;border-radius:5px}
+#inspect>span{font:bold 16px/1.1 Arial,Helvetica,sans-serif;letter-spacing:.4px}
+#inspect small{display:block;font:9px/1.4 Arial,Helvetica,sans-serif;letter-spacing:0;margin-top:5px}
+#inspect:not(:disabled):hover{background:#ffd282;box-shadow:0 3px 0 #956125,0 0 32px #e7ae5355}
+#inspect:disabled{opacity:1;color:#b0c4bd;background:#1e3942;border-color:#48626a;box-shadow:none}
+#inspect:disabled>kbd{border-color:#7d9893;background:#ffffff08}
+.interaction[data-ready=true]{border-top:2px solid #efb959;background:linear-gradient(100deg,#203a3b,#102b34)}
+.interaction[data-ready=true] #interaction-kicker{color:#ffd17c}.interaction[data-ready=true] #interaction-help{color:#e5dfbe}
+.inspect-hint{position:absolute;bottom:118px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;white-space:nowrap;padding:10px 14px;border:1px solid #f1be68;border-radius:6px;background:#102d38ee;color:#ffcf7d;font:600 12px Arial,Helvetica,sans-serif;box-shadow:0 5px 24px #061b2870;pointer-events:none}
+.inspect-hint kbd{font:bold 18px LocalMono,monospace;margin:0;opacity:1}
+.wayfinder{position:absolute;right:18px;top:17px;display:flex;gap:10px;align-items:center;padding:9px 12px;background:#0c2637df;border:1px solid #648b854d;border-radius:4px;color:#d8e5d0;max-width:250px;pointer-events:none}
+.wayfinder>span:first-child{font:26px Arial,Helvetica,sans-serif;color:#f6b754}.wayfinder small{display:block;font:7px LocalMono,monospace;letter-spacing:1.2px;color:#9ab9b0;margin-bottom:4px}.wayfinder strong{font:11px/1.2 Arial,Helvetica,sans-serif}
+.intro{bottom:125px}.intro strong{color:#ffcf7d}.intro .intro-foot{margin-top:10px}
+#lab-canvas{border:1px solid #52756e;box-shadow:inset 0 0 25px #04172250}
+#lab-feedback{padding:11px 13px;border-left:3px solid #6a9283;background:#e3e6d8;border-radius:0 3px 3px 0;line-height:1.55}
+#lab-feedback[data-tone=complete]{border-color:#3d8266;background:#d4e3cb;color:#234e3d}
+#lab-feedback[data-tone=retry]{border-color:#be8843;background:#ede1c5;color:#674e2b}
+body:is([data-view=fit],[data-view=fullscreen]) .masthead,body:is([data-view=fit],[data-view=fullscreen]) .heading-row{display:none}
+body:is([data-view=fit],[data-view=fullscreen]) main{padding-top:14px;max-width:1800px}
+body:is([data-view=fit],[data-view=fullscreen]) #world{height:max(400px,calc(100dvh - 205px));aspect-ratio:auto}
+body:is([data-view=fit],[data-view=fullscreen]) .sidebar{max-height:max(400px,calc(100dvh - 205px));overflow:auto}
+body:is([data-view=fit],[data-view=fullscreen]) footer{margin-top:0;padding-top:12px;padding-bottom:12px}
+@media(max-width:1100px){.toolbar .tool-group:last-child{justify-content:flex-start}.toolbar{flex-wrap:wrap}.intro{bottom:116px;max-width:280px;padding:15px}.intro h2{font-size:25px}}
+@media(max-width:800px){
+  #world{height:400px;aspect-ratio:auto}.intro{bottom:120px;max-width:320px;padding:17px}.intro h2{font-size:28px}.intro p{font-size:12px}
+  .interaction{min-height:104px;padding:12px;gap:12px}.wayfinder{right:12px;top:45px;max-width:220px}
+  body:is([data-view=fit],[data-view=fullscreen]) #world{height:max(340px,calc(100dvh - 320px))}
+  body:is([data-view=fit],[data-view=fullscreen]) .sidebar{max-height:none;overflow:visible}
+}
+@media(max-width:480px){
+  #world{height:390px}.intro{left:12px;max-width:calc(100% - 24px);bottom:119px;padding:15px}.intro h2{font-size:26px}.intro p{font-size:11px;line-height:1.45;margin-bottom:10px}
+  .interaction{min-height:110px;gap:9px;padding:10px}#prompt{font-size:14px}#interaction-kicker{font-size:7px;letter-spacing:.7px}#interaction-help{font-size:10px;line-height:1.3}
+  #inspect{min-width:108px;min-height:63px;gap:8px;padding:9px}#inspect>kbd{font-size:21px;width:29px;height:34px}#inspect>span{font-size:12px}#inspect small{font-size:8px;max-width:54px}
+  .inspect-hint{bottom:125px;padding:9px 12px;font-size:11px;gap:8px}.wayfinder{max-width:190px;top:38px;padding:6px 9px}.wayfinder strong{font-size:10px}
+  .toolbar button{min-height:38px}#fullscreen{font-size:9px}
+}

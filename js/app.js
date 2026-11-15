@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
 import {FixedClock} from '../vendor/vanillajs/modules/time/index.js';
+import {createDisplayController} from '../vendor/vanillajs/api/display/index.js';
 import {angleDifference} from '../vendor/rayshare/raycast.js';
 import {createGame,step,seals,completed,nearestExhibit,linkStatus,labAction,switchProbe,facePartner,saveRecord,validateSave,EDGES,MAX_TICK} from './game.js';
-import {EXHIBITS,DIRECTIONS,GEO,SOURCE} from './world.js';
+import {EXHIBITS,DIRECTIONS,GEO,SOURCE,CORE} from './world.js';
 import {createRenderer,drawLab} from './render.js';
 import {audioSystem,soundtrack} from './music.js';
 const $=id=>document.getElementById(id),STORAGE='concentric.expedition.v1';
@@ -17,6 +18,16 @@ let lastRender=0,lastHUD='',lastTime=performance.now();
 function blocked(){return !started||paused||$('lab').open||$('notebook').open||!$('victory').hidden;}
 function clearInput(){keyboard.clear();touches.clear();drag=null;state.sync=state.won?120:0;}
 function stopTime(){clearInput();clock.setPaused(true);audio.stop();}
+const display=createDisplayController({root:document.documentElement,initial:'page',onTransition:stopTime,onChange(view){
+  document.body.dataset.view=view.mode;
+  $('view-mode').textContent=view.windowed==='fit'?'Page view':'Fit window';
+  $('view-mode').setAttribute('aria-pressed',String(view.windowed==='fit'));
+  $('fullscreen').textContent=view.fullscreen?'Exit fullscreen':'Fullscreen ⛶';
+  $('view-mode').disabled=view.pending;$('fullscreen').disabled=view.pending;
+  if(view.message)status(view.message);
+}});
+$('view-mode').addEventListener('click',async()=>{await display.setMode(display.snapshot().windowed==='fit'?'page':'fit');if(started)focusWorld();});
+$('fullscreen').addEventListener('click',async()=>{const view=display.snapshot();await display.setMode(view.fullscreen?view.windowed:'fullscreen');if(started)focusWorld();});
 function saveLocal(){try{localStorage.setItem(STORAGE,JSON.stringify(saveRecord(state)));return true;}catch{status('Local saving is unavailable. Use Save to download your expedition.');return false;}}
 function focusWorld(){$('world').focus({preventScroll:true});}
 function updateTools(){for(const id of ['pause','switch','face'])$(id).disabled=!started;}
@@ -33,7 +44,7 @@ function openLab(){
   labId=exhibit.id;pair=null;stopTime();$('lab-title').textContent=exhibit.name;$('lab-brief').textContent=exhibit.brief;
   $('lab-source').href=SOURCE+'#/article/'+exhibit.article;
   $('lab-feedback').textContent=completed(state,labId)?exhibit.fact:'Try a connection. You can experiment without losing progress.';
-  buildLab();$('lab').showModal();
+  $('lab-feedback').dataset.tone='neutral';buildLab();$('lab').showModal();audio.cue('inspect');updateHUD(true);
 }
 function closeLab(){$('lab').close();labId=null;pair=null;clearInput();saveLocal();focusWorld();}
 function labButton(text,action,value,disabled=false,key=text){
@@ -43,11 +54,13 @@ function labButton(text,action,value,disabled=false,key=text){
 function performLab(action,value,key){
   let result;
   if(labId==='ivm'&&action==='select'){
-    if(pair===null){pair=value;$('lab-feedback').textContent=`Direction ${value+1} selected. Now choose its opposite.`;buildLab(key);return;}
+    if(pair===null){pair=value;$('lab-feedback').textContent=`Direction ${value+1} selected. Now choose its opposite.`;$('lab-feedback').dataset.tone='neutral';audio.cue('select');buildLab(key);return;}
     if(pair===value){pair=null;buildLab(key);return;}
     result=labAction(state,labId,'pair',[pair,value]);pair=null;
   }else result=labAction(state,labId,action,value);
-  $('lab-feedback').textContent=result.message;if(result.ok){audio.reward();saveLocal();}
+  const restored=completed(state,labId);
+  $('lab-feedback').textContent=result.message;$('lab-feedback').dataset.tone=result.ok?(restored?'complete':'neutral'):'retry';
+  audio.cue(result.ok?(restored?'complete':'connect'):'retry');if(result.ok)saveLocal();
   buildLab(key);updateHUD(true);
 }
 function buildLab(focusKey){
@@ -83,6 +96,11 @@ function buildLab(focusKey){
 }
 function updateHUD(force=false){
   const nearest=nearestExhibit(state),link=linkStatus(state),count=seals(state);
+  const goal=EXHIBITS.find(e=>!completed(state,e.id))||{...CORE,name:'Concentric Engine'},p=state.probes[state.active];
+  const bearing=angleDifference(Math.atan2(goal.y-p.y,goal.x-p.x),p.angle);
+  const arrow=['↑','↗','→','↘','↓','↙','←','↖'][(Math.round(bearing/(Math.PI/4))+8)%8];
+  $('wayfinder').hidden=blocked()||!!nearest||state.won;
+  $('wayfinder-arrow').textContent=arrow;$('wayfinder-target').textContent=goal.name;
   $('world').dataset.position=JSON.stringify(state.probes[state.active]);$('world').dataset.tick=String(state.tick);$('world').dataset.seals=String(count);
   const key=JSON.stringify([nearest?.id,count,state.active,link,state.sync,state.won,blocked()]);if(key===lastHUD&&!force)return;lastHUD=key;
   $('seal-count').textContent=`0${count} / 04`;$('probe-label').textContent=state.active===0?'PIP · 01':'MICA · 02';
@@ -92,15 +110,19 @@ function updateHUD(force=false){
   $('checklist').replaceChildren(...EXHIBITS.map((e,i)=>{const li=document.createElement('li');const n=document.createElement('span');n.className='number';n.textContent=String(i+1).padStart(2,'0');
     const label=document.createElement('span');label.className='check-label';label.textContent=e.short+' · '+['Tetrahedron','Tetravolume','12 neighbours','Quadray'][i];
     const done=document.createElement('span');done.className='done';done.textContent=completed(state,e.id)?'✓':'○';done.setAttribute('aria-label',completed(state,e.id)?'restored':'not restored');li.append(n,label,done);return li;}));
-  $('inspect').disabled=!nearest||blocked();
-  $('prompt').textContent=nearest?`${completed(state,nearest.id)?'Restored · ':''}${nearest.name}`:count===4&&!state.won?'Both probes near the core · face each other · hold Space':'Follow the map to a coloured exhibit.';
+  const ready=!!nearest&&!blocked();
+  $('inspect').disabled=!ready;$('interaction').dataset.ready=String(ready);$('inspect-hint').hidden=!ready;
+  $('inspect').querySelector('small').textContent=ready?'Open experiment ↗':'Move closer';
+  $('interaction-kicker').textContent=ready?(completed(state,nearest.id)?'EXHIBIT RESTORED · REVISIT':'EXPERIMENT IN REACH'):count===4?'THE FINAL CONNECTION':'EXPLORE THE STATION';
+  $('prompt').textContent=nearest?nearest.name:count===4&&!state.won?'Both probes near the core':'Follow a coloured floor trail.';
+  $('interaction-help').textContent=ready?'Press E or tap the gold button to inspect.':count===4&&!state.won?'Q switches · F faces your partner · hold Space to link.':'Inspect lights up when you reach an exhibit.';
   $('link-label').textContent=link.linked?(link.near?'Facing · near core':'Facing · return to core'):'Face your partner';
   $('sync-progress').value=state.sync;
   $('world').dataset.position=JSON.stringify(state.probes[state.active]);$('world').dataset.tick=String(state.tick);$('world').dataset.seals=String(count);
 }
 $('start').addEventListener('click',()=>{begin();updateHUD(true);});
 $('pause').addEventListener('click',()=>setPause(!paused));$('resume').addEventListener('click',()=>setPause(false));
-$('switch').addEventListener('click',()=>{if(!blocked()){clearInput();switchProbe(state);updateHUD(true);saveLocal();}focusWorld();});
+$('switch').addEventListener('click',()=>{if(!blocked()){clearInput();switchProbe(state);audio.cue('switch');updateHUD(true);saveLocal();}focusWorld();});
 $('face').addEventListener('click',()=>{if(!blocked()){facePartner(state);updateHUD(true);}focusWorld();});
 $('inspect').addEventListener('click',openLab);$('close-lab').addEventListener('click',closeLab);
 $('lab').addEventListener('cancel',e=>{e.preventDefault();closeLab();});
@@ -130,7 +152,7 @@ window.addEventListener('keydown',event=>{
   if(movement.has(event.code)){event.preventDefault();keyboard.add(event.code);}
   if(event.repeat)return;
   if(event.code==='KeyE'){event.preventDefault();openLab();}
-  if(event.code==='KeyQ'){event.preventDefault();clearInput();switchProbe(state);updateHUD(true);}
+  if(event.code==='KeyQ'){event.preventDefault();clearInput();switchProbe(state);audio.cue('switch');updateHUD(true);}
   if(event.code==='KeyF'){event.preventDefault();facePartner(state);}
 });
 window.addEventListener('keyup',e=>keyboard.delete(e.code));
@@ -156,11 +178,11 @@ function frame(now){
   if(running){
     const held=code=>keyboard.has(code)||[...touches.values()].includes(code);
     clock.advance(elapsed,()=>step(state,{forward:Number(held('KeyW')||held('ArrowUp'))-Number(held('KeyS')||held('ArrowDown')),strafe:Number(held('KeyD'))-Number(held('KeyA')),turn:Number(held('ArrowRight'))-Number(held('ArrowLeft')),sync:held('Space')}));
-    if(state.won&&!victoryShown){victoryShown=true;stopTime();$('victory').hidden=false;$('continue').focus();saveLocal();audio.reward();}
+    if(state.won&&!victoryShown){victoryShown=true;stopTime();$('victory').hidden=false;$('continue').focus();saveLocal();audio.cue('victory');}
     if(state.tick===MAX_TICK){setPause(true);status('This expedition reached its 10-hour simulation limit. Save it or start a new one.');}
   }
   audio.sync(state.tick,running&&!state.won);
-  if(now-lastRender>=33||lastRender===0){renderer.draw(state,{reduced:$('motion').checked});if(labId&&$('lab').open)drawLab($('lab-canvas'),labId,state,$('motion').checked?.65:now/2200);updateHUD();lastRender=now;}
+  if(now-lastRender>=33||lastRender===0){renderer.draw(state,{reduced:$('motion').checked,activeExhibit:blocked()?null:nearestExhibit(state)?.id});if(labId&&$('lab').open)drawLab($('lab-canvas'),labId,state,$('motion').checked?.65:now/2200);updateHUD();lastRender=now;}
   requestAnimationFrame(frame);
 }
 updateHUD(true);requestAnimationFrame(frame);
