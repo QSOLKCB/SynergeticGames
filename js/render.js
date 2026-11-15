@@ -131,7 +131,9 @@ export function createRenderer(canvas,mapCanvas){
     }
     // Restrained viewfinder; no flashing or camera shake.
     ctx.strokeStyle='#e4eee38a';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(w/2-7,horizon);ctx.lineTo(w/2+7,horizon);ctx.moveTo(w/2,horizon-7);ctx.lineTo(w/2,horizon+7);ctx.stroke();
-    ctx.fillStyle='#061b2888';ctx.fillRect(18,h-144,190,26);ctx.fillStyle='#c2d9d5';ctx.font='10px monospace';ctx.fillText(`${s.active===0?'PIP 01':'MICA 02'}  ·  ${seals(s)} / 4 CONNECTIONS`,29,h-127);
+    // Leave room for the centred Inspect hint on narrow views.
+    const plaqueTop=h-(activeExhibit&&w<650?204:144);
+    ctx.fillStyle='#061b2888';ctx.fillRect(18,plaqueTop,190,26);ctx.fillStyle='#c2d9d5';ctx.font='10px monospace';ctx.fillText(`${s.active===0?'PIP 01':'MICA 02'}  ·  ${seals(s)} / 4 CONNECTIONS`,29,plaqueTop+17);
     drawMap(s);
   }
   function drawMap(s){
