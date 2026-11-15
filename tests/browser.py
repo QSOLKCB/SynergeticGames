@@ -39,7 +39,7 @@ errors = []
 
 
 def advance(page, ms=150):
-    page.clock.run_for(ms)
+    page.clock.run_for(round(ms))
 
 
 def pose(page):
