@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {soundtrack,phrase,audioSystem} from '../js/music.js';
+import {soundtrack,phrase,audioSystem,soundCues} from '../js/music.js';
 test('original score is bounded, nonoverlapping, deterministic PCM with a valid WAV',()=>{
   const a=soundtrack.renderRange(0,48000),b=soundtrack.renderRange(0,48000);
   assert.deepEqual(a,b);assert.ok(a.some(n=>n!==0));assert.ok(a.every(n=>Math.abs(n)<32767));
@@ -9,6 +9,15 @@ test('original score is bounded, nonoverlapping, deterministic PCM with a valid 
   const wav=soundtrack.wav(),view=new DataView(wav.buffer);assert.equal(new TextDecoder().decode(wav.slice(0,4)),'RIFF');assert.equal(view.getUint32(24,true),48000);assert.equal(view.getUint32(40,true),soundtrack.frames*2);
   assert.deepEqual(soundtrack.position(0),soundtrack.position(soundtrack.loopTicks));
   console.log('soundtrack WAV SHA-256',createHash('sha256').update(wav).digest('hex'));
+});
+test('interaction cues are distinct deterministic unclipped PCM scores',()=>{
+  const hashes=new Set();
+  for(const cue of Object.values(soundCues)){
+    const a=cue.renderAll(),b=cue.renderAll();assert.deepEqual(a,b);
+    assert.ok(a.length>0&&a.length<=96000);assert.ok(a.some(n=>n!==0));assert.ok(a.every(n=>Math.abs(n)<32767));
+    hashes.add(createHash('sha256').update(new Uint8Array(a.buffer)).digest('hex'));
+  }
+  assert.equal(hashes.size,Object.keys(soundCues).length);
 });
 test('sound can retry after a partially constructed audio device fails',async t=>{
   const previous=Object.getOwnPropertyDescriptor(globalThis,'AudioContext');

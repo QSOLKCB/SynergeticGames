@@ -94,6 +94,13 @@
       "sha256": "c44e5c0234d0253cacdfb760d81e159859c11d52f169d47ed131314a00b64e77",
       "adapted": true,
       "changes": "Pure DDA map interface, bounded ray misses, grid traversal sight, mutual cones and disk collision"
+    },
+    {
+      "path": "vendor/vanillajs/api/display/index.js",
+      "source": "api/display/index.js",
+      "repository": "QSOLKCB/VANILLAJS",
+      "commit": "2d5caddc93154874e9bdb582de6a830356b360aa",
+      "sha256": "e062f02ff45ff4402138f90124eb1454e878f1b6ec300278ce75ab0516368f6d"
     }
   ]
 }

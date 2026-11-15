@@ -19,10 +19,20 @@ export function phrase(index){
   return {frames:step*16,events};
 }
 export const soundtrack=createSoundtrack({phrases:Array.from({length:4},(_,i)=>phrase(i))});
-const chime=createSound2D({frames:24000,events:[
-  {id:1,sample:0,duration:16000,channel:0,frequency:524,gain:3000,wave:'triangle'},
-  {id:2,sample:6000,duration:16000,channel:1,frequency:660,gain:2400,wave:'triangle'},
-  {id:3,sample:12000,duration:12000,channel:2,frequency:784,gain:2200,wave:'triangle'}]});
+function cueScore(notes,{gap=3600,duration=6500,gain=1800}={}){
+  return createSound2D({frames:gap*(notes.length-1)+duration,events:notes.map((frequency,i)=>({
+    id:i+1,sample:i*gap,duration,channel:i%4,frequency,gain,wave:'triangle'}))});
+}
+// Each cue is an original bounded PCM score; no randomness or device clock in the notes.
+export const soundCues=Object.freeze({
+  select:cueScore([660],{duration:2200,gain:1100}),
+  connect:cueScore([524,784],{gap:1800,duration:4300,gain:1500}),
+  inspect:cueScore([392,524,660],{gap:2400,gain:1400}),
+  retry:cueScore([294,262],{gap:4200,duration:5000,gain:1200}),
+  switch:cueScore([440,588],{gap:2600,duration:4000,gain:1300}),
+  complete:cueScore([524,660,784,1048],{gap:4800,duration:12000,gain:2100}),
+  victory:cueScore([392,524,660,784,1048,1318],{gap:7200,duration:18000,gain:2100})
+});
 export function audioSystem(report){
   let context=null,player=null,effects=null,enabled=false,failed=false;
   function fail(error){
@@ -44,7 +54,8 @@ export function audioSystem(report){
       return enabled;
     },
     sync(tick,running){if(enabled&&!failed)try{player?.sync(tick,running);}catch(error){fail(error);}},
-    reward(){if(enabled&&!failed)try{effects?.play(chime);}catch(error){fail(error);}},
+    cue(kind){if(enabled&&!failed&&soundCues[kind])try{effects?.play(soundCues[kind]);}catch(error){fail(error);}},
+    reward(){this.cue('complete');},
     stop(){try{player?.stop();effects?.stopAll();}catch(error){fail(error);}},
     get enabled(){return enabled;}
   };

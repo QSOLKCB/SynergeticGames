@@ -8,6 +8,7 @@ Built for the School of Tomorrow by QSOL-IMC as independent contributors to open
 |---|---|---|
 | RyanJBuchanan/RayShare | `e0f7fe59331b5a09ac1e20164a12280202ab44d0`, `app.js` | Adapted raycaster and two-observer facing relationship |
 | QSOLKCB/VANILLAJS | `68a3e94aa0bd8d44b6c0139742605d9dd9425147` | Direct imports of unchanged clock, math, PCM and playback modules |
+| QSOLKCB/VANILLAJS display API | `2d5caddc93154874e9bdb582de6a830356b360aa`, `api/display/index.js` | Unchanged fit/page/fullscreen controller, with input clearing and graceful denial fallback |
 | QSOLKCB/synergetics2 | `96aae2de4a02cd4df86ff2db68af07b1ce7ea1a3`, `js/math.js`, `js/content.js` | Vendored geometry; educator reference for independently written puzzles |
 | Kirby Urner | [The Proposal (Martian Math Portfolio)](https://www.youtube.com/watch?v=wxMmUJygIRg) | Curriculum direction: tetrahedral accounting, relationships and exploratory artifacts |
 | Polydactica | [Earthbound Music](https://www.youtube.com/playlist?list=PLbcn_8NsfcIrKQPqpC8VTEeTPBVlRe0E4) | Broad mood reference for an original retro score |
@@ -33,5 +34,7 @@ The game does not reconstruct a hinged Jitterbug motion, represent Fuller's whol
 RayShare's two views become two player-controlled probes; this is a single-player perspective-switching game, not network multiplayer. The engine finale requires both within three map units of the core, a clear line of sight, both facing within π/7 radians of each other, and 120 consecutive held-link ticks at 60 Hz.
 
 The score is a 16-second, four-phrase loop with a triangle bass, plucked triangle lead, quiet saw chord tones and seeded percussion. Audio device timing is presentation only. Puzzle progress and movement do not depend on whether sound plays. Original score WAV SHA-256: `b2108a62f79dca00bb515c190d3c021b3d6adf837ea86398a6cf2fea579beee3`.
+
+The v0.2 presentation adds seven original bounded PCM cues, unchanged-source VANILLAJS display modes, face-normal lighting using VANILLAJS vector operations, seeded decorative particles, and coloured floor trails. All are presentation aids, not new geometric or physical claims. The compass points towards the next unfinished exhibit; it is a bearing, not a route planner. Quadray basis vertices and the marked point use the same rotation and scale. Existing version-1 expedition saves remain compatible. Reduced motion freezes exhibit rotation, bobbing and decorative particles.
 
 For later milestones: authored station packs, additional geometry experiments, cooperative challenge design and a classroom route. None is claimed as already implemented. The first game deliberately has a small, inspectable state model and no runtime dependencies outside the source tree.
