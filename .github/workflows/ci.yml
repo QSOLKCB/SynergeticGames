@@ -35,7 +35,7 @@ jobs:
           path: test-results/
           if-no-files-found: warn
   deploy:
-    if: github.event_name != 'pull_request'
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: validate
     runs-on: ubuntu-24.04
     permissions:
