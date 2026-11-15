@@ -115,9 +115,73 @@ try:
         assert pose(page) == stopped
         record('pause clears held input with no catch-up')
 
+        # Do not refocus the canvas between pause and resume: Resume owns focus.
+        for shortcut in ['p', 'Escape']:
+            page.keyboard.down(shortcut)
+            expect(page.locator('#paused')).to_be_visible()
+            expect(page.locator('#resume')).to_be_focused()
+            page.keyboard.down(shortcut)  # OS key repeat must not toggle again.
+            expect(page.locator('#paused')).to_be_visible()
+            page.keyboard.up(shortcut)
+            advance(page, 250)
+            paused_tick = page.locator('#world').get_attribute('data-tick')
+            advance(page, 300)
+            assert page.locator('#world').get_attribute('data-tick') == paused_tick
+            page.keyboard.press(shortcut)
+            expect(page.locator('#paused')).to_be_hidden()
+            expect(page.locator('#world')).to_be_focused()
+            advance(page, 150)
+            assert int(page.locator('#world').get_attribute('data-tick')) > int(paused_tick)
+
+        # Exercise the actual blur handler without injecting game state.
+        page.evaluate("window.dispatchEvent(new Event('blur'))")
+        expect(page.locator('#resume')).to_be_focused()
+        page.keyboard.press('Escape')
+        expect(page.locator('#paused')).to_be_hidden()
+        expect(page.locator('#world')).to_be_focused()
+
+        # Non-pause keys retain native button behaviour.
+        page.keyboard.press('p')
+        page.keyboard.press('Space')
+        expect(page.locator('#paused')).to_be_hidden()
+        record('P/Escape resume from focused Resume, ignore repeats and recover after blur; Space stays native')
+
+        # Temporary DOM fixtures verify editable targets; they do not alter game state.
+        for element in ['input', 'textarea', 'select', 'div']:
+            page.evaluate("""tag => {
+                const field = document.createElement(tag);
+                field.id = 'editable-fixture';
+                if (tag === 'div') field.contentEditable = 'true';
+                document.body.append(field);
+            }""", element)
+            page.locator('#editable-fixture').focus()
+            for shortcut in ['p', 'Escape']:
+                page.keyboard.press(shortcut)
+                expect(page.locator('#paused')).to_be_hidden()
+                expect(page.locator('#editable-fixture')).to_be_focused()
+            page.locator('#editable-fixture').evaluate('(field) => field.remove()')
+
+        page.locator('#notes').click()
+        page.keyboard.press('p')
+        expect(page.locator('#notebook')).to_be_visible()
+        expect(page.locator('#paused')).to_be_hidden()
+        page.keyboard.press('Escape')
+        expect(page.locator('#notebook')).to_be_hidden()
+        expect(page.locator('#paused')).to_be_hidden()
+        page.locator('#world').focus()
+        record('editable fields and notebook retain their keyboard handling')
+
         travel_axis(page, 'y', 4.8)
         page.screenshot(path=str(OUT / 'desktop-play.png'), full_page=True)
         open_lab(page, 'The Minimum Department')
+        page.keyboard.press('p')
+        expect(page.locator('#lab')).to_be_visible()
+        expect(page.locator('#paused')).to_be_hidden()
+        page.keyboard.press('Escape')
+        expect(page.locator('#lab')).to_be_hidden()
+        expect(page.locator('#paused')).to_be_hidden()
+        open_lab(page, 'The Minimum Department')
+        record('experiment Escape closes the dialog without pausing the station')
         for edge in ['AB', 'AC', 'AD', 'BC', 'BD', 'CD']:
             page.get_by_role('button', name='Join ' + edge, exact=True).click()
         expect(page.locator('#lab-readout')).to_contain_text('6 / 6')

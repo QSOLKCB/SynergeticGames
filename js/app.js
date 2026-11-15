@@ -122,8 +122,10 @@ $('restart').addEventListener('click',()=>{$('confirm-restart').hidden=false;$('
 $('continue').addEventListener('click',()=>{$('victory').hidden=true;focusWorld();});
 const movement=new Set(['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space']);
 window.addEventListener('keydown',event=>{
-  if(event.target.closest?.('input,textarea,select,button,a,summary')||$('lab').open||$('notebook').open)return;
+  if(event.target.closest?.('input,textarea,select')||event.target.isContentEditable||$('lab').open||$('notebook').open)return;
+  // Pausing focuses Resume; the same shortcuts must work from that button.
   if(event.code==='KeyP'||event.code==='Escape'){if(!event.repeat&&started){event.preventDefault();setPause(!paused);}return;}
+  if(event.target.closest?.('button,a,summary'))return;
   if(blocked())return;
   if(movement.has(event.code)){event.preventDefault();keyboard.add(event.code);}
   if(event.repeat)return;

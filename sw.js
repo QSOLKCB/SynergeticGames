@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 const PREFIX='concentric-'+new URL(self.registration.scope).pathname+'-';
-const CACHE=PREFIX+'v0.1.0-2';
+const CACHE=PREFIX+'v0.1.0-3';
 const ASSETS=['./','./index.html','./style.css','./assets/icon.svg',
   './js/app.js','./js/game.js','./js/world.js','./js/render.js','./js/music.js',
   './vendor/rayshare/raycast.js','./vendor/synergetics95/js/math.js',
