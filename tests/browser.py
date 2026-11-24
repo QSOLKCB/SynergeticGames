@@ -34,8 +34,17 @@ class QuietHandler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *_args):
         pass
 
+    def do_GET(self):
+        if self.server.offline:
+            self.server.offline_requests.append(self.path)
+            self.send_error(503)
+            return
+        super().do_GET()
+
 
 server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), partial(QuietHandler, directory=str(ROOT)))
+server.offline = False
+server.offline_requests = []
 threading.Thread(target=server.serve_forever, daemon=True).start()
 URL = f'http://127.0.0.1:{server.server_port}/'
 errors = []
@@ -705,7 +714,7 @@ try:
         record('deterministic browser WAV export and explicit sound controls')
 
         page.wait_for_function('navigator.serviceWorker.controller !== null')
-        context.set_offline(True)
+        server.offline = True
         page.reload()
         expect(page.locator('#start')).to_contain_text('Continue expedition')
         page.locator('#start').click()
@@ -755,7 +764,10 @@ try:
         page.locator('#museum-actions').get_by_role('button', name='Run experiment', exact=True).click()
         expect(page.locator('#museum-readout')).to_contain_text('Runs retained 1/4')
         page.locator('#museum-close').click()
-        record('offline reload with local expedition persistence and museum runtime imports, including Experimental Annex')
+        uncached_requests = [path for path in server.offline_requests if path.split('?', 1)[0] != '/sw.js']
+        assert not uncached_requests, f'The service-worker cache missed application assets: {uncached_requests}'
+        record('reload from service-worker cache with unavailable origin and local expedition persistence, including Experimental Annex')
+        server.offline = False
         context.close()
 
         for width in [390, 320]:
@@ -896,6 +908,7 @@ try:
         with page.expect_download() as event:
             page.locator('#pack-download').click()
         pack_bytes = Path(event.value.path()).read_bytes()
+        page.clock.install()
         page.goto(URL)
         page.locator('#museum-open').click()
         page.locator('#museum-file').set_input_files({'name':'pack.json','mimeType':'application/json','buffer':pack_bytes})
@@ -912,7 +925,6 @@ try:
         page.locator('#museum-close').click()
         page.locator('#economy').check()
         page.wait_for_function("document.querySelector('#world').width <= 640")
-        page.clock.install()
         page.locator('#start').click()
         advance(page, 150)
         before = pose(page)
