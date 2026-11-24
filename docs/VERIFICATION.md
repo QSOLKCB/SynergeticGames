@@ -27,3 +27,7 @@ The existing browser acceptance sequence now covers independent museum experimen
 New test coverage: 48 conversion amounts in both directions, 192 triangle/figure cases checked with independent shoelace areas, 181 integer TetraBook positions and two analytic regular positions checked against coordinate determinants, record validation and model isolation. The browser suite now completes all eight standalone labs, checks new exhibit save/restore, touch and offline access. These are coverage descriptions, not execution receipts; consult exact candidate CI. Original v0.3.0 release evidence remains historical. No new physics or universal device/accessibility certification is claimed.
 
 Cache upgrade regression: simulate a visitor with the earlier v0.4.0-measurement-1 cache, install and activate the new worker, verify the updated Pythagorean Transfer and Conversion Desk are served offline and unrelated scope caches survive. This is a Node VM lifecycle test, not a live browser deployment receipt.
+
+## v0.5.0 candidate (QUADRAY-001)
+
+New coverage includes 625 integer tuples and five common offsets, exact inverse and existing basis comparison, independent parity enumeration and all-pairs adjacency for four FCC radii, edge/face incidence and centroid-fan volume oracles for three cells, malformed state rejection, eleven-lab browser completion, mobile and offline access. Service-worker regression also covers upgrades from the released v0.4.0 cache. These are coverage descriptions, not execution receipts; consult the exact candidate CI.

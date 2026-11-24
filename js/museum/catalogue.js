@@ -5,9 +5,10 @@ import {volumeExchangeExhibit} from './volume-exchange.js';
 import {conversionDesk} from './conversion-desk.js';
 import {pythagorasExhibit} from './pythagoras.js';
 import {tetraBookExhibit} from './tetrabook.js';
+import {quadrayWorkshop,latticeWorkshop,cellWorkshop} from './geometry-workshop.js';
 // New reviewed exhibits enter through this list, not through the host's view code.
-export const registry=createRegistry([...founding.slice(0,-1),volumeExchangeExhibit,conversionDesk,pythagorasExhibit,tetraBookExhibit,founding.at(-1)]);
-export const foundingRoute=validateRoute(registry,{kind:'museum.route.v1',schema:1,id:'concentric.route',title:'Founding collection and Measurement Gallery',exhibits:registry.list.map(m=>m.id)});
+export const registry=createRegistry([...founding.slice(0,-1),volumeExchangeExhibit,conversionDesk,pythagorasExhibit,tetraBookExhibit,quadrayWorkshop,latticeWorkshop,cellWorkshop,founding.at(-1)]);
+export const foundingRoute=validateRoute(registry,{kind:'museum.route.v1',schema:1,id:'concentric.route',title:'Founding collection, Measurement Gallery and Geometry Workshop',exhibits:registry.list.map(m=>m.id)});
 // Pure catalogue metadata; route order is never sorted or modified.
 export function visitSummary(registry,session,ids){
   let total=0,complete=0;
