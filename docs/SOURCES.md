@@ -38,3 +38,7 @@ The score is a 16-second, four-phrase loop with a triangle bass, plucked triangl
 The v0.2 presentation adds seven original bounded PCM cues, unchanged-source VANILLAJS display modes, face-normal lighting using VANILLAJS vector operations, seeded decorative particles, and coloured floor trails. All are presentation aids, not new geometric or physical claims. The compass points towards the next unfinished exhibit; it is a bearing, not a route planner. Quadray basis vertices and the marked point use the same rotation and scale. Existing version-1 expedition saves remain compatible. Reduced motion freezes exhibit rotation, bobbing and decorative particles.
 
 For later milestones: authored station packs, additional geometry experiments, cooperative challenge design and a classroom route. None is claimed as already implemented. The first game deliberately has a small, inspectable state model and no runtime dependencies outside the source tree.
+
+## Volume Exchange (MUSEUM-001C)
+
+Public curriculum reference: Kirby Urner, [Qvolume.ipynb, XYZ : IVM Conversion (S3)](https://github.com/4dsolutions/School_of_Tomorrow/blob/8d30d18fa1dde164317f2e21ae7e6c29ab2060df/Qvolume.ipynb), inspected at commit `8d30d18fa1dde164317f2e21ae7e6c29ab2060df`. Its radius/diameter convention and S3 factor inform this independently authored exhibit. No notebook code, external images, private correspondence or unpublished material is redistributed. See [VOLUME_EXCHANGE.md](VOLUME_EXCHANGE.md) for derivation and precision.

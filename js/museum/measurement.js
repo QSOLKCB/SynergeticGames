@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Exact coefficient arithmetic for the upcoming Volume Exchange.
+// Exact coefficient arithmetic for the Volume Exchange.
 // R = radius, D = 2R. Volumes are in fixed Cartesian cubic units.
 import {ExactRational} from '../../vendor/vanillajs/modules/exact-rational/index.js';
 const radius=r=>{if(!Number.isSafeInteger(r)||r<1||r>200)throw new RangeError('radius must be 1..200 hundredths');return new ExactRational(r,100);};
