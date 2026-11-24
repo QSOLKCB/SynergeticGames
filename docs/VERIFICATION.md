@@ -31,3 +31,7 @@ Cache upgrade regression: simulate a visitor with the earlier v0.4.0-measurement
 ## v0.5.0 candidate (QUADRAY-001)
 
 New coverage includes 625 integer tuples and five common offsets, exact inverse and existing basis comparison, independent parity enumeration and all-pairs adjacency for four FCC radii, edge/face incidence and centroid-fan volume oracles for three cells, malformed state rejection, eleven-lab browser completion, mobile and offline access. Service-worker regression also covers upgrades from the released v0.4.0 cache. These are coverage descriptions, not execution receipts; consult the exact candidate CI.
+
+## v0.6.0 candidate (EPISTEMIC-001)
+
+New coverage: 32 observer states, 326 distinct clue prefixes per world (2608 cases), all 15 nonempty four-plan sets at both stages, four plans and two disclosure orders, view isolation, truth preservation, redundancy, atomic saves, fourteen-lab browser completion, mobile and offline access. Cache upgrade tests cover v0.5.0 as well as both v0.4.0 revisions. Coverage description only; consult exact candidate CI for execution evidence.

@@ -1,6 +1,6 @@
 # The Living Museum — Development Roadmap
 
-Released baseline: [v0.4.0 — The Measurement Gallery](https://github.com/QSOLKCB/SynergeticGames/releases/tag/v0.4.0), commit `1ba197fef006726481afaa9f36203b6b4e37cbae`. QUADRAY-001 is the v0.5.0 candidate, subject to acceptance. Keep main playable; no bulk rewrite.
+Released baseline: [v0.5.0 — The Geometry Workshop](https://github.com/QSOLKCB/SynergeticGames/releases/tag/v0.5.0), commit `464609fadfe3ed6a56bf1b5936fc6ba865e9e77f`. EPISTEMIC-001 is the v0.6.0 candidate, subject to acceptance. Keep main playable; no bulk rewrite.
 
 ## Release sequence
 
@@ -40,11 +40,13 @@ Released in v0.4.0 (PR #9). See [measurement gallery](docs/MEASUREMENT_GALLERY.m
 
 ## QUADRAY-001 — geometry workshop
 
-Candidate: three new registered labs with bounded integer coordinate arithmetic, exact FCC adjacency and regular-cell construction, centroid-aligned comparison, updated offline assets and acceptance tests. See [Geometry Workshop](docs/GEOMETRY_WORKSHOP.md). Full hinged Jitterbug remains deferred.
+Released in v0.5.0 (PR #10): three registered labs with bounded integer coordinate arithmetic, exact FCC adjacency and regular-cell construction, centroid-aligned comparison, updated offline assets and acceptance tests. See [Geometry Workshop](docs/GEOMETRY_WORKSHOP.md). Full hinged Jitterbug remains deferred.
 
 Canonical integer quadrays modulo the common offset; exact integer identity under translation of all four components; bounded coordinates and overflow policy. Cartesian conversion is a rendering boundary with declared basis/scale. Build FCC neighbours, tetrahedral/octahedral cells and concentric polyhedra. Verify adjacency, uniqueness, incidence, volume and round-trip properties independently. Candidate upstream references: Mapping_Quadrays.ipynb, QuadraysResearch.ipynb, Rendering_IVM.ipynb, Qvolume.ipynb and QuadCraft2.html; inspect exact revisions and file-specific terms first. A full hinged Jitterbug requires its own validated kinematics.
 
 ## EPISTEMIC-001 — information gallery
+
+Candidate: Observer Room, Evidence Ledger and Disclosure Theatre implement finite possible-world sets, reversible truthful constraints and exhaustive comparison of two disclosure schedules in an explicitly scoped toy maximin game. See [Information Gallery](docs/INFORMATION_GALLERY.md). No belief propagation or reproduction of the cited theorem is claimed.
 
 Extend RayShare's two perspectives into explicit per-observer information sets. Separate hidden model state, observations, disclosures and action policy. Demonstrate truthful constraints, redundant evidence and order effects where a specified model permits them. Compare strategic disclosure and random disclosure in small extensive games with an exhaustive oracle. Use the public paper arXiv:2611.17084 as a research reference, not a claim of implementation equivalence to any private theory. No psychological manipulation of real visitors; reveal rules are visible and reversible.
 
