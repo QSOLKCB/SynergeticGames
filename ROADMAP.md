@@ -1,6 +1,6 @@
 # The Living Museum — Development Roadmap
 
-Released baseline: [v0.5.0 — The Geometry Workshop](https://github.com/QSOLKCB/SynergeticGames/releases/tag/v0.5.0), commit `464609fadfe3ed6a56bf1b5936fc6ba865e9e77f`. EPISTEMIC-001 is the v0.6.0 candidate, subject to acceptance. Keep main playable; no bulk rewrite.
+Released baseline: [v0.6.0 — The Information Gallery](https://github.com/QSOLKCB/SynergeticGames/releases/tag/v0.6.0), commit `bce86d66575c3bd72b2f4ab0c6a2b11a3efeec4a`. INFERENCE-001 is the v0.7.0 candidate, subject to acceptance. Keep main playable; no bulk rewrite.
 
 ## Release sequence
 
@@ -46,11 +46,13 @@ Canonical integer quadrays modulo the common offset; exact integer identity unde
 
 ## EPISTEMIC-001 — information gallery
 
-Candidate: Observer Room, Evidence Ledger and Disclosure Theatre implement finite possible-world sets, reversible truthful constraints and exhaustive comparison of two disclosure schedules in an explicitly scoped toy maximin game. See [Information Gallery](docs/INFORMATION_GALLERY.md). No belief propagation or reproduction of the cited theorem is claimed.
+Released in v0.6.0 (PR #11): Observer Room, Evidence Ledger and Disclosure Theatre implement finite possible-world sets, reversible truthful constraints and exhaustive comparison of two disclosure schedules in an explicitly scoped toy maximin game. See [Information Gallery](docs/INFORMATION_GALLERY.md). No belief propagation or reproduction of the cited theorem is claimed.
 
 Extend RayShare's two perspectives into explicit per-observer information sets. Separate hidden model state, observations, disclosures and action policy. Demonstrate truthful constraints, redundant evidence and order effects where a specified model permits them. Compare strategic disclosure and random disclosure in small extensive games with an exhaustive oracle. Use the public paper arXiv:2611.17084 as a research reference, not a claim of implementation equivalence to any private theory. No psychological manipulation of real visitors; reveal rules are visible and reversible.
 
 ## INFERENCE-001 — hidden tetrahedron
+
+Candidate: four registered labs implement exact rational enumeration, normalized synchronous sum-product on a tree and tetrahedral loop, and zero-evidence contradiction diagnosis. See [Inference Gallery](docs/INFERENCE_GALLERY.md). Classical parity models only; no QEC logical error claim.
 
 Start with small binary factor graphs, uniform and nonuniform priors, XOR constraints and exact enumeration. Implement sum-product BP separately with explicit schedule, normalisation, convergence/iteration bounds and contradiction handling. Verify tree cases against exact marginals; report loopy errors, nonconvergence and correlations not captured by individual marginals. Compare information gain with decision utility as distinct objectives; maximin is not sum-product. QEC extension requires a separately verified syndrome model and logical error criterion, not just a graph shaped like a tetrahedron. Reference: arXiv:2209.05464.
 
