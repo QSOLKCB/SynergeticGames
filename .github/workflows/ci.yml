@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: [main, museum-002-authoring]
   workflow_dispatch:
 permissions:
   contents: read
@@ -39,7 +39,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: |
           mkdir _site
-          cp index.html style.css sw.js .nojekyll LICENSE NOTICE.md _site/
+          cp index.html workshop.html style.css sw.js .nojekyll LICENSE NOTICE.md _site/
           cp -r js vendor assets _site/
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'

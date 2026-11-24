@@ -49,3 +49,7 @@ Coverage: all 32768 masks, all 167 face-closed complexes (including the empty co
 ## v0.9.0 candidate (RESEARCH-001)
 
 Coverage: twenty polynomial quadrature configurations against independent closed forms, twenty oscillator configurations against analytic Euler and independent matrix-power symplectic oracles, inference sweep witnesses, source blob identity, evidence recomputation/tamper rejection, bounded history, atomic saves, twenty-four-lab browser completion and offline upgrade from v0.8.0. Coverage descriptions are not execution receipts; consult exact candidate CI.
+
+## MUSEUM-002A candidate
+
+Coverage: allowlisted template packs, malformed inputs, pack identity on restore, bounded catalogue, independent native sample registration, real browser author/preview/export/install/complete flow, offline import closure. Full execution status belongs to exact-head CI. MUSEUM-002B adds browser compatibility and polish gates.

@@ -8,7 +8,7 @@ Built for the School of Tomorrow by QSOL-IMC as independent contributors to open
 
 [Play the current museum expedition](https://qsolkcb.github.io/SynergeticGames/) · [Roadmap](ROADMAP.md) · [Design charter](docs/MUSEUM.md) · [Exhibit authoring](docs/EXHIBITS.md) · [Sources](docs/SOURCES.md) · [Verification](docs/VERIFICATION.md)
 
-## Visit the museum (v0.9.0 candidate)
+## Visit the museum (v1.0.0 candidate)
 
 Open **Museum catalogue** for twenty-four standalone experiments, an optional guided route and access to the Concentric finale. Explore freely or follow a route with Previous/Next; export or load route JSON, revisit experiments, reset an individual lab and download its state. Completion counts describe standalone experiments only; they never award expedition seals. No account or persistent museum-wide profile is required. See [release acceptance](docs/RELEASE_ACCEPTANCE.md).
 
@@ -78,7 +78,7 @@ Follow the coloured trails; the compass points towards the next unfinished exhib
 | Inference | Exact Oracle, Message Tree, Hidden Tetrahedron and Contradiction Room are in the catalogue |
 | Topology | Simplex Builder, Boundary Studio and Homology Laboratory are in the catalogue |
 | Research annex | Quadrature Bench, Oscillator Laboratory and Inference Sweep; candidate elastic-loop work remains gated |
-| Workshop | Author, validate, test and share local exhibit packs |
+| Workshop | Author, preview, export and install data packs; edit routes; inspect research evidence |
 
 Our teaching inspiration includes [Kirby Urner's School of Tomorrow](https://github.com/4dsolutions/School_of_Tomorrow), [Ryan's RayShare](https://github.com/RyanJBuchanan/RayShare) and [Synergetics 95](https://qsolkcb.github.io/synergetics2/#/home). Public source materials are references, not a blanket licence to copy everything or a claim of contributor endorsement.
 
@@ -108,7 +108,9 @@ Node is a development test runner only. Browser checks exercise actual gameplay,
 
 ## Extend
 
-Start with [CONTRIBUTING.md](CONTRIBUTING.md) and the proposed [exhibit contract](docs/EXHIBITS.md). An exhibit should have a question, an interaction, a mathematical or experimental model, source attribution and a way to check its result. Educators can propose an exhibit without writing code.
+Open workshop.html on the same local HTTP server. No Node installation is needed for authoring or playing. Download a data-only pack and load it in the museum; native extensions use the reviewed contributions.js list. See [SDK](docs/SDK.md) and [example pack](assets/example-pack.json).
+
+Start with [Contributor Workshop](workshop.html), [CONTRIBUTING.md](CONTRIBUTING.md) and the stable [exhibit contract](docs/EXHIBITS.md). An exhibit should have a question, an interaction, a mathematical or experimental model, source attribution and a way to check its result. Educators can propose an exhibit without writing code.
 
 Pull requests validate; only main deploys through GitHub Actions. No merge without owner authorization.
 

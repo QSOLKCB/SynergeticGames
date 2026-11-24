@@ -844,6 +844,27 @@ try:
         assert json.loads(Path(event.value.path()).read_text())['kind'] == 'concentric.save.v1'
         record('denied fullscreen, unavailable audio and blocked storage do not stop gameplay or download saves')
         fallback.close()
+        authoring = browser.new_context(viewport={'width': 1100, 'height': 900})
+        page = authoring.new_page()
+        page.on('pageerror', lambda error: errors.append(str(error)))
+        page.goto(URL+'workshop.html')
+        page.locator('#pack-author').fill('Example author')
+        page.locator('#pack-preview').click()
+        expect(page.locator('#workshop-status')).to_contain_text('Pack validated')
+        with page.expect_download() as event:
+            page.locator('#pack-download').click()
+        pack_bytes = Path(event.value.path()).read_bytes()
+        page.goto(URL)
+        page.locator('#museum-open').click()
+        page.locator('#museum-file').set_input_files({'name':'pack.json','mimeType':'application/json','buffer':pack_bytes})
+        expect(page.locator('#museum-feedback')).to_contain_text('Pack installed')
+        expect(page.locator('#museum-list article')).to_have_count(26)
+        page.locator('[data-exhibit="pack.my-experiment"]').click()
+        page.locator('#museum-actions').get_by_role('button',name='Predict cube',exact=True).click()
+        page.locator('#museum-actions').get_by_role('button',name='Measure volumes',exact=True).click()
+        expect(page.locator('#museum-lab-status')).to_have_text('Experiment completed')
+        record('author a data pack, export, install and complete real reviewed model')
+        authoring.close()
         assert not errors, errors
         browser.close()
     receipt['status'] = 'PASS'

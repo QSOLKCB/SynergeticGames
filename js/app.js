@@ -7,6 +7,8 @@ import {EXHIBITS,DIRECTIONS,GEO,SOURCE,CORE} from './world.js';
 import {createRenderer,drawLab} from './render.js';
 import {audioSystem,soundtrack} from './music.js';
 import {connectMuseum} from './museum/catalogue.js';
+import {applyMuseumIdentity} from './museum/museum-config.js';
+applyMuseumIdentity(document);
 const $=id=>document.getElementById(id),STORAGE='concentric.expedition.v1';
 let state=createGame(),started=false,paused=false,labId=null,pair=null,victoryShown=false,importGeneration=0;
 const keyboard=new Set(),touches=new Map();let drag=null;

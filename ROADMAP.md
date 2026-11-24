@@ -1,6 +1,6 @@
 # The Living Museum — Development Roadmap
 
-Released baseline: [v0.8.0 — The Topology Gallery](https://github.com/QSOLKCB/SynergeticGames/releases/tag/v0.8.0), commit `056c7d451017b370f75a9d2e189bc2fa3cd7846d`. RESEARCH-001 is the v0.9.0 candidate, subject to acceptance. Keep main playable; no bulk rewrite.
+Released baseline: [v0.9.0 — The Experimental Annex](https://github.com/QSOLKCB/SynergeticGames/releases/tag/v0.9.0), commit `233fbe73f2214f7b7da4818006303b2b58649dca`. MUSEUM-002 is the v1.0.0 candidate, subject to both PRs and acceptance. Keep main playable; no bulk rewrite.
 
 ## Release sequence
 
@@ -64,11 +64,13 @@ Construct oriented vertices, edges, faces and tetrahedra. Define coefficient fie
 
 ## RESEARCH-001 — experimental annex
 
-Candidate: public-mathematics fallback implemented as three registered labs, exact-reference refinement and exhaustive inference sweeps, bounded retained run history and deterministic evidence export/recomputation. See [Experimental Annex](docs/EXPERIMENTAL_ANNEX.md). No permission to publish the elastic-loop model has been established; it remains deferred rather than blocking this milestone.
+Released in v0.9.0 (PR #14): public-mathematics fallback implemented as three registered labs, exact-reference refinement and exhaustive inference sweeps, bounded retained run history and deterministic evidence export/recomputation. See [Experimental Annex](docs/EXPERIMENTAL_ANNEX.md). No permission to publish the elastic-loop model has been established; it remains deferred rather than blocking this milestone.
 
 Source/permission gate before use of unpublished or privately circulated material. A candidate elastic-loop exhibit should reproduce a public or author-approved model and its numerical example first, with explicit parameters, units, discretisation, convergence checks and independent references. Distinguish transient configurations from equilibria and phenomenological scalar potentials from relativistic stress-energy or graviton claims. No novel physical conclusions implied by successful reproduction. A tetrahedral discretisation is a separate experimental extension. Retain failed receipts; export observations, algorithm/version, source revision, settings, seeds where applicable, numerical error and limitations.
 
 ## MUSEUM-002 — a museum others can extend
+
+Two PRs: A delivers the authoring contract, local data packs, native contribution hook, configuration, route editor and evidence inspector. B is compatibility, performance, quality of life and release acceptance. Do not tag until both are merged, exact-head review and CI pass, and owner acceptance includes actual Safari where available.
 
 Stabilise the exhibit registry and pack format; add a local authoring workflow, example pack, catalogue/route editor, standalone inspection where practical and evidence export/import validation. Allow a second contributor to build an exhibit without altering the host or unrelated model code. Validate offline, keyboard and touch behaviour, reader-oriented explanations, storage failure and optional renderer fallbacks. Run clean-checkout reproducibility, complete visitor playthrough and curator review. No cloud or mandatory runtime framework.
 
