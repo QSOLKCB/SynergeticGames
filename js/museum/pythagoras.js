@@ -40,6 +40,12 @@ function describe(s){
 function draw(canvas,s){
   const {c,w,h}=frame(canvas),m=areaModel(s.a,s.b,s.shape),scale=Math.min(w/640,h/300)*6.5;
   const colors=['#66d9cd','#f6b754','#b4adff'];
+  // Reference triangle with a marked right angle, inset at an explicitly separate scale.
+  const inset=Math.min(w/640,h/300)*6,ox=w*.06,oy=h*.29;
+  const ax=ox+s.a*inset,by=oy-s.b*inset;
+  polygon(c,[[ox,oy],[ax,oy],[ox,by]],'#eef1dc');
+  c.beginPath();c.moveTo(ox+5,oy);c.lineTo(ox+5,oy-5);c.lineTo(ox,oy-5);c.stroke();
+  label(c,w*.095,h*.39,'Right triangle');
   // Separate, equally scaled shapes. Area transfer is a ledger bar, not a geometric dissection.
   for(let i=0;i<3;i++){
     const x=w*(i+1)/4,y=h*.40;

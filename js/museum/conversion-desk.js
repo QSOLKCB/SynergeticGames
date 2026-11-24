@@ -19,7 +19,7 @@ export function conversion(quarters,direction){
 function transition(s,a){
   if(!fields(a,['type','value']))throw TypeError('invalid conversion action');
   if(a.type==='amount'&&integer(a.value,1,48))return accept({...s,quarters:a.value},'Input volume changed.');
-  if(a.type==='direction'&&DIRECTIONS.includes(a.value))return accept({...s,direction:a.value,prediction:null,measured:false},'New direction. Predict how the numerical measure changes.');
+  if(a.type==='direction'&&DIRECTIONS.includes(a.value))return accept({...s,direction:a.value,prediction:null,measured:false},'New input unit: this defines a new specimen. Predict its converted measure.');
   if(a.type==='predict'&&PREDICTIONS.includes(a.value))return accept({...s,prediction:a.value,measured:false},'Prediction recorded.');
   if(a.type==='convert'&&a.value===null&&s.prediction!==null){
     const ok=s.prediction===conversion(s.quarters,s.direction).expected;
@@ -38,7 +38,8 @@ function describe(s){
 }
 function draw(canvas,s){
   const {c,w,h}=frame(canvas),m=conversion(s.quarters,s.direction),forward=s.direction==='xyz-ivm';
-  // Single physical specimen, independent of unit choice; size proportional to cube root of physical volume.
+  // Each conversion compares one physical specimen; a direction change reinterprets the input.
+  // Size is proportional to the cube root of the physical volume.
   const physical=number(m.amount)*(forward?1:Math.sqrt(8/9)),edge=Math.cbrt(physical),size=edge*40*Math.min(w/640,h/300);
   const x=w/2-size/2,y=h*.40-size/2;
   c.strokeStyle='#66d9cd';c.lineWidth=2;c.strokeRect(x,y,size,size);

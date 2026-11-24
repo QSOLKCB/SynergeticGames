@@ -19,7 +19,7 @@ Versions are targets, not release commitments. A gated research exhibit may be d
 
 ## MUSEUM-001 — first implementation release
 
-Engine bridge (PR #5), modular host (PR #6) and Volume Exchange (PR #7) are merged. MUSEUM-001D prepares the v0.3.0 candidate with museum-first presentation, visitor progress, route navigation/export and acceptance checks. Release only after exact-head review, green CI, deployed smoke check and owner playthrough. The versioned release is not claimed by this document.
+MUSEUM-001 was released as v0.3.0 after PRs #5–8. The original acceptance checklist is preserved as historical documentation.
 
 Four sequential reviewable PRs, each based on accepted main (no overlapping unmerged dependencies):
 
