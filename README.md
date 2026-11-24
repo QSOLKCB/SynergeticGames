@@ -8,9 +8,9 @@ Built for the School of Tomorrow by QSOL-IMC as independent contributors to open
 
 [Play the current museum expedition](https://qsolkcb.github.io/SynergeticGames/) · [Roadmap](ROADMAP.md) · [Design charter](docs/MUSEUM.md) · [Exhibit authoring](docs/EXHIBITS.md) · [Sources](docs/SOURCES.md) · [Verification](docs/VERIFICATION.md)
 
-## Visit the museum (v0.7.0 candidate)
+## Visit the museum (v0.8.0 candidate)
 
-Open **Museum catalogue** for eighteen standalone experiments, an optional guided route and access to the Concentric finale. Explore freely or follow a route with Previous/Next; export or load route JSON, revisit experiments, reset an individual lab and download its state. Completion counts describe standalone experiments only; they never award expedition seals. No account or persistent museum-wide profile is required. See [release acceptance](docs/RELEASE_ACCEPTANCE.md).
+Open **Museum catalogue** for twenty-one standalone experiments, an optional guided route and access to the Concentric finale. Explore freely or follow a route with Previous/Next; export or load route JSON, revisit experiments, reset an individual lab and download its state. Completion counts describe standalone experiments only; they never award expedition seals. No account or persistent museum-wide profile is required. See [release acceptance](docs/RELEASE_ACCEPTANCE.md).
 
 ## The Measurement Gallery
 
@@ -27,6 +27,10 @@ Switch observer views, share truthful observations, filter possible worlds and c
 ## The Inference Gallery — The Hidden Tetrahedron
 
 Enumerate exact rational posteriors, step normalized sum-product messages on a tree, compare a loopy tetrahedron and investigate global contradiction. See [Inference Gallery](docs/INFERENCE_GALLERY.md) for priors, schedules, precision, counterexamples and scope. Classical binary inference, not a validated QEC decoder.
+
+## The Topology Gallery
+
+Construct face-closed simplicial complexes, reverse orientations, compare GF(2) and GF(3), and calculate Betti numbers and cycle/boundary witnesses. See [Topology Gallery](docs/TOPOLOGY_GALLERY.md) for the exact bounded model and independent kernel oracle.
 
 ## Founding collection: Concentric — The Field Station Edition
 
@@ -68,7 +72,7 @@ Follow the coloured trails; the compass points towards the next unfinished exhib
 | Measurement | Further volume-from-edges experiments; Volume Exchange, Conversion Desk, Pythagorean Transfer and TetraBook are in the catalogue |
 | Information | Observer Room, Evidence Ledger and Disclosure Theatre are in the catalogue |
 | Inference | Exact Oracle, Message Tree, Hidden Tetrahedron and Contradiction Room are in the catalogue |
-| Topology | Simplicial complexes, boundary operators, cycles and holes |
+| Topology | Simplex Builder, Boundary Studio and Homology Laboratory are in the catalogue |
 | Research annex | Numerical model reproduction, parameter sweeps, evidence exports; candidate elastic-loop work subject to source review and permission |
 | Workshop | Author, validate, test and share local exhibit packs |
 
