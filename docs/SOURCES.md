@@ -57,4 +57,4 @@ Sergei Artemov and Benjamin Prud'homme, Strategic disclosure and epistemic manip
 
 ## INFERENCE-001 public reference
 
-Christian Knoll, [Understanding the Behavior of Belief Propagation: Convergence Properties, Approximation Quality, and Solution Space Analysis](https://arxiv.org/abs/2209.05464), arXiv:2209.05464. General background on BP behaviour; the museum uses independently authored bounded pairwise XOR examples, not a reproduction of thesis experiments or a QEC decoder. No private research used.
+Christian Knoll, [Understanding the Behavior of Belief Propagation](https://arxiv.org/abs/2209.05464), arXiv:2209.05464. General background on BP behaviour; the museum uses independently authored bounded pairwise XOR examples, not a reproduction of thesis experiments or a QEC decoder. No private research used.

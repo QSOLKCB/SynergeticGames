@@ -39,3 +39,5 @@ New coverage: 32 observer states, 326 distinct clue prefixes per world (2608 cas
 ## v0.7.0 candidate (INFERENCE-001)
 
 Coverage: all 81 prior tuples across three parity graphs (243 exact cases), tree BP at finite propagation depth for every prior tuple, message normalization, independent cavity-product message oracle, loopy convergence/accuracy counterexample, global contradiction, atomic saves and eighteen-lab browser completion. Cache migration includes v0.6.0. Coverage descriptions are not execution receipts; consult exact candidate CI.
+
+The separate uniform-plan benchmark checks equal one-bit information gain and unequal stage-1 mean utilities 3 and 2. Cache upgrade also covers the intermediate v0.7.0-inference-1 revision.

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {exactPosterior,beliefPropagation,compareInference,graph,MAX_ROUNDS,TOLERANCE} from '../js/museum/inference-model.js';
+import {exactPosterior,beliefPropagation,compareInference,graph,MAX_ROUNDS,TOLERANCE,informationUtility} from '../js/museum/inference-model.js';
 import {registry,foundingRoute,visitSummary} from '../js/museum/catalogue.js';
 import {createSession} from '../js/museum/registry.js';
 const num=q=>Number(q.numerator)/Number(q.denominator);
@@ -65,4 +65,10 @@ test('registered labs preserve state, atomic invalid restores and prior resets',
   s.mount('inference.contradiction-room');a('kind','contradiction');a('check');assert.equal(s.describe().done,true);
   const c=s.export();s.reset();assert.equal(s.describe().done,false);s.restore(c);
   assert.equal(visitSummary(registry,s,foundingRoute.exhibits).complete,4);s.mount('information.observer-room');assert.deepEqual(s.export(),old);
+});
+
+test('equal information gain does not imply equal expected decision utility',()=>{
+  const m=informationUtility();
+  assert.deepEqual(m.map(x=>x.gain.toString()),['1','1']);
+  assert.deepEqual(m.map(x=>x.utility.toString()),['3','2']);
 });

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-import {graph,exactPosterior,compareInference,validatePriors,MAX_ROUNDS,TOLERANCE} from './inference-model.js';
+import {graph,exactPosterior,compareInference,validatePriors,MAX_ROUNDS,TOLERANCE,informationUtility} from './inference-model.js';
 import {fields,integer,action,accept,reject,frame,label,number} from './measurement-tools.js';
 const SOURCE='https://arxiv.org/abs/2209.05464';
 const manifest=(id,title,question)=>Object.freeze({schema:1,id:'inference.'+id,version:1,title,gallery:'Inference',kind:'lab',question,source:SOURCE});
@@ -44,9 +44,9 @@ function eTransition(s,a){
   return reject(s,'Invalid exact action.');
 }
 function eDescribe(s){
-  const m=exactPosterior('tree',s.priors);
-  return {readout:'Prior P(1): '+s.priors.map(p=>p+'/4').join(', ')+'. '+(s.evaluated?'Evidence Z='+m.evidence.toString()+'; support '+m.support+'/16; posterior P(1): '+exactText(m)+'. P(A=B)='+m.pairEqual[0].toString()+'.':'Enumerate the sixteen assignments.'),
-    done:s.evaluated,explanation:'Independent priors multiply. Each equality parity factor has weight 1 if satisfied, else 0. Sum the surviving integer weights, divide by their total for exact rational marginals. Z is the evidence probability before conditioning. Here all four bits agree; singleton marginals do not describe their joint correlation.',
+  const m=exactPosterior('tree',s.priors),u=informationUtility();
+  return {readout:'Prior P(1): '+s.priors.map(p=>p+'/4').join(', ')+'. '+(s.evaluated?'Evidence Z='+m.evidence.toString()+'; support '+m.support+'/16; posterior P(1): '+exactText(m)+'. P(A=B)='+m.pairEqual[0].toString()+'. Separate uniform-plan disclosure experiment: both first clues give '+u[0].gain.toString()+' bit; mean stage-1 receiver utility B1='+u[0].utility.toString()+', B2='+u[1].utility.toString()+'.':'Enumerate the sixteen assignments.'),
+    done:s.evaluated,explanation:'Independent priors multiply. Each equality parity factor has weight 1 if satisfied, else 0. Sum the surviving integer weights, divide by their total for exact rational marginals. Z is the evidence probability before conditioning. Here all four bits agree; singleton marginals do not describe their joint correlation. In a separate uniform-plan Disclosure Theatre benchmark, either first clue halves four equally likely plans (one bit), but the maximin receiver has mean stage-1 utility 3 versus 2. Equal information gain is not equal decision utility.',
     actions:[...priorActions(s),action('Enumerate assignments','enumerate')]};
 }
 export const exactLab=Object.freeze({manifest:manifest('exact-oracle','The Exact Oracle','Weight sixteen binary assignments, apply three XOR checks and inspect exact posterior fractions.'),initial:eInitial,validate:eValidate,transition:eTransition,describe:eDescribe,draw(canvas,s){const {c,w,h}=frame(canvas),m=exactPosterior('tree',s.priors);label(c,w/2,h*.1,'Sixteen joint assignments');
@@ -68,7 +68,8 @@ function bTransition(s,a){
 }
 function bpDescription(s,kind){
   const m=compareInference(kind,s.priors,s.rounds),b=m.bp;
-  return {readout:'Prior P(1): '+s.priors.map(p=>p+'/4').join(', ')+'. Round '+b.rounds+'/'+MAX_ROUNDS+'; residual '+(b.residual===null?'not measured':b.residual.toExponential(3))+'; '+(b.converged?'message convergence':'messages not converged')+'. BP P(1): '+(b.marginals?b.marginals.map((v,i)=>names[i]+'='+fmt(v)).join(', '):'undefined')+'. '+(s.compared?'Exact P(1): '+exactText(m.exact)+'; max marginal error '+fmt(m.error)+'; evidence Z='+m.exact.evidence.toString()+'. '+m.status+'.':'Compare with exact enumeration after a round.'),
+  const messages=graph(kind).map(({a,b:dst},k)=>names[a]+'←'+names[dst]+' '+fmt(b.messages[k][0][1])+'; '+names[dst]+'←'+names[a]+' '+fmt(b.messages[k][1][1])).join(' | ');
+  return {readout:'Prior P(1): '+s.priors.map(p=>p+'/4').join(', ')+'. Round '+b.rounds+'/'+MAX_ROUNDS+'; residual '+(b.residual===null?'not measured':b.residual.toExponential(3))+'; '+(b.converged?'message convergence':'messages not converged')+'. BP P(1): '+(b.marginals?b.marginals.map((v,i)=>names[i]+'='+fmt(v)).join(', '):'undefined')+'. '+(s.compared?'Exact P(1): '+exactText(m.exact)+'; max marginal error '+fmt(m.error)+'; evidence Z='+m.exact.evidence.toString()+'. '+m.status+'.':'Compare with exact enumeration after a round.')+' Factor messages P(1), recipient←other: '+messages+'.',
     done:s.compared&&(kind==='tree'?m.error!==null&&m.error<=TOLERANCE&&b.converged:s.rounds===MAX_ROUNDS),
     explanation:'Every round computes all variable-to-factor messages from previous factor-to-variable messages, then all factor-to-variable messages from those new variable messages. Normalize each pair; equality passes the other incoming message, inequality swaps it. Uniform initialization, no damping, maximum 32 rounds, residual tolerance 1e-9. '+(kind==='tree'?'On this tree the final marginals agree with exact enumeration.':'On the tetrahedral loop, a small residual need not imply correct marginals. Cycles can repeatedly count correlated information. Compare the exact oracle; convergence is not a certificate of accuracy.'),
     actions:[...priorActions(s),action('Step one round','step',null,s.rounds===MAX_ROUNDS),action('Run 32 rounds','run',null,s.rounds===MAX_ROUNDS),action('Compare exact posterior','compare',null,s.rounds===0),action('Reset messages','rewind')]};
