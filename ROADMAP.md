@@ -1,6 +1,6 @@
 # The Living Museum — Development Roadmap
 
-Released baseline: [v0.3.0 — The Living Museum](https://github.com/QSOLKCB/SynergeticGames/releases/tag/v0.3.0), commit `8615c242afe40a933b34007c3d1695ac05c104d8`. VOLUME-001 is the v0.4.0 candidate, subject to acceptance. Keep main playable; no bulk rewrite.
+Released baseline: [v0.4.0 — The Measurement Gallery](https://github.com/QSOLKCB/SynergeticGames/releases/tag/v0.4.0), commit `1ba197fef006726481afaa9f36203b6b4e37cbae`. QUADRAY-001 is the v0.5.0 candidate, subject to acceptance. Keep main playable; no bulk rewrite.
 
 ## Release sequence
 
@@ -32,13 +32,15 @@ Acceptance: original expedition completable through real browser controls; no re
 
 ## VOLUME-001 — the measurement gallery
 
-Candidate: Conversion Desk, Pythagorean Transfer and TetraBook implemented through the reviewed registry; existing Volume Exchange remains unchanged. See [measurement gallery](docs/MEASUREMENT_GALLERY.md). Exact-head CI, review, deployed smoke check and owner playthrough required before v0.4.0 is tagged.
+Released in v0.4.0 (PR #9). See [measurement gallery](docs/MEASUREMENT_GALLERY.md).
 
 - S3: with D=2R, tetrahedron volume is (2 sqrt(2)/3) R^3; cube volume is R^3. Their physical ratio V_cube/V_tet = sqrt(9/8). Expressing the same physical volume in R^3 units and D-edged tetrahedron units gives a numerical conversion factor S3 from XYZ to IVM and 1/S3 in reverse. Equal-edge unit tetrahedron instead gives 6 sqrt(2) per cubic unit. State conventions next to every number.
 - Pythagoras: area transfer with squares and similar non-square shapes, with right-angle and similarity assumptions explicit. Use geometric area checks, not animation as proof.
 - TetraBook: inspect Kirby's public notebook before implementing hinge geometry. Calculate volumes from explicit vertices and verify endpoint and intermediate configurations against an independent determinant oracle.
 
 ## QUADRAY-001 — geometry workshop
+
+Candidate: three new registered labs with bounded integer coordinate arithmetic, exact FCC adjacency and regular-cell construction, centroid-aligned comparison, updated offline assets and acceptance tests. See [Geometry Workshop](docs/GEOMETRY_WORKSHOP.md). Full hinged Jitterbug remains deferred.
 
 Canonical integer quadrays modulo the common offset; exact integer identity under translation of all four components; bounded coordinates and overflow policy. Cartesian conversion is a rendering boundary with declared basis/scale. Build FCC neighbours, tetrahedral/octahedral cells and concentric polyhedra. Verify adjacency, uniqueness, incidence, volume and round-trip properties independently. Candidate upstream references: Mapping_Quadrays.ipynb, QuadraysResearch.ipynb, Rendering_IVM.ipynb, Qvolume.ipynb and QuadCraft2.html; inspect exact revisions and file-specific terms first. A full hinged Jitterbug requires its own validated kinematics.
 

@@ -8,13 +8,17 @@ Built for the School of Tomorrow by QSOL-IMC as independent contributors to open
 
 [Play the current museum expedition](https://qsolkcb.github.io/SynergeticGames/) · [Roadmap](ROADMAP.md) · [Design charter](docs/MUSEUM.md) · [Exhibit authoring](docs/EXHIBITS.md) · [Sources](docs/SOURCES.md) · [Verification](docs/VERIFICATION.md)
 
-## Visit the museum (v0.4.0 candidate)
+## Visit the museum (v0.5.0 candidate)
 
-Open **Museum catalogue** for eight standalone experiments, an optional guided route and access to the Concentric finale. Explore freely or follow a route with Previous/Next; export or load route JSON, revisit experiments, reset an individual lab and download its state. Completion counts describe standalone experiments only; they never award expedition seals. No account or persistent museum-wide profile is required. See [release acceptance](docs/RELEASE_ACCEPTANCE.md).
+Open **Museum catalogue** for eleven standalone experiments, an optional guided route and access to the Concentric finale. Explore freely or follow a route with Previous/Next; export or load route JSON, revisit experiments, reset an individual lab and download its state. Completion counts describe standalone experiments only; they never award expedition seals. No account or persistent museum-wide profile is required. See [release acceptance](docs/RELEASE_ACCEPTANCE.md).
 
 ## The Measurement Gallery
 
 Three new independent experiments extend the Volume Exchange: **The Conversion Desk** (bidirectional XYZ/IVM conversion), **The Pythagorean Transfer** (similar figures and area accounting), and **The TetraBook** (hinged equilateral triangles and volume). See [Measurement Gallery](docs/MEASUREMENT_GALLERY.md) for mathematical conventions, source attribution and tests.
+
+## The Geometry Workshop
+
+Construct integer Quadrays, grow FCC/IVM shells and build equal-edge tetrahedral, octahedral and cuboctahedral cells. See [Geometry Workshop](docs/GEOMETRY_WORKSHOP.md) for exact coordinate bounds, independent oracles and source references.
 
 ## Founding collection: Concentric — The Field Station Edition
 
@@ -52,7 +56,7 @@ Follow the coloured trails; the compass points towards the next unfinished exhib
 
 | Gallery | Planned exhibits |
 | --- | --- |
-| Geometry | Quadray construction, IVM/FCC, concentric polyhedra and coordinate perspective |
+| Geometry | Expanded lattice and kinematic investigations; Quadray Workshop, IVM Builder and Cell Foundry are in the catalogue |
 | Measurement | Further volume-from-edges experiments; Volume Exchange, Conversion Desk, Pythagorean Transfer and TetraBook are in the catalogue |
 | Information | Observer-specific visibility, selective revelation, exact inference and belief propagation |
 | Topology | Simplicial complexes, boundary operators, cycles and holes |

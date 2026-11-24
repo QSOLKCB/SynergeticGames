@@ -4,11 +4,11 @@ import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
 
 const source=readFileSync(new URL('../sw.js',import.meta.url),'utf8');
-test('Measurement Gallery upgrade replaces stale exhibit modules and preserves other scopes',async()=>{
+for(const prior of ['v0.4.0-measurement-1','v0.4.0-measurement-2'])test('Upgrade from '+prior+' replaces stale exhibit modules and preserves other scopes',async()=>{
   const scope='https://example.test/SynergeticGames/';
   const prefix='concentric-/SynergeticGames/-';
-  const old=prefix+'v0.4.0-measurement-1',other='concentric-/OtherGame/-v1';
-  const modules=['js/museum/pythagoras.js','js/museum/conversion-desk.js'];
+  const old=prefix+prior,other='concentric-/OtherGame/-v1';
+  const modules=['js/museum/pythagoras.js','js/museum/conversion-desk.js','js/museum/catalogue.js'];
   const stale=new Map(modules.map(path=>[new URL(path,scope).href,'old '+path]));
   const stores=new Map([[old,stale],[other,new Map()]]);
   const handlers=new Map(),requests=[];let claimed=false;
@@ -40,7 +40,7 @@ test('Measurement Gallery upgrade replaces stale exhibit modules and preserves o
   assert.ok(stores.has(other),'unrelated scope must be preserved');
   assert.equal(claimed,true);
   const count=requests.length;
-  for(const path of modules){
+  for(const path of [...modules,'js/museum/quadray-model.js','js/museum/geometry-workshop.js']){
     const url=new URL(path,scope).href;let response;
     handlers.get('fetch')({request:{url,method:'GET'},respondWith(p){response=p;}});
     assert.equal(await response,'new '+url);
