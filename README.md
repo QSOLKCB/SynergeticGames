@@ -75,7 +75,7 @@ uv run --no-project --python 3.12 --with playwright==1.62.0 python tests/browser
 
 Node is a development test runner only. Browser checks exercise actual gameplay, save validation, offline reload, sound, layout and focus. Current receipts and screenshots are written under test-results/. See [verification scope](docs/VERIFICATION.md); historical PASS results do not certify a new commit.
 
-[Source provenance](vendor/PROVENANCE.json) records pinned upstream revisions and file hashes. Current runtime uses selected older VANILLAJS modules. [VANILLAJS v3.5.0](https://github.com/QSOLKCB/VANILLAJS/releases/tag/v3.5.0) is the next integration baseline, not a claim that it is already installed.
+[Source provenance](vendor/PROVENANCE.json) records pinned upstream revisions and file hashes. The existing runtime modules are byte-identical to [VANILLAJS v3.5.0](https://github.com/QSOLKCB/VANILLAJS/releases/tag/v3.5.0); the engine bridge adds its exact-rational and exact-graph modules for independently testable museum model foundations. The visitor-facing host is still planned.
 
 ## Extend
 
