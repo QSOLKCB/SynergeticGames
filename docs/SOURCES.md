@@ -50,3 +50,7 @@ Kirby Urner, [TetraBook.ipynb](https://github.com/4dsolutions/School_of_Tomorrow
 ## QUADRAY-001 public references
 
 At School_of_Tomorrow revision `8d30d18fa1dde164317f2e21ae7e6c29ab2060df`, inspected Mapping_Quadrays.ipynb, QuadraysResearch.ipynb, Rendering_IVM.ipynb, Qvolume.ipynb, qrays.py and QuadCraft2.html. See [pinned tree](https://github.com/4dsolutions/School_of_Tomorrow/tree/8d30d18fa1dde164317f2e21ae7e6c29ab2060df). Independently authored models and graphics use the mathematical conventions; no notebook code, QuadCraft scripts or media are copied. The Qvolume notebook acknowledges Tom Ace for the Quadray determinant enhancement. No endorsement implied.
+
+## EPISTEMIC-001 public reference
+
+Sergei Artemov and Benjamin Prud'homme, Strategic disclosure and epistemic manipulation in extensive games, [arXiv:2611.17084v1](https://arxiv.org/abs/2611.17084v1) (November 2026). The public abstract motivates truthful commitments and maximin decisions; the museum's finite two-stage example is original and does not reproduce the paper's general theorem. RayShare inspires the two observer roles. No private correspondence or unpublished material used.
