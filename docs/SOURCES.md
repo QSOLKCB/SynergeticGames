@@ -42,3 +42,7 @@ For later milestones: authored station packs, additional geometry experiments, c
 ## Volume Exchange (MUSEUM-001C)
 
 Public curriculum reference: Kirby Urner, [Qvolume.ipynb, XYZ : IVM Conversion (S3)](https://github.com/4dsolutions/School_of_Tomorrow/blob/8d30d18fa1dde164317f2e21ae7e6c29ab2060df/Qvolume.ipynb), inspected at commit `8d30d18fa1dde164317f2e21ae7e6c29ab2060df`. Its radius/diameter convention and S3 factor inform this independently authored exhibit. No notebook code, external images, private correspondence or unpublished material is redistributed. See [VOLUME_EXCHANGE.md](VOLUME_EXCHANGE.md) for derivation and precision.
+
+## VOLUME-001 public references
+
+Kirby Urner, [TetraBook.ipynb](https://github.com/4dsolutions/School_of_Tomorrow/blob/8d30d18fa1dde164317f2e21ae7e6c29ab2060df/TetraBook.ipynb) (thanks in the notebook to Alan Michelson and David Koski), [Qvolume.ipynb](https://github.com/4dsolutions/School_of_Tomorrow/blob/8d30d18fa1dde164317f2e21ae7e6c29ab2060df/Qvolume.ipynb), and [VolumeTalk.ipynb](https://github.com/4dsolutions/School_of_Tomorrow/blob/8d30d18fa1dde164317f2e21ae7e6c29ab2060df/VolumeTalk.ipynb), inspected at the pinned revision. Euclid, Elements VI.31, [Clay Mathematics Institute](https://www.claymath.org/euclid_index/similar-figures-and-proportions/?chapter=31), supports similar figures on right triangle sides. These are mathematical references; the source, diagrams and visitor actions are original, with no notebook code or media redistributed. No private correspondence or unpublished research is shipped.

@@ -9,8 +9,8 @@ const sub=(a,b)=>a.map((v,i)=>v-b[i]);
 const dist=(a,b)=>Math.hypot(...sub(a,b));
 const determinant=(a,b,c)=>a[0]*(b[1]*c[2]-b[2]*c[1])-a[1]*(b[0]*c[2]-b[2]*c[0])+a[2]*(b[0]*c[1]-b[1]*c[0]);
 test('actual registered exhibit is new and precedes the legacy finale in guided route',()=>{
-  assert.equal(registry.list.length,6);assert.equal(registry.get(ID).manifest.kind,'lab');
-  assert.deepEqual(foundingRoute.exhibits.slice(-2),[ID,'concentric.engine']);
+  assert.equal(registry.list.length,9);assert.equal(registry.get(ID).manifest.kind,'lab');
+  assert.deepEqual(foundingRoute.exhibits.slice(-5),[ID,'measurement.conversion-desk','measurement.area-transfer','measurement.tetrabook','concentric.engine']);
 });
 test('every radius: common-scale mesh edges, independent determinants, fixed and reference-unit conversions',()=>{
   for(let n=1;n<=200;n++){

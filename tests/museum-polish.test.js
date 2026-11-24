@@ -4,8 +4,8 @@ import {registry,foundingRoute,visitSummary} from '../js/museum/catalogue.js';
 import {createSession,validateRoute} from '../js/museum/registry.js';
 test('progress derives from model state and excludes the expedition; inspection cannot mount labs',()=>{
   const s=createSession(registry),ids=foundingRoute.exhibits,summary=()=>visitSummary(registry,s,ids);
-  assert.equal(summary().total,5);assert.equal(summary().complete,0);assert.equal(s.active,null);
-  assert.deepEqual(summary().entries.map(e=>e.status),['unvisited','unvisited','unvisited','unvisited','unvisited','expedition']);
+  assert.equal(summary().total,8);assert.equal(summary().complete,0);assert.equal(s.active,null);
+  assert.deepEqual(summary().entries.map(e=>e.status),[...Array(8).fill('unvisited'),'expedition']);
   s.mount('concentric.tetra');assert.equal(s.status('concentric.tetra'),'visited');
   for(const edge of ['AB','AC','AD','BC','BD','CD'])s.dispatch({type:'edge',value:edge});
   assert.equal(summary().complete,1);assert.equal(s.active,'concentric.tetra');

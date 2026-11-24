@@ -1,6 +1,6 @@
 # The Living Museum — Development Roadmap
 
-Status: MUSEUM-000 establishes the direction and design contract only. Released baseline: v0.2.0 Concentric. Everything below is proposed until implemented, tested and released. Keep main playable; no bulk rewrite.
+Released baseline: [v0.3.0 — The Living Museum](https://github.com/QSOLKCB/SynergeticGames/releases/tag/v0.3.0), commit `8615c242afe40a933b34007c3d1695ac05c104d8`. VOLUME-001 is the v0.4.0 candidate, subject to acceptance. Keep main playable; no bulk rewrite.
 
 ## Release sequence
 
@@ -31,6 +31,8 @@ Four sequential reviewable PRs, each based on accepted main (no overlapping unme
 Acceptance: original expedition completable through real browser controls; no regressions in existing suites; old saves readable; new exhibit accessible by keyboard and touch; source-pinned provenance; no network needed for core play after install; no unsupported scientific claims; owner playthrough and exact-head review before release.
 
 ## VOLUME-001 — the measurement gallery
+
+Candidate: Conversion Desk, Pythagorean Transfer and TetraBook implemented through the reviewed registry; existing Volume Exchange remains unchanged. See [measurement gallery](docs/MEASUREMENT_GALLERY.md). Exact-head CI, review, deployed smoke check and owner playthrough required before v0.4.0 is tagged.
 
 - S3: with D=2R, tetrahedron volume is (2 sqrt(2)/3) R^3; cube volume is R^3. Their physical ratio V_cube/V_tet = sqrt(9/8). Expressing the same physical volume in R^3 units and D-edged tetrahedron units gives a numerical conversion factor S3 from XYZ to IVM and 1/S3 in reverse. Equal-edge unit tetrahedron instead gives 6 sqrt(2) per cubic unit. State conventions next to every number.
 - Pythagoras: area transfer with squares and similar non-square shapes, with right-angle and similarity assumptions explicit. Use geometric area checks, not animation as proof.
