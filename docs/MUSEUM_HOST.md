@@ -1,6 +1,6 @@
 # MUSEUM-001B — Modular host v1
 
-Use Museum catalogue from the Concentric toolbar. Four standalone experiments use the same puzzle transition logic as the expedition, but own separate state. Closing or switching exhibits preserves in-memory work; Reset exhibit resets only the mounted lab. A new page load starts fresh standalone labs; Save exhibit downloads a record, Load exhibit or route restores it. The original expedition continues using its own v1 save and storage key.
+Use Museum catalogue from the Concentric toolbar. Four founding standalone experiments use the same puzzle transition logic as the expedition, but own separate state. The Volume Exchange is a fifth independent lab registered through the same API; it does not modify founding models or the host lifecycle. Closing or switching exhibits preserves in-memory work; Reset exhibit resets only the mounted lab. A new page load starts fresh standalone labs; Save exhibit downloads a record, Load exhibit or route restores it. The original expedition continues using its own v1 save and storage key.
 
 The Concentric Engine entry returns to the original expedition, where the existing positional and mutual-facing requirements apply. It does not award a seal or bypass the finale. The catalogue stops the expedition clock, clears held input and owns modal focus; keyboard shortcuts are blocked while it is open. Free exploration lists every reviewed entry; Guided route orders the catalogue and offers Next stop. It is a suggested order, not a progression lock.
 

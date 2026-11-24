@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
 import {createRegistry,createSession,parseData,validateRoute,LIMITS} from './registry.js';
 import {founding} from './founding.js';
+import {volumeExchangeExhibit} from './volume-exchange.js';
 // New reviewed exhibits enter through this list, not through the host's view code.
-export const registry=createRegistry(founding);
-export const foundingRoute=validateRoute(registry,{kind:'museum.route.v1',schema:1,id:'concentric.route',title:'Founding collection',exhibits:registry.list.map(m=>m.id)});
+export const registry=createRegistry([...founding.slice(0,-1),volumeExchangeExhibit,founding.at(-1)]);
+export const foundingRoute=validateRoute(registry,{kind:'museum.route.v1',schema:1,id:'concentric.route',title:'Founding collection and Volume Exchange',exhibits:registry.list.map(m=>m.id)});
 export function connectMuseum({dialog,stop,returnToStation,download}){
   const $=id=>dialog.querySelector('#'+id),session=createSession(registry);
   let route=foundingRoute,mode='free',generation=0,opener=null;

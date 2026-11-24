@@ -45,7 +45,7 @@ Follow the coloured trails; the compass points towards the next unfinished exhib
 | Gallery | Planned exhibits |
 | --- | --- |
 | Geometry | Quadray construction, IVM/FCC, concentric polyhedra and coordinate perspective |
-| Measurement | S3 Volume Exchange, Pythagorean area transfer, TetraBook |
+| Measurement | Pythagorean area transfer, TetraBook (Volume Exchange is already in the catalogue) |
 | Information | Observer-specific visibility, selective revelation, exact inference and belief propagation |
 | Topology | Simplicial complexes, boundary operators, cycles and holes |
 | Research annex | Numerical model reproduction, parameter sweeps, evidence exports; candidate elastic-loop work subject to source review and permission |
@@ -75,7 +75,7 @@ uv run --no-project --python 3.12 --with playwright==1.62.0 python tests/browser
 
 Node is a development test runner only. Browser checks exercise actual gameplay, save validation, offline reload, sound, layout and focus. Current receipts and screenshots are written under test-results/. See [verification scope](docs/VERIFICATION.md); historical PASS results do not certify a new commit.
 
-[Source provenance](vendor/PROVENANCE.json) records pinned upstream revisions and file hashes. The existing runtime modules are byte-identical to [VANILLAJS v3.5.0](https://github.com/QSOLKCB/VANILLAJS/releases/tag/v3.5.0); the engine bridge adds its exact-rational and exact-graph modules for independently testable museum model foundations. The modular catalogue now exposes the four founding experiments as independent, resettable labs and a route back to the original expedition finale. Open **Museum catalogue** before or during play. The Volume Exchange and further galleries are planned.
+[Source provenance](vendor/PROVENANCE.json) records pinned upstream revisions and file hashes. The existing runtime modules are byte-identical to [VANILLAJS v3.5.0](https://github.com/QSOLKCB/VANILLAJS/releases/tag/v3.5.0); the engine bridge adds its exact-rational and exact-graph modules for independently testable museum model foundations. The modular catalogue now exposes the four founding experiments as independent, resettable labs and a route back to the original expedition finale. Open **Museum catalogue** before or during play. The new **Volume Exchange** compares an R-edged cube with a D-edged tetrahedron (D = 2R): predict, measure, rescale and switch units. It is the first new independently registered lab. See [Volume Exchange](docs/VOLUME_EXCHANGE.md). Further galleries remain planned.
 
 ## Extend
 
