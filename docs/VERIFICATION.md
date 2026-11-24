@@ -53,3 +53,7 @@ Coverage: twenty polynomial quadrature configurations against independent closed
 ## MUSEUM-002A candidate
 
 Coverage: allowlisted template packs, malformed inputs, pack identity on restore, bounded catalogue, independent native sample registration, real browser author/preview/export/install/complete flow, offline import closure. Full execution status belongs to exact-head CI. MUSEUM-002B adds browser compatibility and polish gates.
+
+## MUSEUM-002B candidate
+
+Adds full engine-parameterized browser acceptance for Chromium, Firefox and WebKit with engine-specific evidence directories; compatibility is a required predecessor of Pages validation. Catalogue search preserves unfiltered progress, completion cache is invalidated by state replacement, economy mode does not alter fixed ticks, downloads attach anchors and delay URL revocation, route editor includes locally validated packs. No actual Safari or old Mac result claimed until manual device acceptance. See BROWSER_COMPATIBILITY.md.

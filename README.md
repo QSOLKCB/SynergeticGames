@@ -1,4 +1,6 @@
-# SynergeticGames — The Living Museum
+![SynergeticGames — The Living Museum. Construct, measure, infer, verify.](assets/museum-banner.svg)
+
+[**Enter the museum**](https://qsolkcb.github.io/SynergeticGames/) · [**Open the Contributor Workshop**](https://qsolkcb.github.io/SynergeticGames/workshop.html) · [**Start here**](docs/VISITOR_GUIDE.md)
 
 **A modular science museum that can be cloned, audited, played and extended.**
 
@@ -7,6 +9,17 @@ Discover mathematics by doing mathematics. Walk through interactive exhibits, ch
 Built for the School of Tomorrow by QSOL-IMC as independent contributors to open science. **We are not members of the School of Tomorrow.** This is an independent contribution, not an official publication, affiliation or endorsement.
 
 [Play the current museum expedition](https://qsolkcb.github.io/SynergeticGames/) · [Roadmap](ROADMAP.md) · [Design charter](docs/MUSEUM.md) · [Exhibit authoring](docs/EXHIBITS.md) · [Sources](docs/SOURCES.md) · [Verification](docs/VERIFICATION.md)
+
+## Start here
+
+| I want to… | Read or open |
+| --- | --- |
+| Explore the museum or play Concentric | [Visitor guide](docs/VISITOR_GUIDE.md) |
+| Create an exhibit without writing code | [Authoring guide](docs/AUTHORING_GUIDE.md) |
+| Turn a complex idea into an understandable interaction | [Educator and researcher guide](docs/TEACHING_GUIDE.md) |
+| Build my own mathematical model or fork | [Modding guide](docs/MODDING_GUIDE.md) · [SDK](docs/SDK.md) |
+| Check browser requirements and troubleshoot | [Compatibility guide](docs/BROWSER_COMPATIBILITY.md) |
+| Reproduce results and review a release | [Verification](docs/VERIFICATION.md) · [Acceptance](docs/RELEASE_ACCEPTANCE.md) |
 
 ## Visit the museum (v1.0.0 candidate)
 
@@ -68,9 +81,9 @@ Follow the coloured trails; the compass points towards the next unfinished exhib
 
 ## The museum we are building
 
-**The initial museum host:** a shared catalogue with independently testable founding exhibits. The catalogue includes the galleries below; external authoring remains planned. A visitor can explore freely or follow an educational route. The Experimental Annex offers bounded research experiments. The same exhibit should support an accessible first encounter and an inspectable mathematical explanation; advanced tools are optional.
+**The initial museum host:** a shared catalogue with independently testable founding exhibits. The catalogue includes the galleries below; external data-pack authoring and reviewed native contributions are supported. A visitor can explore freely or follow an educational route. The Experimental Annex offers bounded research experiments. The same exhibit should support an accessible first encounter and an inspectable mathematical explanation; advanced tools are optional.
 
-| Gallery | Planned exhibits |
+| Gallery | Available and future exhibits |
 | --- | --- |
 | Geometry | Expanded lattice and kinematic investigations; Quadray Workshop, IVM Builder and Cell Foundry are in the catalogue |
 | Measurement | Further volume-from-edges experiments; Volume Exchange, Conversion Desk, Pythagorean Transfer and TetraBook are in the catalogue |
@@ -98,13 +111,15 @@ Open http://localhost:8765. A static HTTP origin is required for native modules;
 
 ```sh
 node --test tests/*.test.js
-uv run --no-project --python 3.12 --with playwright==1.62.0 python -m playwright install chromium
-uv run --no-project --python 3.12 --with playwright==1.62.0 python tests/browser.py
+uv run --no-project --python 3.12 --with playwright==1.62.0 python -m playwright install chromium firefox webkit
+BROWSER_ENGINE=chromium uv run --no-project --python 3.12 --with playwright==1.62.0 python tests/browser.py
+BROWSER_ENGINE=firefox uv run --no-project --python 3.12 --with playwright==1.62.0 python tests/browser.py
+BROWSER_ENGINE=webkit uv run --no-project --python 3.12 --with playwright==1.62.0 python tests/browser.py
 ```
 
-Node is a development test runner only. Browser checks exercise actual gameplay, save validation, offline reload, sound, layout and focus. Current receipts and screenshots are written under test-results/. See [verification scope](docs/VERIFICATION.md); historical PASS results do not certify a new commit.
+Node is a development test runner only. Browser checks exercise actual gameplay, save validation, offline reload, sound, layout and focus. Current receipts and screenshots are written under test-results/<engine>/. WebKit is not a substitute for testing the installed Safari browser on the intended Mac. See [verification scope](docs/VERIFICATION.md); historical PASS results do not certify a new commit.
 
-[Source provenance](vendor/PROVENANCE.json) records pinned upstream revisions and file hashes. The existing runtime modules are byte-identical to [VANILLAJS v3.5.0](https://github.com/QSOLKCB/VANILLAJS/releases/tag/v3.5.0); the engine bridge adds its exact-rational and exact-graph modules for independently testable museum model foundations. The modular catalogue now exposes the four founding experiments as independent, resettable labs and a route back to the original expedition finale. Open **Museum catalogue** before or during play. The new **Volume Exchange** compares an R-edged cube with a D-edged tetrahedron (D = 2R): predict, measure, rescale and switch units. It is the first new independently registered lab. See [Volume Exchange](docs/VOLUME_EXCHANGE.md). The Measurement Gallery expands this collection with three new labs; further galleries remain planned.
+[Source provenance](vendor/PROVENANCE.json) records pinned upstream revisions and file hashes. The existing runtime modules are byte-identical to [VANILLAJS v3.5.0](https://github.com/QSOLKCB/VANILLAJS/releases/tag/v3.5.0); the engine bridge adds its exact-rational and exact-graph modules for independently testable museum model foundations. The modular catalogue now exposes the four founding experiments as independent, resettable labs and a route back to the original expedition finale. Open **Museum catalogue** before or during play. The new **Volume Exchange** compares an R-edged cube with a D-edged tetrahedron (D = 2R): predict, measure, rescale and switch units. It is the first new independently registered lab. See [Volume Exchange](docs/VOLUME_EXCHANGE.md). Subsequent galleries add geometry, information, inference, topology and reproducible research experiments.
 
 ## Extend
 

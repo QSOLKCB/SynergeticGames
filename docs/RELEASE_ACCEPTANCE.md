@@ -20,3 +20,7 @@ Candidate, not a release receipt. MUSEUM-001A–D culminate in this candidate. R
 ## Scope and limits
 
 No new physical theory, complete external exhibit SDK, mandatory cloud service, WebGL upgrade, gamepad integration or performance certification is claimed. The existing deterministic simulation and Canvas 2D fallback remain. Controller support is deferred to a separately tested engine integration; keyboard/touch are the supported inputs. No new runtime dependencies. All private research remains out of the shipped assets. A successful browser test is not proof of complete accessibility or cross-browser/device support.
+
+## v1.0.0 — MUSEUM-002 final candidate
+
+Historical v0.3 checklist above remains a record, not current evidence. Require both PRs merged, exact-head review, all three engine receipts green, Pages main deployment and owner smoke test. Verify all 24 built-in labs, expedition, independent native example registration, actual Workshop author/preview/export/install, pack-specific save identity, route including pack, read-only evidence inspection, keyboard and mobile layouts, low-power graphics, offline and invalid records. Verify banner and guides render. Record actual Safari device acceptance separately using BROWSER_COMPATIBILITY.md; if unavailable, explicitly record that limitation before any compatibility claim. No tag until owner accepts results.
