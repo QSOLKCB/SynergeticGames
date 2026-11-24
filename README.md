@@ -8,9 +8,9 @@ Built for the School of Tomorrow by QSOL-IMC as independent contributors to open
 
 [Play the current museum expedition](https://qsolkcb.github.io/SynergeticGames/) · [Roadmap](ROADMAP.md) · [Design charter](docs/MUSEUM.md) · [Exhibit authoring](docs/EXHIBITS.md) · [Sources](docs/SOURCES.md) · [Verification](docs/VERIFICATION.md)
 
-## Visit the museum (v0.6.0 candidate)
+## Visit the museum (v0.7.0 candidate)
 
-Open **Museum catalogue** for fourteen standalone experiments, an optional guided route and access to the Concentric finale. Explore freely or follow a route with Previous/Next; export or load route JSON, revisit experiments, reset an individual lab and download its state. Completion counts describe standalone experiments only; they never award expedition seals. No account or persistent museum-wide profile is required. See [release acceptance](docs/RELEASE_ACCEPTANCE.md).
+Open **Museum catalogue** for eighteen standalone experiments, an optional guided route and access to the Concentric finale. Explore freely or follow a route with Previous/Next; export or load route JSON, revisit experiments, reset an individual lab and download its state. Completion counts describe standalone experiments only; they never award expedition seals. No account or persistent museum-wide profile is required. See [release acceptance](docs/RELEASE_ACCEPTANCE.md).
 
 ## The Measurement Gallery
 
@@ -22,7 +22,11 @@ Construct integer Quadrays, grow FCC/IVM shells and build equal-edge tetrahedral
 
 ## The Information Gallery
 
-Switch observer views, share truthful observations, filter possible worlds and compare disclosure orders in a bounded maximin decision game. See [Information Gallery](docs/INFORMATION_GALLERY.md) for models, assumptions, scope and tests. Exact probabilistic inference and belief propagation remain planned for v0.7.0.
+Switch observer views, share truthful observations, filter possible worlds and compare disclosure orders in a bounded maximin decision game. See [Information Gallery](docs/INFORMATION_GALLERY.md) for models, assumptions, scope and tests. The Inference Gallery extends these finite information models with a separate probability model.
+
+## The Inference Gallery — The Hidden Tetrahedron
+
+Enumerate exact rational posteriors, step normalized sum-product messages on a tree, compare a loopy tetrahedron and investigate global contradiction. See [Inference Gallery](docs/INFERENCE_GALLERY.md) for priors, schedules, precision, counterexamples and scope. Classical binary inference, not a validated QEC decoder.
 
 ## Founding collection: Concentric — The Field Station Edition
 
@@ -62,7 +66,8 @@ Follow the coloured trails; the compass points towards the next unfinished exhib
 | --- | --- |
 | Geometry | Expanded lattice and kinematic investigations; Quadray Workshop, IVM Builder and Cell Foundry are in the catalogue |
 | Measurement | Further volume-from-edges experiments; Volume Exchange, Conversion Desk, Pythagorean Transfer and TetraBook are in the catalogue |
-| Information | Observer Room, Evidence Ledger and Disclosure Theatre are in the catalogue; exact inference and belief propagation remain planned |
+| Information | Observer Room, Evidence Ledger and Disclosure Theatre are in the catalogue |
+| Inference | Exact Oracle, Message Tree, Hidden Tetrahedron and Contradiction Room are in the catalogue |
 | Topology | Simplicial complexes, boundary operators, cycles and holes |
 | Research annex | Numerical model reproduction, parameter sweeps, evidence exports; candidate elastic-loop work subject to source review and permission |
 | Workshop | Author, validate, test and share local exhibit packs |

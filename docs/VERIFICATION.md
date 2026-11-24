@@ -35,3 +35,7 @@ New coverage includes 625 integer tuples and five common offsets, exact inverse 
 ## v0.6.0 candidate (EPISTEMIC-001)
 
 New coverage: 32 observer states, 326 distinct clue prefixes per world (2608 cases), all 15 nonempty four-plan sets at both stages, four plans and two disclosure orders, view isolation, truth preservation, redundancy, atomic saves, fourteen-lab browser completion, mobile and offline access. Cache upgrade tests cover v0.5.0 as well as both v0.4.0 revisions. Coverage description only; consult exact candidate CI for execution evidence.
+
+## v0.7.0 candidate (INFERENCE-001)
+
+Coverage: all 81 prior tuples across three parity graphs (243 exact cases), tree BP at finite propagation depth for every prior tuple, message normalization, independent cavity-product message oracle, loopy convergence/accuracy counterexample, global contradiction, atomic saves and eighteen-lab browser completion. Cache migration includes v0.6.0. Coverage descriptions are not execution receipts; consult exact candidate CI.

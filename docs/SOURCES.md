@@ -54,3 +54,7 @@ At School_of_Tomorrow revision `8d30d18fa1dde164317f2e21ae7e6c29ab2060df`, inspe
 ## EPISTEMIC-001 public reference
 
 Sergei Artemov and Benjamin Prud'homme, Strategic disclosure and epistemic manipulation in extensive games, [arXiv:2611.17084v1](https://arxiv.org/abs/2611.17084v1) (November 2026). The public abstract motivates truthful commitments and maximin decisions; the museum's finite two-stage example is original and does not reproduce the paper's general theorem. RayShare inspires the two observer roles. No private correspondence or unpublished material used.
+
+## INFERENCE-001 public reference
+
+Christian Knoll, [Understanding the Behavior of Belief Propagation: Convergence Properties, Approximation Quality, and Solution Space Analysis](https://arxiv.org/abs/2209.05464), arXiv:2209.05464. General background on BP behaviour; the museum uses independently authored bounded pairwise XOR examples, not a reproduction of thesis experiments or a QEC decoder. No private research used.
