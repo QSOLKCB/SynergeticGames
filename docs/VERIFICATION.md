@@ -25,3 +25,5 @@ The existing browser acceptance sequence now covers independent museum experimen
 ## v0.4.0 candidate (VOLUME-001)
 
 New test coverage: 48 conversion amounts in both directions, 192 triangle/figure cases checked with independent shoelace areas, 181 integer TetraBook positions and two analytic regular positions checked against coordinate determinants, record validation and model isolation. The browser suite now completes all eight standalone labs, checks new exhibit save/restore, touch and offline access. These are coverage descriptions, not execution receipts; consult exact candidate CI. Original v0.3.0 release evidence remains historical. No new physics or universal device/accessibility certification is claimed.
+
+Cache upgrade regression: simulate a visitor with the earlier v0.4.0-measurement-1 cache, install and activate the new worker, verify the updated Pythagorean Transfer and Conversion Desk are served offline and unrelated scope caches survive. This is a Node VM lifecycle test, not a live browser deployment receipt.
