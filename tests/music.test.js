@@ -38,3 +38,30 @@ test('sound can retry after a partially constructed audio device fails',async t=
     assert.equal(attempts,2);assert.equal(closed,1);assert.ok(started>0);audio.stop();
   }finally{if(previous)Object.defineProperty(globalThis,'AudioContext',previous);else delete globalThis.AudioContext;}
 });
+test('pending audio resume does not block toggles and stale failures do not affect a retry',async t=>{
+  const previous=Object.getOwnPropertyDescriptor(globalThis,'AudioContext');
+  const rejections=[],messages=[];let closed=0;
+  t.mock.method(console,'warn',()=>{});
+  class Device {
+    constructor(){this.destination={};}
+    createBuffer(){}
+    createBufferSource(){}
+    createGain(){}
+    resume(){return new Promise((_,reject)=>rejections.push(reject));}
+    async close(){closed++;}
+  }
+  Object.defineProperty(globalThis,'AudioContext',{configurable:true,value:Device});
+  try{
+    const audio=audioSystem(message=>messages.push(message));
+    assert.equal(await audio.toggle(),true);
+    assert.equal(await audio.toggle(),false);
+    assert.equal(await audio.toggle(),true);
+    rejections[0](new Error('stale failure'));await Promise.resolve();
+    assert.equal(messages.length,0);assert.equal(closed,0);
+    rejections[1](new Error('current failure'));await Promise.resolve();
+    assert.equal(messages.length,1);assert.equal(closed,1);
+    assert.equal(await audio.toggle(),false);
+    assert.equal(await audio.toggle(),true);
+    assert.equal(rejections.length,3);
+  }finally{if(previous)Object.defineProperty(globalThis,'AudioContext',previous);else delete globalThis.AudioContext;}
+});

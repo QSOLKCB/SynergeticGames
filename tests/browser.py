@@ -90,6 +90,21 @@ try:
             options['executable_path'] = os.environ['BROWSER_EXECUTABLE']
         browser = getattr(pw, ENGINE).launch(**options)
         receipt['browserVersion'] = browser.version
+        pending_audio = browser.new_context()
+        pending_audio.add_init_script("""
+            const NativeAudioContext = window.AudioContext || window.webkitAudioContext;
+            window.AudioContext = class extends NativeAudioContext {
+                resume() { return new Promise(() => {}); }
+            };
+        """)
+        page = pending_audio.new_page()
+        page.goto(URL)
+        page.locator('#sound').click()
+        expect(page.locator('#sound')).to_have_attribute('aria-pressed', 'true')
+        page.locator('#sound').click()
+        expect(page.locator('#sound')).to_have_attribute('aria-pressed', 'false')
+        record('sound controls remain responsive while audio resume is pending')
+        pending_audio.close()
         context = browser.new_context(viewport={'width': 1440, 'height': 1060})
         page = context.new_page()
         page.on('pageerror', lambda error: errors.append(str(error)))
