@@ -45,3 +45,7 @@ The separate uniform-plan benchmark checks equal one-bit information gain and un
 ## v0.8.0 candidate (SIMPLEX-001)
 
 Coverage: all 32768 masks, all 167 face-closed complexes (including the empty complex) in GF(2) and GF(3), independent kernel cardinalities, signed boundary cancellation, cycle/boundary witnesses, invalid construction/restores and twenty-one-lab browser completion. Offline upgrade includes both v0.7.0 cache revisions. Coverage descriptions are not execution receipts; consult exact candidate CI.
+
+## v0.9.0 candidate (RESEARCH-001)
+
+Coverage: twenty polynomial quadrature configurations against independent closed forms, twenty oscillator configurations against analytic Euler and independent matrix-power symplectic oracles, inference sweep witnesses, source blob identity, evidence recomputation/tamper rejection, bounded history, atomic saves, twenty-four-lab browser completion and offline upgrade from v0.8.0. Coverage descriptions are not execution receipts; consult exact candidate CI.

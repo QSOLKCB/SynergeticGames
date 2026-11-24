@@ -8,9 +8,9 @@ Built for the School of Tomorrow by QSOL-IMC as independent contributors to open
 
 [Play the current museum expedition](https://qsolkcb.github.io/SynergeticGames/) · [Roadmap](ROADMAP.md) · [Design charter](docs/MUSEUM.md) · [Exhibit authoring](docs/EXHIBITS.md) · [Sources](docs/SOURCES.md) · [Verification](docs/VERIFICATION.md)
 
-## Visit the museum (v0.8.0 candidate)
+## Visit the museum (v0.9.0 candidate)
 
-Open **Museum catalogue** for twenty-one standalone experiments, an optional guided route and access to the Concentric finale. Explore freely or follow a route with Previous/Next; export or load route JSON, revisit experiments, reset an individual lab and download its state. Completion counts describe standalone experiments only; they never award expedition seals. No account or persistent museum-wide profile is required. See [release acceptance](docs/RELEASE_ACCEPTANCE.md).
+Open **Museum catalogue** for twenty-four standalone experiments, an optional guided route and access to the Concentric finale. Explore freely or follow a route with Previous/Next; export or load route JSON, revisit experiments, reset an individual lab and download its state. Completion counts describe standalone experiments only; they never award expedition seals. No account or persistent museum-wide profile is required. See [release acceptance](docs/RELEASE_ACCEPTANCE.md).
 
 ## The Measurement Gallery
 
@@ -31,6 +31,10 @@ Enumerate exact rational posteriors, step normalized sum-product messages on a t
 ## The Topology Gallery
 
 Construct face-closed simplicial complexes, reverse orientations, compare GF(2) and GF(3), and calculate Betti numbers and cycle/boundary witnesses. See [Topology Gallery](docs/TOPOLOGY_GALLERY.md) for the exact bounded model and independent kernel oracle.
+
+## The Experimental Annex
+
+Run exact-reference quadrature, dimensionless oscillator refinement and exhaustive inference sweeps. Retain failed or inconclusive observations and download versioned, locally verifiable evidence. See [Experimental Annex](docs/EXPERIMENTAL_ANNEX.md). Unpublished elastic-loop material remains deferred behind the source/permission gate.
 
 ## Founding collection: Concentric — The Field Station Edition
 
@@ -64,7 +68,7 @@ Follow the coloured trails; the compass points towards the next unfinished exhib
 
 ## The museum we are building
 
-**The initial museum host:** a shared catalogue with independently testable founding exhibits. The additional galleries and research workbench below are planned. A visitor can explore freely or follow an educational route. A research workbench is planned. The same exhibit should support an accessible first encounter and an inspectable mathematical explanation; advanced tools are optional.
+**The initial museum host:** a shared catalogue with independently testable founding exhibits. The catalogue includes the galleries below; external authoring remains planned. A visitor can explore freely or follow an educational route. The Experimental Annex offers bounded research experiments. The same exhibit should support an accessible first encounter and an inspectable mathematical explanation; advanced tools are optional.
 
 | Gallery | Planned exhibits |
 | --- | --- |
@@ -73,7 +77,7 @@ Follow the coloured trails; the compass points towards the next unfinished exhib
 | Information | Observer Room, Evidence Ledger and Disclosure Theatre are in the catalogue |
 | Inference | Exact Oracle, Message Tree, Hidden Tetrahedron and Contradiction Room are in the catalogue |
 | Topology | Simplex Builder, Boundary Studio and Homology Laboratory are in the catalogue |
-| Research annex | Numerical model reproduction, parameter sweeps, evidence exports; candidate elastic-loop work subject to source review and permission |
+| Research annex | Quadrature Bench, Oscillator Laboratory and Inference Sweep; candidate elastic-loop work remains gated |
 | Workshop | Author, validate, test and share local exhibit packs |
 
 Our teaching inspiration includes [Kirby Urner's School of Tomorrow](https://github.com/4dsolutions/School_of_Tomorrow), [Ryan's RayShare](https://github.com/RyanJBuchanan/RayShare) and [Synergetics 95](https://qsolkcb.github.io/synergetics2/#/home). Public source materials are references, not a blanket licence to copy everything or a claim of contributor endorsement.

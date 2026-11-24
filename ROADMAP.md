@@ -1,6 +1,6 @@
 # The Living Museum — Development Roadmap
 
-Released baseline: [v0.7.0 — The Hidden Tetrahedron](https://github.com/QSOLKCB/SynergeticGames/releases/tag/v0.7.0), commit `e2e71e2eab82d49e371728f5e0442615f599047b`. SIMPLEX-001 is the v0.8.0 candidate, subject to acceptance. Keep main playable; no bulk rewrite.
+Released baseline: [v0.8.0 — The Topology Gallery](https://github.com/QSOLKCB/SynergeticGames/releases/tag/v0.8.0), commit `056c7d451017b370f75a9d2e189bc2fa3cd7846d`. RESEARCH-001 is the v0.9.0 candidate, subject to acceptance. Keep main playable; no bulk rewrite.
 
 ## Release sequence
 
@@ -58,11 +58,13 @@ Start with small binary factor graphs, uniform and nonuniform priors, XOR constr
 
 ## SIMPLEX-001 — topology gallery
 
-Candidate: Simplex Builder, Boundary Studio and Homology Laboratory implement four-vertex face-closed complexes, oriented boundaries, exact GF(2)/GF(3) ranks, Betti numbers and explicit cycle/boundary witnesses. See [Topology Gallery](docs/TOPOLOGY_GALLERY.md).
+Released in v0.8.0 (PR #13): Simplex Builder, Boundary Studio and Homology Laboratory implement four-vertex face-closed complexes, oriented boundaries, exact GF(2)/GF(3) ranks, Betti numbers and explicit cycle/boundary witnesses. See [Topology Gallery](docs/TOPOLOGY_GALLERY.md).
 
 Construct oriented vertices, edges, faces and tetrahedra. Define coefficient field explicitly, validate face closure and orientation, demonstrate boundary-of-boundary zero and calculate small Betti numbers using independent rank checks. Contrast a tetrahedral surface with a filled tetrahedron. Explore graph and complex relationships without assuming a lattice proves a physical theory. Consider exact-graph and finite-field modules only where their contracts fit.
 
 ## RESEARCH-001 — experimental annex
+
+Candidate: public-mathematics fallback implemented as three registered labs, exact-reference refinement and exhaustive inference sweeps, bounded retained run history and deterministic evidence export/recomputation. See [Experimental Annex](docs/EXPERIMENTAL_ANNEX.md). No permission to publish the elastic-loop model has been established; it remains deferred rather than blocking this milestone.
 
 Source/permission gate before use of unpublished or privately circulated material. A candidate elastic-loop exhibit should reproduce a public or author-approved model and its numerical example first, with explicit parameters, units, discretisation, convergence checks and independent references. Distinguish transient configurations from equilibria and phenomenological scalar potentials from relativistic stress-energy or graviton claims. No novel physical conclusions implied by successful reproduction. A tetrahedral discretisation is a separate experimental extension. Retain failed receipts; export observations, algorithm/version, source revision, settings, seeds where applicable, numerical error and limitations.
 

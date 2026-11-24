@@ -9,9 +9,11 @@ import {quadrayWorkshop,latticeWorkshop,cellWorkshop} from './geometry-workshop.
 import {observerLab,evidenceLab,disclosureLab} from './information-gallery.js';
 import {exactLab,treeLab,loopLab,contradictionLab} from './inference-gallery.js';
 import {simplexLab,boundaryLab,homologyLab} from './topology-gallery.js';
+import {researchLabs} from './research-gallery.js';
+import {verifyResearchEvidence} from './research-evidence.js';
 // New reviewed exhibits enter through this list, not through the host's view code.
-export const registry=createRegistry([...founding.slice(0,-1),volumeExchangeExhibit,conversionDesk,pythagorasExhibit,tetraBookExhibit,quadrayWorkshop,latticeWorkshop,cellWorkshop,observerLab,evidenceLab,disclosureLab,exactLab,treeLab,loopLab,contradictionLab,simplexLab,boundaryLab,homologyLab,founding.at(-1)]);
-export const foundingRoute=validateRoute(registry,{kind:'museum.route.v1',schema:1,id:'concentric.route',title:'Founding collection, Measurement, Geometry, Information, Inference and Topology',exhibits:registry.list.map(m=>m.id)});
+export const registry=createRegistry([...founding.slice(0,-1),volumeExchangeExhibit,conversionDesk,pythagorasExhibit,tetraBookExhibit,quadrayWorkshop,latticeWorkshop,cellWorkshop,observerLab,evidenceLab,disclosureLab,exactLab,treeLab,loopLab,contradictionLab,simplexLab,boundaryLab,homologyLab,...researchLabs,founding.at(-1)]);
+export const foundingRoute=validateRoute(registry,{kind:'museum.route.v1',schema:1,id:'concentric.route',title:'Founding collection and all galleries through the Experimental Annex',exhibits:registry.list.map(m=>m.id)});
 // Pure catalogue metadata; route order is never sorted or modified.
 export function visitSummary(registry,session,ids){
   let total=0,complete=0;
@@ -52,6 +54,8 @@ export function connectMuseum({dialog,stop,returnToStation,download}){
     $('museum-explanation').hidden=!$('museum-reveal').checked;
     updateProgress();$('museum-lab-status').textContent=v.done?'Experiment completed':'Explore and test your ideas';
     $('museum-canvas').hidden=typeof d.draw!=='function';if(d.draw)d.draw($('museum-canvas'),session.snapshot());
+    $('museum-evidence-export').hidden=typeof d.evidence!=='function';
+    $('museum-evidence-export').disabled=!v.done;
     $('museum-actions').replaceChildren();
     for(const [index,a] of v.actions.entries()){
       const b=document.createElement('button');b.textContent=a.label;b.disabled=a.disabled;
@@ -89,12 +93,18 @@ export function connectMuseum({dialog,stop,returnToStation,download}){
   $('museum-route-export').addEventListener('click',()=>{download(JSON.stringify(route,null,2),'museum-route.json','application/json');message('Route downloaded.');});
   $('museum-route-default').addEventListener('click',()=>{generation++;route=foundingRoute;catalogue();message('Founding route restored. Lab progress is unchanged.');focusTitle();});
   $('museum-export').addEventListener('click',()=>{download(JSON.stringify(session.export(),null,2),'museum-exhibit.json','application/json');message('Exhibit downloaded.');});
+  $('museum-evidence-export').addEventListener('click',()=>{
+    if(session.active===null)return;
+    const d=registry.get(session.active);if(typeof d.evidence!=='function'||!session.describe().done)return;
+    download(JSON.stringify(d.evidence(session.snapshot()),null,2),'museum-research-evidence.json','application/json');message('Research evidence downloaded.');
+  });
   $('museum-load').addEventListener('click',()=>{$('museum-file').value='';$('museum-file').click();});
   $('museum-file').addEventListener('change',async()=>{
     const f=$('museum-file').files[0],ticket=++generation;if(!f)return;
     try{
       if(f.size>LIMITS.bytes)throw new RangeError('64 KiB maximum');
       const record=parseData(await f.text());if(ticket!==generation||!dialog.open)return;
+      if(record.kind==='museum.research.evidence.v1'){const result=verifyResearchEvidence(record);message('Evidence reproduced: '+result.experiment+'; '+result.runs+' run(s). Current state unchanged.');return;}
       if(record.kind==='museum.route.v1'){route=validateRoute(registry,record);mode='guided';$('museum-mode').value=mode;catalogue();message('Route loaded.');focusTitle();}
       else{session.restore(record);$('museum-list').hidden=true;$('museum-lab').hidden=false;$('museum-route-tools').hidden=true;$('museum-reveal').checked=session.describe().done===true;paint();message('Exhibit restored.');focusTitle();}
     }catch(error){if(ticket===generation&&dialog.open)message('Record rejected: '+error.message+'. Existing progress is unchanged.');}

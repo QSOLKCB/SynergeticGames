@@ -13,10 +13,10 @@
 <body>
   <header class="masthead">
     <a class="brand" href="./" aria-label="SynergeticGames home"><span class="brand-mark">◈</span><span>QSOL–IMC <small>SYNERGETIC GAMES / 001</small></span></a>
-    <span class="edition">BUILT FOR THE SCHOOL OF TOMORROW <i>v0.8</i></span>
+    <span class="edition">BUILT FOR THE SCHOOL OF TOMORROW <i>v0.9</i></span>
   </header>
   <main>
-    <div class="heading-row museum-entrance"><div><p class="eyebrow">SYNERGETICGAMES / EXPLORE · PREDICT · DISCOVER</p><h1>The Living Museum<span>.</span></h1></div><p class="tagline">Concentric · Founding collection<br>Twenty-one standalone experiments. One expedition.</p></div>
+    <div class="heading-row museum-entrance"><div><p class="eyebrow">SYNERGETICGAMES / EXPLORE · PREDICT · DISCOVER</p><h1>The Living Museum<span>.</span></h1></div><p class="tagline">Concentric · Founding collection<br>Twenty-four standalone experiments. One expedition.</p></div>
     <div class="toolbar" aria-label="Expedition tools">
       <div class="tool-group"><button id="pause" disabled>Pause <kbd>P</kbd></button><button id="switch" disabled>Switch probe <kbd>Q</kbd></button><button id="face" disabled>Face partner <kbd>F</kbd></button></div>
       <div class="tool-group"><button id="museum-open" aria-haspopup="dialog" class="museum-entry">Museum catalogue</button><button id="sound" aria-pressed="false">Sound off</button><button id="view-mode" aria-pressed="false">Fit window</button><button id="fullscreen">Fullscreen ⛶</button><button id="notes">Field notes</button><button id="save">Save</button><button id="load">Load</button><input id="file" type="file" accept="application/json,.json" hidden></div>
@@ -84,7 +84,7 @@
   <dialog id="museum" aria-labelledby="museum-heading">
     <div class="dialog-top"><p class="eyebrow">SYNERGETICGAMES / THE LIVING MUSEUM</p><button id="museum-close" aria-label="Close museum">×</button></div>
     <h2 id="museum-heading" tabindex="-1">The Living Museum</h2>
-    <div class="museum-tools"><label for="museum-mode">Visit mode</label><select id="museum-mode"><option value="free">Free exploration</option><option value="guided">Guided route</option></select><button id="museum-load">Load exhibit or route</button><input id="museum-file" type="file" accept="application/json,.json" hidden></div>
+    <div class="museum-tools"><label for="museum-mode">Visit mode</label><select id="museum-mode"><option value="free">Free exploration</option><option value="guided">Guided route</option></select><button id="museum-load">Load exhibit, route or evidence</button><input id="museum-file" type="file" accept="application/json,.json" hidden></div>
     <p id="museum-route" class="museum-route-label"></p>
     <p id="museum-progress" role="status" aria-live="polite"></p>
     <div id="museum-route-tools" class="museum-tools" hidden><button id="museum-route-export">Download route</button><button id="museum-route-default">Restore founding route</button></div>
@@ -95,7 +95,7 @@
       <p id="museum-readout" class="readout" aria-live="polite"></p><div id="museum-actions" class="lab-controls"></div>
       <label><input type="checkbox" id="museum-reveal" aria-controls="museum-explanation"> Reveal explanation</label><p id="museum-explanation" hidden></p>
       <p><a id="museum-source" target="_blank" rel="noopener">Source reference ↗</a></p>
-      <div class="museum-tools"><button id="museum-reset">Reset exhibit</button><button id="museum-export">Save exhibit</button><button id="museum-back">Back to catalogue</button><button id="museum-previous" hidden>Previous stop</button><button id="museum-next" hidden>Next stop</button></div>
+      <div class="museum-tools"><button id="museum-reset">Reset exhibit</button><button id="museum-export">Save exhibit</button><button id="museum-evidence-export" hidden disabled>Download research evidence</button><button id="museum-back">Back to catalogue</button><button id="museum-previous" hidden>Previous stop</button><button id="museum-next" hidden>Next stop</button></div>
     </section>
     <p id="museum-feedback" role="status" aria-live="polite"></p>
     <p class="smallprint">Standalone experiments do not affect your expedition. The Concentric Engine remains an expedition-only challenge.</p>
