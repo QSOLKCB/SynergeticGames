@@ -1,6 +1,6 @@
 # The Living Museum — Development Roadmap
 
-Released baseline: [v0.6.0 — The Information Gallery](https://github.com/QSOLKCB/SynergeticGames/releases/tag/v0.6.0), commit `bce86d66575c3bd72b2f4ab0c6a2b11a3efeec4a`. INFERENCE-001 is the v0.7.0 candidate, subject to acceptance. Keep main playable; no bulk rewrite.
+Released baseline: [v0.7.0 — The Hidden Tetrahedron](https://github.com/QSOLKCB/SynergeticGames/releases/tag/v0.7.0), commit `e2e71e2eab82d49e371728f5e0442615f599047b`. SIMPLEX-001 is the v0.8.0 candidate, subject to acceptance. Keep main playable; no bulk rewrite.
 
 ## Release sequence
 
@@ -52,11 +52,13 @@ Extend RayShare's two perspectives into explicit per-observer information sets. 
 
 ## INFERENCE-001 — hidden tetrahedron
 
-Candidate: four registered labs implement exact rational enumeration, normalized synchronous sum-product on a tree and tetrahedral loop, and zero-evidence contradiction diagnosis. See [Inference Gallery](docs/INFERENCE_GALLERY.md). Classical parity models only; no QEC logical error claim.
+Released in v0.7.0 (PR #12): four registered labs implement exact rational enumeration, normalized synchronous sum-product on a tree and tetrahedral loop, and zero-evidence contradiction diagnosis. See [Inference Gallery](docs/INFERENCE_GALLERY.md). Classical parity models only; no QEC logical error claim.
 
 Start with small binary factor graphs, uniform and nonuniform priors, XOR constraints and exact enumeration. Implement sum-product BP separately with explicit schedule, normalisation, convergence/iteration bounds and contradiction handling. Verify tree cases against exact marginals; report loopy errors, nonconvergence and correlations not captured by individual marginals. Compare information gain with decision utility as distinct objectives; maximin is not sum-product. QEC extension requires a separately verified syndrome model and logical error criterion, not just a graph shaped like a tetrahedron. Reference: arXiv:2209.05464.
 
 ## SIMPLEX-001 — topology gallery
+
+Candidate: Simplex Builder, Boundary Studio and Homology Laboratory implement four-vertex face-closed complexes, oriented boundaries, exact GF(2)/GF(3) ranks, Betti numbers and explicit cycle/boundary witnesses. See [Topology Gallery](docs/TOPOLOGY_GALLERY.md).
 
 Construct oriented vertices, edges, faces and tetrahedra. Define coefficient field explicitly, validate face closure and orientation, demonstrate boundary-of-boundary zero and calculate small Betti numbers using independent rank checks. Contrast a tetrahedral surface with a filled tetrahedron. Explore graph and complex relationships without assuming a lattice proves a physical theory. Consider exact-graph and finite-field modules only where their contracts fit.
 

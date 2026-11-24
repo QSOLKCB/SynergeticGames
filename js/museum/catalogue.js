@@ -8,9 +8,10 @@ import {tetraBookExhibit} from './tetrabook.js';
 import {quadrayWorkshop,latticeWorkshop,cellWorkshop} from './geometry-workshop.js';
 import {observerLab,evidenceLab,disclosureLab} from './information-gallery.js';
 import {exactLab,treeLab,loopLab,contradictionLab} from './inference-gallery.js';
+import {simplexLab,boundaryLab,homologyLab} from './topology-gallery.js';
 // New reviewed exhibits enter through this list, not through the host's view code.
-export const registry=createRegistry([...founding.slice(0,-1),volumeExchangeExhibit,conversionDesk,pythagorasExhibit,tetraBookExhibit,quadrayWorkshop,latticeWorkshop,cellWorkshop,observerLab,evidenceLab,disclosureLab,exactLab,treeLab,loopLab,contradictionLab,founding.at(-1)]);
-export const foundingRoute=validateRoute(registry,{kind:'museum.route.v1',schema:1,id:'concentric.route',title:'Founding collection, Measurement, Geometry, Information and Inference',exhibits:registry.list.map(m=>m.id)});
+export const registry=createRegistry([...founding.slice(0,-1),volumeExchangeExhibit,conversionDesk,pythagorasExhibit,tetraBookExhibit,quadrayWorkshop,latticeWorkshop,cellWorkshop,observerLab,evidenceLab,disclosureLab,exactLab,treeLab,loopLab,contradictionLab,simplexLab,boundaryLab,homologyLab,founding.at(-1)]);
+export const foundingRoute=validateRoute(registry,{kind:'museum.route.v1',schema:1,id:'concentric.route',title:'Founding collection, Measurement, Geometry, Information, Inference and Topology',exhibits:registry.list.map(m=>m.id)});
 // Pure catalogue metadata; route order is never sorted or modified.
 export function visitSummary(registry,session,ids){
   let total=0,complete=0;
