@@ -31,7 +31,7 @@ export function connectMuseum({dialog,stop,returnToStation,download}){
     for(const [index,a] of v.actions.entries()){
       const b=document.createElement('button');b.textContent=a.label;b.disabled=a.disabled;
       if(a.pressed!==null&&a.pressed!==undefined)b.setAttribute('aria-pressed',String(a.pressed));
-      b.addEventListener('click',()=>{if(session.active!==id)return;const r=session.dispatch(a.action);message(r.message);paint(index);});
+      b.addEventListener('click',()=>{if(session.active!==id)return;generation++;const r=session.dispatch(a.action);message(r.message);paint(index);});
       $('museum-actions').append(b);
     }
     const next=route.exhibits.indexOf(id)+1;

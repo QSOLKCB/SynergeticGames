@@ -33,7 +33,7 @@ function saveLocal(){try{localStorage.setItem(STORAGE,JSON.stringify(saveRecord(
 function focusWorld(){$('world').focus({preventScroll:true});}
 function updateTools(){for(const id of ['pause','switch','face'])$(id).disabled=!started;}
 function begin(){started=true;paused=false;$('intro').hidden=true;$('paused').hidden=true;updateTools();focusWorld();}
-function setPause(value){if(!started)return;paused=value;$('paused').hidden=!value;$('pause').textContent=value?'Resume':'Pause P';stopTime();if(value)$('resume').focus();else focusWorld();}
+function setPause(value){if(!started)return;paused=value;$('paused').hidden=!value;$('pause').textContent=value?'Resume':'Pause P';stopTime();if(value){if(!$('museum').open)$('resume').focus();}else focusWorld();}
 function download(bytes,name,type){const url=URL.createObjectURL(new Blob([bytes],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function newExpedition(){
   importGeneration++;stopTime();state=createGame();victoryShown=false;lastHUD='';$('victory').hidden=true;$('confirm-restart').hidden=true;
@@ -122,7 +122,7 @@ function updateHUD(force=false){
   $('world').dataset.position=JSON.stringify(state.probes[state.active]);$('world').dataset.tick=String(state.tick);$('world').dataset.seals=String(count);
 }
 const museum=connectMuseum({dialog:$('museum'),stop:stopTime,returnToStation:()=>{if(!started)begin();else if(paused)$('resume').focus();else if(!$('victory').hidden)$('continue').focus();else focusWorld();updateHUD(true);},download});
-$('museum-open').addEventListener('click',()=>museum.open($('museum-open')));
+$('museum-open').addEventListener('click',()=>{importGeneration++;museum.open($('museum-open'));});
 $('start').addEventListener('click',()=>{begin();updateHUD(true);});
 $('pause').addEventListener('click',()=>setPause(!paused));$('resume').addEventListener('click',()=>setPause(false));
 $('switch').addEventListener('click',()=>{if(!blocked()){clearInput();switchProbe(state);audio.cue('switch');updateHUD(true);saveLocal();}focusWorld();});
@@ -160,7 +160,7 @@ window.addEventListener('keydown',event=>{
 });
 window.addEventListener('keyup',e=>keyboard.delete(e.code));
 window.addEventListener('blur',()=>{stopTime();if(started&&!$('lab').open&&!$('notebook').open&&!$('museum').open)setPause(true);});
-document.addEventListener('visibilitychange',()=>{if(document.hidden){stopTime();if(started&&!$('museum').open)setPause(true);saveLocal();}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){stopTime();if(started)setPause(true);saveLocal();}});
 window.addEventListener('pagehide',()=>{stopTime();saveLocal();});
 for(const b of document.querySelectorAll('[data-hold]')){
   b.addEventListener('pointerdown',e=>{e.preventDefault();if(blocked()||e.button>0)return;touches.set(e.pointerId,b.dataset.hold);b.setPointerCapture(e.pointerId);});

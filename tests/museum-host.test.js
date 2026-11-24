@@ -25,7 +25,7 @@ test('versioned records restore atomically, own their data and reject wrong fiel
   s.restore(parseData(JSON.stringify(saved)));saved.state.lab.push('BC');assert.deepEqual(s.snapshot().lab,['AB']);
   assert.throws(()=>parseData('{"__proto__":{}}'));assert.throws(()=>parseData(' '.repeat(65537)));assert.throws(()=>ownData(Array(1)));
   let accessed=false;assert.throws(()=>ownData({get x(){accessed=true;return 1;}}));assert.equal(accessed,false);
-  assert.throws(()=>ownData({a:{b:{c:{d:{e:{f:{g:{h:{i:1}}}}}}}}}));
+  let deep=0;for(let i=0;i<10;i++)deep={nested:deep};assert.throws(()=>ownData(deep));
 });
 test('route packs are data-only, bounded and refer to reviewed entries; registry rejects duplicates',()=>{
   const route={kind:'museum.route.v1',schema:1,id:'test.route',title:'Test route',exhibits:['concentric.tetra','concentric.engine']};

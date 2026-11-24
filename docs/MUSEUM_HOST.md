@@ -18,7 +18,7 @@ The Concentric Engine entry returns to the original expedition, where the existi
 {"kind":"museum.route.v1","schema":1,"id":"school.geometry","title":"Geometry tour","exhibits":["concentric.tetra","concentric.quadray","concentric.engine"]}
 ```
 
-Records are bounded to 64 KiB UTF-8, depth 8, 1024 nodes, arrays of at most 64 entries, strings of at most 512 characters. Fields are exact, references must resolve to reviewed entries, duplicate route IDs are rejected within the route's exhibit list, and unsupported versions or unknown fields are rejected. No scripts, paths, remote module URLs, HTML or arbitrary model definitions are accepted. Route packs only select existing IDs; full exhibit-pack authoring remains planned. Imports validate before state changes. Asynchronous imports are invalidated by navigation/reset/close. Legacy Concentric save handling remains separate.
+Records are bounded to 64 KiB UTF-8, depth 8, 1024 nodes, arrays of at most 64 entries, strings of at most 512 characters. Fields are exact, references must resolve to reviewed entries, duplicate route IDs are rejected within the route's exhibit list, and unsupported versions or unknown fields are rejected. No scripts, paths, remote module URLs, HTML or arbitrary model definitions are accepted. Route packs only select existing IDs; full exhibit-pack authoring remains planned. Imports validate before state changes. Asynchronous imports are invalidated by navigation, model actions, reset and close. Legacy Concentric save handling remains separate.
 
 ## Verification
 
