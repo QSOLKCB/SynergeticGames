@@ -61,6 +61,8 @@ export function createSession(registry){
   const current=()=>{if(active===null)throw new Error('no mounted exhibit');return model(active);};
   return Object.freeze({
     get active(){return active;},
+    status(id){const d=registry.get(id);if(d.manifest.kind==='expedition')return 'expedition';
+      if(!states.has(id))return 'unvisited';return d.describe(states.get(id)).done===true?'complete':'visited';},
     mount(id){const d=model(id);if(!states.has(id))states.set(id,checked(d,d.initial()));active=id;return states.get(id);},
     unmount(){active=null;},
     snapshot(){current();return states.get(active);},

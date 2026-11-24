@@ -1,9 +1,9 @@
 {
   "name": "synergeticgames-concentric",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "license": "Apache-2.0",
-  "description": "A zero-build RayShare and VANILLAJS synergetics adventure",
+  "description": "The Living Museum: a modular offline-first science museum with Concentric",
   "scripts": {"test": "node --test tests/*.test.js"}
 }

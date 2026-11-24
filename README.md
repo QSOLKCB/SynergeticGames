@@ -8,7 +8,11 @@ Built for the School of Tomorrow by QSOL-IMC as independent contributors to open
 
 [Play the current museum expedition](https://qsolkcb.github.io/SynergeticGames/) · [Roadmap](ROADMAP.md) · [Design charter](docs/MUSEUM.md) · [Exhibit authoring](docs/EXHIBITS.md) · [Sources](docs/SOURCES.md) · [Verification](docs/VERIFICATION.md)
 
-## Open today: Concentric — The Field Station Edition
+## Visit the museum (v0.3.0 candidate)
+
+Open **Museum catalogue** for five standalone experiments, an optional guided route and access to the Concentric finale. Explore freely or follow a route with Previous/Next; export or load route JSON, revisit experiments, reset an individual lab and download its state. Completion counts describe standalone experiments only; they never award expedition seals. No account or persistent museum-wide profile is required. See [release acceptance](docs/RELEASE_ACCEPTANCE.md).
+
+## Founding collection: Concentric — The Field Station Edition
 
 The released v0.2.0 game is the founding exhibit collection. Pip and Mica explore a 2.5D geometric field station, restore four experiments and link their perspectives. The Department of Unnecessary Cubes still has a paperwork problem.
 
@@ -40,7 +44,7 @@ Follow the coloured trails; the compass points towards the next unfinished exhib
 
 ## The museum we are building
 
-**The initial museum host:** a shared catalogue with independently testable founding exhibits. The additional galleries and research workbench below are planned. A visitor may explore freely, follow an educational route, or open a research workbench. The same exhibit should support an accessible first encounter and an inspectable mathematical explanation; advanced tools are optional.
+**The initial museum host:** a shared catalogue with independently testable founding exhibits. The additional galleries and research workbench below are planned. A visitor can explore freely or follow an educational route. A research workbench is planned. The same exhibit should support an accessible first encounter and an inspectable mathematical explanation; advanced tools are optional.
 
 | Gallery | Planned exhibits |
 | --- | --- |

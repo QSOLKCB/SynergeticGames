@@ -4,22 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#102d38">
-  <meta name="description" content="A funny little expedition into a very geometric universe. A RayShare × VANILLAJS synergetics game by QSOL-IMC.">
+  <meta name="description" content="A modular science museum by QSOL-IMC. Explore interactive geometry, measurement and Concentric's two-observer expedition.">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
-  <title>Concentric — SynergeticGames</title>
+  <title>The Living Museum — SynergeticGames</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="masthead">
     <a class="brand" href="./" aria-label="SynergeticGames home"><span class="brand-mark">◈</span><span>QSOL–IMC <small>SYNERGETIC GAMES / 001</small></span></a>
-    <span class="edition">BUILT FOR THE SCHOOL OF TOMORROW <i>v0.2</i></span>
+    <span class="edition">BUILT FOR THE SCHOOL OF TOMORROW <i>v0.3</i></span>
   </header>
   <main>
-    <div class="heading-row"><div><p class="eyebrow">THE DEPARTMENT OF UNNECESSARY CUBES PRESENTS</p><h1>Concentric<span>.</span></h1></div><p class="tagline">A small adventure.<br>A whole different way to see.</p></div>
+    <div class="heading-row museum-entrance"><div><p class="eyebrow">SYNERGETICGAMES / EXPLORE · PREDICT · DISCOVER</p><h1>The Living Museum<span>.</span></h1></div><p class="tagline">Concentric · Founding collection<br>Five standalone experiments. One expedition.</p></div>
     <div class="toolbar" aria-label="Expedition tools">
       <div class="tool-group"><button id="pause" disabled>Pause <kbd>P</kbd></button><button id="switch" disabled>Switch probe <kbd>Q</kbd></button><button id="face" disabled>Face partner <kbd>F</kbd></button></div>
-      <div class="tool-group"><button id="sound" aria-pressed="false">Sound off</button><button id="view-mode" aria-pressed="false">Fit window</button><button id="fullscreen">Fullscreen ⛶</button><button id="museum-open">Museum catalogue</button><button id="notes">Field notes</button><button id="save">Save</button><button id="load">Load</button><input id="file" type="file" accept="application/json,.json" hidden></div>
+      <div class="tool-group"><button id="museum-open" aria-haspopup="dialog" class="museum-entry">Museum catalogue</button><button id="sound" aria-pressed="false">Sound off</button><button id="view-mode" aria-pressed="false">Fit window</button><button id="fullscreen">Fullscreen ⛶</button><button id="notes">Field notes</button><button id="save">Save</button><button id="load">Load</button><input id="file" type="file" accept="application/json,.json" hidden></div>
     </div>
     <div class="expedition">
       <section class="viewport" aria-label="Expedition view">
@@ -85,14 +85,17 @@
     <div class="dialog-top"><p class="eyebrow">SYNERGETICGAMES / THE LIVING MUSEUM</p><button id="museum-close" aria-label="Close museum">×</button></div>
     <h2 id="museum-heading" tabindex="-1">The Living Museum</h2>
     <div class="museum-tools"><label for="museum-mode">Visit mode</label><select id="museum-mode"><option value="free">Free exploration</option><option value="guided">Guided route</option></select><button id="museum-load">Load exhibit or route</button><input id="museum-file" type="file" accept="application/json,.json" hidden></div>
-    <p id="museum-route"></p>
+    <p id="museum-route" class="museum-route-label"></p>
+    <p id="museum-progress" role="status" aria-live="polite"></p>
+    <div id="museum-route-tools" class="museum-tools" hidden><button id="museum-route-export">Download route</button><button id="museum-route-default">Restore founding route</button></div>
     <div id="museum-list" class="museum-list"></div>
     <section id="museum-lab" hidden>
+      <p id="museum-stop" class="museum-card-meta"></p><p id="museum-lab-status" class="museum-card-state"></p>
       <p id="museum-question"></p><canvas id="museum-canvas" width="640" height="300" aria-label="Geometric model; values are described below"></canvas>
       <p id="museum-readout" class="readout" aria-live="polite"></p><div id="museum-actions" class="lab-controls"></div>
-      <label><input type="checkbox" id="museum-reveal"> Reveal explanation</label><p id="museum-explanation" hidden></p>
+      <label><input type="checkbox" id="museum-reveal" aria-controls="museum-explanation"> Reveal explanation</label><p id="museum-explanation" hidden></p>
       <p><a id="museum-source" target="_blank" rel="noopener">Source reference ↗</a></p>
-      <div class="museum-tools"><button id="museum-reset">Reset exhibit</button><button id="museum-export">Save exhibit</button><button id="museum-back">Back to catalogue</button><button id="museum-next" hidden>Next stop</button></div>
+      <div class="museum-tools"><button id="museum-reset">Reset exhibit</button><button id="museum-export">Save exhibit</button><button id="museum-back">Back to catalogue</button><button id="museum-previous" hidden>Previous stop</button><button id="museum-next" hidden>Next stop</button></div>
     </section>
     <p id="museum-feedback" role="status" aria-live="polite"></p>
     <p class="smallprint">Standalone experiments do not affect your expedition. The Concentric Engine remains an expedition-only challenge.</p>
