@@ -66,3 +66,28 @@ body:is([data-view=fit],[data-view=fullscreen]) footer{margin-top:0;padding-top:
 #museum-canvas{display:block;width:100%;height:auto;background:#102d38;border:1px solid #52756e;border-radius:5px}
 #museum-feedback{margin-top:14px;overflow-wrap:anywhere}
 #museum-readout{overflow-wrap:anywhere}
+
+/* MUSEUM-001D: a museum entrance, not just a field-station toolbar. */
+.museum-entrance h1{font-size:clamp(36px,4.6vw,68px);letter-spacing:-.055em}
+.museum-entry{background:#1a6662;color:#fff;border-color:#1a6662;order:-1}
+.museum-entry:hover{background:#124c49}
+#museum{max-width:850px}
+#museum-heading:focus-visible,#museum select:focus-visible,#museum input:focus-visible{outline:3px solid #a26416;outline-offset:3px}
+#museum-progress{font-size:13px;font-weight:600;margin-bottom:8px}
+.museum-route-label{font-weight:700;margin-bottom:4px;overflow-wrap:anywhere}
+.museum-list article{background:#f8f5ec;border-top:3px solid #567a75;gap:6px}
+.museum-list article[data-gallery="Measurement"]{border-top-color:#b67a29}
+.museum-list article[data-gallery="Shared perspectives"]{border-top-color:#776794}
+.museum-list article[data-status="complete"]{border-top-color:#2b7654}
+.museum-list article h3{margin-bottom:0;line-height:1.25}
+.museum-list article p{margin-bottom:0;overflow-wrap:anywhere}
+.museum-list article button{margin-top:auto;width:100%;background:#e2e9df;border-color:#a7bcb1}
+.museum-card-meta{font:10px/1.5 LocalMono,monospace;letter-spacing:.08em;color:#315952}
+.museum-card-state{font-size:12px;font-weight:700;color:#3f625b}
+#museum-actions button[aria-pressed="true"]{background:#d1e4db;border-color:#1a6662;box-shadow:inset 0 0 0 1px #1a6662}
+#museum-explanation{padding:12px 14px;border-left:3px solid #1a6662;background:#e2e9df;overflow-wrap:anywhere}
+#museum-lab-status{margin-bottom:8px}
+#museum label{line-height:1.5}
+#museum button,#museum select{max-width:100%}
+@media(max-width:800px){.museum-entrance{align-items:start;gap:10px;flex-wrap:wrap}.museum-entrance .tagline{font-size:12px}}
+@media(max-width:480px){.museum-entrance h1{font-size:36px}.museum-entrance .tagline{display:none}#museum{width:calc(100% - 16px);padding:15px}.museum-tools{gap:6px}.museum-list article{padding:12px}}
