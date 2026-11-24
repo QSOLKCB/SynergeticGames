@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
 
 const source=readFileSync(new URL('../sw.js',import.meta.url),'utf8');
-for(const prior of ['v0.4.0-measurement-1','v0.4.0-measurement-2','v0.5.0-geometry-1','v0.6.0-information-1','v0.7.0-inference-1','v0.7.0-inference-2','v0.8.0-topology-1'])test('Upgrade from '+prior+' replaces stale exhibit modules and preserves other scopes',async()=>{
+for(const prior of ['v0.4.0-measurement-1','v0.4.0-measurement-2','v0.5.0-geometry-1','v0.6.0-information-1','v0.7.0-inference-1','v0.7.0-inference-2','v0.8.0-topology-1','v0.9.0-research-1'])test('Upgrade from '+prior+' replaces stale exhibit modules and preserves other scopes',async()=>{
   const scope='https://example.test/SynergeticGames/';
   const prefix='concentric-/SynergeticGames/-';
   const old=prefix+prior,other='concentric-/OtherGame/-v1';
@@ -40,7 +40,7 @@ for(const prior of ['v0.4.0-measurement-1','v0.4.0-measurement-2','v0.5.0-geomet
   assert.ok(stores.has(other),'unrelated scope must be preserved');
   assert.equal(claimed,true);
   const count=requests.length;
-  for(const path of [...modules,'js/museum/quadray-model.js','js/museum/geometry-workshop.js','js/museum/epistemic-model.js','js/museum/information-gallery.js','js/museum/inference-model.js','js/museum/inference-gallery.js','js/museum/simplex-model.js','js/museum/topology-gallery.js','js/museum/research-model.js','js/museum/research-evidence.js','js/museum/research-gallery.js']){
+  for(const path of [...modules,'js/museum/quadray-model.js','js/museum/geometry-workshop.js','js/museum/epistemic-model.js','js/museum/information-gallery.js','js/museum/inference-model.js','js/museum/inference-gallery.js','js/museum/simplex-model.js','js/museum/topology-gallery.js','js/museum/research-model.js','js/museum/research-evidence.js','js/museum/research-gallery.js','js/museum/exhibit-packs.js','js/museum/workshop.js','workshop.html']){
     const url=new URL(path,scope).href;let response;
     handlers.get('fetch')({request:{url,method:'GET'},respondWith(p){response=p;}});
     assert.equal(await response,'new '+url);

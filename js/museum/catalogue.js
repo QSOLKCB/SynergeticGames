@@ -11,8 +11,11 @@ import {exactLab,treeLab,loopLab,contradictionLab} from './inference-gallery.js'
 import {simplexLab,boundaryLab,homologyLab} from './topology-gallery.js';
 import {researchLabs} from './research-gallery.js';
 import {verifyResearchEvidence} from './research-evidence.js';
+import {contributions} from './contributions.js';
+import {createPackCatalogue} from './exhibit-packs.js';
+import {museumConfig} from './museum-config.js';
 // New reviewed exhibits enter through this list, not through the host's view code.
-export const registry=createRegistry([...founding.slice(0,-1),volumeExchangeExhibit,conversionDesk,pythagorasExhibit,tetraBookExhibit,quadrayWorkshop,latticeWorkshop,cellWorkshop,observerLab,evidenceLab,disclosureLab,exactLab,treeLab,loopLab,contradictionLab,simplexLab,boundaryLab,homologyLab,...researchLabs,founding.at(-1)]);
+export const registry=createRegistry([...founding.slice(0,-1),volumeExchangeExhibit,conversionDesk,pythagorasExhibit,tetraBookExhibit,quadrayWorkshop,latticeWorkshop,cellWorkshop,observerLab,evidenceLab,disclosureLab,exactLab,treeLab,loopLab,contradictionLab,simplexLab,boundaryLab,homologyLab,...researchLabs,...contributions,founding.at(-1)]);
 export const foundingRoute=validateRoute(registry,{kind:'museum.route.v1',schema:1,id:'concentric.route',title:'Founding collection and all galleries through the Experimental Annex',exhibits:registry.list.map(m=>m.id)});
 // Pure catalogue metadata; route order is never sorted or modified.
 export function visitSummary(registry,session,ids){
@@ -25,7 +28,11 @@ export function visitSummary(registry,session,ids){
   return Object.freeze({total,complete,entries:Object.freeze(entries)});
 }
 export function connectMuseum({dialog,stop,returnToStation,download}){
-  const $=id=>dialog.querySelector('#'+id),session=createSession(registry);
+  const local=createPackCatalogue(registry);
+  return connectCatalogue({dialog,stop,returnToStation,download,local});
+}
+function connectCatalogue({dialog,stop,returnToStation,download,local}){
+  const registry=local.registry,$=id=>dialog.querySelector('#'+id),session=createSession(registry);
   let route=foundingRoute,mode='free',generation=0,opener=null;
   const message=s=>{$('museum-feedback').textContent=s;};
   const focusTitle=()=>$('museum-heading').focus();
@@ -34,7 +41,7 @@ export function connectMuseum({dialog,stop,returnToStation,download}){
   function updateProgress(){const summary=visitSummary(registry,session,visibleIds());$('museum-progress').textContent=summary.complete+' / '+summary.total+' standalone experiments completed';return summary;}
   function catalogue(){
     session.unmount();$('museum-list').hidden=false;$('museum-lab').hidden=true;
-    $('museum-heading').textContent='The Living Museum';$('museum-route').textContent=mode==='guided'?'Guided route: '+route.title:'Free exploration';
+    $('museum-heading').textContent=museumConfig.title;$('museum-route').textContent=mode==='guided'?'Guided route: '+route.title:'Free exploration';
     $('museum-list').replaceChildren();$('museum-route-tools').hidden=mode!=='guided';
     const summary=updateProgress();
     for(const [i,{manifest:m,status}] of summary.entries.entries()){
@@ -104,6 +111,7 @@ export function connectMuseum({dialog,stop,returnToStation,download}){
     try{
       if(f.size>LIMITS.bytes)throw new RangeError('64 KiB maximum');
       const record=parseData(await f.text());if(ticket!==generation||!dialog.open)return;
+      if(record.kind==='museum.pack.v1'){const id=local.install(record);mode='free';$('museum-mode').value=mode;catalogue();message('Pack installed for this page: '+id+'.');focusTitle();return;}
       if(record.kind==='museum.research.evidence.v1'){const result=verifyResearchEvidence(record);message('Evidence reproduced: '+result.experiment+'; '+result.runs+' run(s). Current state unchanged.');return;}
       if(record.kind==='museum.route.v1'){route=validateRoute(registry,record);mode='guided';$('museum-mode').value=mode;catalogue();message('Route loaded.');focusTitle();}
       else{session.restore(record);$('museum-list').hidden=true;$('museum-lab').hidden=false;$('museum-route-tools').hidden=true;$('museum-reveal').checked=session.describe().done===true;paint();message('Exhibit restored.');focusTitle();}

@@ -12,11 +12,11 @@
 </head>
 <body>
   <header class="masthead">
-    <a class="brand" href="./" aria-label="SynergeticGames home"><span class="brand-mark">◈</span><span>QSOL–IMC <small>SYNERGETIC GAMES / 001</small></span></a>
-    <span class="edition">BUILT FOR THE SCHOOL OF TOMORROW <i>v0.9</i></span>
+    <a class="brand" href="./" aria-label="SynergeticGames home"><span class="brand-mark">◈</span><span><span data-museum-brand>QSOL–IMC</span> <small>SYNERGETIC GAMES / 001</small></span></a>
+    <span class="edition">BUILT FOR THE SCHOOL OF TOMORROW <i>v1.0</i></span>
   </header>
   <main>
-    <div class="heading-row museum-entrance"><div><p class="eyebrow">SYNERGETICGAMES / EXPLORE · PREDICT · DISCOVER</p><h1>The Living Museum<span>.</span></h1></div><p class="tagline">Concentric · Founding collection<br>Twenty-four standalone experiments. One expedition.</p></div>
+    <div class="heading-row museum-entrance"><div><p class="eyebrow">SYNERGETICGAMES / EXPLORE · PREDICT · DISCOVER</p><h1><span data-museum-title>The Living Museum</span><span>.</span></h1></div><p class="tagline">Concentric · Founding collection<br>Twenty-four standalone experiments. One expedition.</p></div>
     <div class="toolbar" aria-label="Expedition tools">
       <div class="tool-group"><button id="pause" disabled>Pause <kbd>P</kbd></button><button id="switch" disabled>Switch probe <kbd>Q</kbd></button><button id="face" disabled>Face partner <kbd>F</kbd></button></div>
       <div class="tool-group"><button id="museum-open" aria-haspopup="dialog" class="museum-entry">Museum catalogue</button><button id="sound" aria-pressed="false">Sound off</button><button id="view-mode" aria-pressed="false">Fit window</button><button id="fullscreen">Fullscreen ⛶</button><button id="notes">Field notes</button><button id="save">Save</button><button id="load">Load</button><input id="file" type="file" accept="application/json,.json" hidden></div>
@@ -84,11 +84,11 @@
   <dialog id="museum" aria-labelledby="museum-heading">
     <div class="dialog-top"><p class="eyebrow">SYNERGETICGAMES / THE LIVING MUSEUM</p><button id="museum-close" aria-label="Close museum">×</button></div>
     <h2 id="museum-heading" tabindex="-1">The Living Museum</h2>
-    <div class="museum-tools"><label for="museum-mode">Visit mode</label><select id="museum-mode"><option value="free">Free exploration</option><option value="guided">Guided route</option></select><button id="museum-load">Load exhibit, route or evidence</button><input id="museum-file" type="file" accept="application/json,.json" hidden></div>
+    <div class="museum-tools"><label for="museum-mode">Visit mode</label><select id="museum-mode"><option value="free">Free exploration</option><option value="guided">Guided route</option></select><button id="museum-load">Load exhibit, route, pack or evidence</button><input id="museum-file" type="file" accept="application/json,.json" hidden></div>
     <p id="museum-route" class="museum-route-label"></p>
     <p id="museum-progress" role="status" aria-live="polite"></p>
     <div id="museum-route-tools" class="museum-tools" hidden><button id="museum-route-export">Download route</button><button id="museum-route-default">Restore founding route</button></div>
-    <div id="museum-list" class="museum-list"></div>
+    <p><a href="workshop.html" target="_blank" rel="noopener">Contributor Workshop ↗</a> · <a href="assets/example-pack.json" download>Example pack</a></p><div id="museum-list" class="museum-list"></div>
     <section id="museum-lab" hidden>
       <p id="museum-stop" class="museum-card-meta"></p><p id="museum-lab-status" class="museum-card-state"></p>
       <p id="museum-question"></p><canvas id="museum-canvas" width="640" height="300" aria-label="Geometric model; values are described below"></canvas>

@@ -18,7 +18,7 @@ test('offline shell contains the transitive runtime imports and no remote runtim
     for(const m of read(path).matchAll(/(?:from\s+|import\s*)['"]([^'"]+)['"]/g)){
       assert.ok(m[1].startsWith('.'),`external module: ${m[1]}`);const child=new URL(m[1],new URL(path,root));visit(fileURLToPath(child).slice(fileURLToPath(root).length));
     }
-  }visit('js/app.js');
+  }visit('js/app.js');visit('js/museum/workshop.js');assert.ok(cached.includes('workshop.html'));assert.ok(cached.includes('assets/example-pack.json'));
   assert.equal(/<(?:script|link)[^>]+(?:src|href)=["']https?:/.test(html),false);
   assert.ok(html.includes('We are not members of the School of Tomorrow'));
 });

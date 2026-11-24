@@ -23,3 +23,7 @@ Records are bounded to 64 KiB UTF-8, depth 8, 1024 nodes, arrays of at most 64 e
 ## Verification
 
 Node tests cover registry, models, route validation, frozen snapshots, reset and atomic import rejection. Browser tests exercise actual catalogue, navigation, file download/restore, malformed records, keyboard Escape, mobile touch and offline reload; existing expedition and WAV tests remain. The service worker includes the actual new import closure; Pages staging already includes js and vendor. PR #4 workflow regression remains unchanged. See exact candidate CI for executed evidence. The Experimental Annex provides bounded research labs with optional reviewed evidence exporters; full external SDK remains planned. Evidence files are verified by recomputation without restoring or modifying any exhibit state. See EXPERIMENTAL_ANNEX.md.
+
+## v1 extension surface
+
+Reviewed source additions enter contributions.js. Local data packs use a session-scoped overlay with the same registry read interface, preserving mounted state and existing route ordering; see SDK.md. Imported pack data never changes the reviewed registry. Workshop preview uses the real template model. The optional evidence inspector is read-only.

@@ -1,6 +1,6 @@
-# Exhibit authoring contract — v1 host and future SDK
+# Exhibit authoring contract — v1
 
-The initial reviewed-source registry and data-only route/save schemas are specified in [MUSEUM_HOST.md](MUSEUM_HOST.md). The broader external exhibit-pack SDK below remains proposed; imported records cannot register executable models.
+The initial reviewed-source registry and data-only route/save schemas are specified in [MUSEUM_HOST.md](MUSEUM_HOST.md). See [SDK](SDK.md) for the implemented data-only pack and reviewed native extension contracts. Imported records cannot register executable models.
 
 ## Minimum exhibit
 

@@ -1,0 +1,18 @@
+{
+  "kind": "museum.pack.v1",
+  "schema": 1,
+  "id": "pack.volume-demo",
+  "title": "My Volume Exchange",
+  "gallery": "Contributor examples",
+  "question": "Compare two reference volumes.",
+  "author": "QSOL-IMC example",
+  "license": "CC-BY-4.0",
+  "template": "measurement.volume-exchange",
+  "templateVersion": 1,
+  "initial": {
+    "radius": 100,
+    "unit": "xyz",
+    "prediction": null,
+    "measured": false
+  }
+}
