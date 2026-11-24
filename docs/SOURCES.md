@@ -62,3 +62,7 @@ Christian Knoll, [Understanding the Behavior of Belief Propagation](https://arxi
 ## SIMPLEX-001 public references
 
 [UC Davis Math 180: Simplicial Homology](https://www.math.ucdavis.edu/~lstarkston/math180/simplicialhomology) and Allen Hatcher, *Algebraic Topology*, §2.1, provide the standard definitions of oriented boundary maps, chain groups and homology. The finite four-vertex model and diagrams are independently authored; no source code, textbook diagrams or private research copied.
+
+## RESEARCH-001 public references
+
+[NIST DLMF §3.5 Quadrature](https://dlmf.nist.gov/3.5), [OpenStax University Physics 1 §15.1 Simple Harmonic Motion](https://openstax.org/books/university-physics-volume-1/pages/15-1-simple-harmonic-motion), and existing INFERENCE-001 classical parity models. These are standard public mathematics references; no source code, textbook diagrams, private correspondence or unpublished research reproduced. Elastic-loop work remains gated.
