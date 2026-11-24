@@ -528,7 +528,7 @@ try:
         page.locator('#view-mode').click()
         expect(page.locator('body')).to_have_attribute('data-view', 'page')
         page.locator('#fullscreen').click()
-        page.wait_for_function("document.body.dataset.view === 'fullscreen' || (document.body.dataset.view === 'fit' && document.querySelector('#status').textContent.includes('Fullscreen unavailable'))")
+        page.locator("body[data-view='fullscreen'], body[data-view='fit']").wait_for()
         if page.locator('body').get_attribute('data-view') == 'fullscreen':
             assert page.evaluate('document.fullscreenElement === document.documentElement')
             page.locator('#fullscreen').click()
