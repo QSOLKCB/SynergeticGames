@@ -16,7 +16,7 @@
     <span class="edition">BUILT FOR THE SCHOOL OF TOMORROW <i>v1.0</i></span>
   </header>
   <main>
-    <div class="heading-row museum-entrance"><div><p class="eyebrow">SYNERGETICGAMES / EXPLORE · PREDICT · DISCOVER</p><h1><span data-museum-title>The Living Museum</span><span>.</span></h1></div><p class="tagline">Concentric · Founding collection<br>Twenty-four standalone experiments. One expedition.</p></div>
+    <div class="heading-row museum-entrance"><div><p class="eyebrow"><span data-museum-edition>SYNERGETICGAMES</span> / <span data-museum-description>EXPLORE · PREDICT · DISCOVER</span></p><h1><span data-museum-title>The Living Museum</span><span>.</span></h1></div><p class="tagline">Concentric · Founding collection<br>Twenty-four standalone experiments. One expedition.</p></div>
     <div class="toolbar" aria-label="Expedition tools">
       <div class="tool-group"><button id="pause" disabled>Pause <kbd>P</kbd></button><button id="switch" disabled>Switch probe <kbd>Q</kbd></button><button id="face" disabled>Face partner <kbd>F</kbd></button></div>
       <div class="tool-group"><button id="museum-open" aria-haspopup="dialog" class="museum-entry">Museum catalogue</button><button id="sound" aria-pressed="false">Sound off</button><button id="view-mode" aria-pressed="false">Fit window</button><button id="fullscreen">Fullscreen ⛶</button><button id="notes">Field notes</button><button id="save">Save</button><button id="load">Load</button><input id="file" type="file" accept="application/json,.json" hidden></div>
@@ -55,7 +55,7 @@
         <p class="aside-joke" id="quip">“Please keep all four dimensions of your address legible.”<span>— The Coordinate Office</span></p>
       </aside>
     </div>
-    <div class="controls-bar"><p><kbd>W A S D</kbd> Move · <kbd>← →</kbd> Turn · drag view to look · <kbd>E</kbd> Inspect · <kbd>Space</kbd> Link</p><label><input id="motion" type="checkbox"> Still exhibits</label></div>
+    <div class="controls-bar"><p><kbd>W A S D</kbd> Move · <kbd>← →</kbd> Turn · drag view to look · <kbd>E</kbd> Inspect · <kbd>Space</kbd> Link</p><label><input id="motion" type="checkbox"> Still exhibits</label><label><input id="economy" type="checkbox"> Economy graphics</label></div>
     <p id="status" class="status" role="status" aria-live="polite">Built with RayShare × VANILLAJS. Inspired by Synergetics 95 and Kirby Urner’s geometry teaching.</p>
   </main>
   <footer><span>BUILT FOR THE SCHOOL OF TOMORROW.</span><span>Created by QSOL–IMC as independent contributors to open science. We are not members of the School of Tomorrow.</span></footer>
@@ -88,7 +88,7 @@
     <p id="museum-route" class="museum-route-label"></p>
     <p id="museum-progress" role="status" aria-live="polite"></p>
     <div id="museum-route-tools" class="museum-tools" hidden><button id="museum-route-export">Download route</button><button id="museum-route-default">Restore founding route</button></div>
-    <p><a href="workshop.html" target="_blank" rel="noopener">Contributor Workshop ↗</a> · <a href="assets/example-pack.json" download>Example pack</a></p><div id="museum-list" class="museum-list"></div>
+    <p><a href="workshop.html" target="_blank" rel="noopener">Contributor Workshop ↗</a> · <a href="assets/example-pack.json" download>Example pack</a></p><div id="museum-filter-tools" class="museum-tools"><label for="museum-search">Find an exhibit</label><input id="museum-search" type="search" placeholder="Title, gallery or idea" maxlength="100"><button id="museum-search-clear">Clear search</button><span id="museum-match-count" role="status"></span></div><div id="museum-list" class="museum-list"></div>
     <section id="museum-lab" hidden>
       <p id="museum-stop" class="museum-card-meta"></p><p id="museum-lab-status" class="museum-card-state"></p>
       <p id="museum-question"></p><canvas id="museum-canvas" width="640" height="300" aria-label="Geometric model; values are described below"></canvas>

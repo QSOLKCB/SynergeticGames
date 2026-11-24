@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <title>Contributor Workshop — The Living Museum</title><link rel="stylesheet" href="style.css"><link rel="icon" href="assets/icon.svg" type="image/svg+xml"></head>
-<body><main class="workshop"><p><a href="./">Return to museum</a></p><p class="eyebrow" data-museum-title>The Living Museum</p><h1>Contributor Workshop<span>.</span></h1>
+<body><main class="workshop"><p><a href="./">Return to museum</a></p><p class="eyebrow" data-museum-title>The Living Museum</p><h1>Contributor Workshop<span>.</span></h1><p data-museum-description>Explore, predict and discover.</p>
 <p>Build data-only exhibits using reviewed models. No account, uploads to a server, executable imports or package installation.</p>
 <p>We are not members of the School of Tomorrow. Independent contributors retain their own attribution and licensing.</p>
 <div class="museum-tools"><button id="workshop-load">Load pack, route or evidence</button><input id="workshop-file" type="file" accept=".json,application/json" hidden></div>
@@ -16,9 +16,9 @@
 <label>Reviewed template<select id="pack-template"></select></label>
 <label class="workshop-wide">Learning question<textarea id="pack-question" maxlength="512">How do the reference volumes compare?</textarea></label>
 <label class="workshop-wide">Initial model state (JSON; validated by template)<textarea id="pack-initial" rows="7" spellcheck="false"></textarea></label>
-</div><div class="museum-tools"><button id="pack-preview">Validate and preview</button><button id="pack-reset">Reset preview</button><button id="pack-download" disabled>Download pack</button></div>
+</div><div class="museum-tools"><button id="pack-preview">Validate and preview</button><button id="pack-reset">Reset preview</button><button id="pack-download" disabled>Download pack</button><button id="pack-route" disabled>Make pack available to route editor</button></div>
 <canvas id="preview-canvas" width="640" height="300" hidden aria-label="Template model; text results below"></canvas><p id="preview-readout" class="readout" aria-live="polite"></p><div id="preview-actions" class="lab-controls"></div><p id="preview-explanation"></p>
 <p>Pack installation is local to the open museum page. Reload clears local packs; retain the pack file and install it before restoring its saved state.</p></section>
-<section><h2>Route Editor</h2><div class="workshop-fields"><label>Route ID<input id="route-id" value="custom.tour" maxlength="65"></label><label>Title<input id="route-title" value="My museum tour" maxlength="100"></label><label>Exhibit<select id="route-stop"></select></label></div><div class="museum-tools"><button id="route-add">Add stop</button><button id="route-clear">Clear route</button><button id="route-download">Download route</button></div><ol id="route-list"></ol><p>Routes authored here select the reviewed catalogue. Imported packs can be toured in the museum's free catalogue.</p></section>
+<section><h2>Route Editor</h2><div class="workshop-fields"><label>Route ID<input id="route-id" value="custom.tour" maxlength="65"></label><label>Title<input id="route-title" value="My museum tour" maxlength="100"></label><label>Exhibit<select id="route-stop"></select></label></div><div class="museum-tools"><button id="route-add">Add stop</button><button id="route-clear">Clear route</button><button id="route-download">Download route</button></div><ol id="route-list"></ol><p>Routes can select reviewed exhibits and packs made available above. Install all referenced packs in the museum before importing the route.</p></section>
 <section><h2>Evidence Inspector</h2><p>Load a research evidence file above. Recompute every value before displaying the accepted record.</p><pre id="evidence-inspection" tabindex="0"></pre></section>
 </main><script type="module" src="js/museum/workshop.js"></script></body></html>

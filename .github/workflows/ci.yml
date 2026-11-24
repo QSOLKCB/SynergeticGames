@@ -11,9 +11,35 @@ concurrency:
   group: concentric-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  validate:
+  compatibility:
+    name: Browser compatibility (${{ matrix.engine }})
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [firefox, webkit]
+    env:
+      BROWSER_ENGINE: ${{ matrix.engine }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Install pinned Python tooling
+        run: python3 -m pip install --user uv==0.9.18
+      - name: Install pinned compatibility browser
+        run: uv run --no-project --python 3.12 --with playwright==1.62.0 python -m playwright install --with-deps ${{ matrix.engine }}
+      - name: Play the packaged expedition and workshop
+        run: uv run --no-project --python 3.12 --with playwright==1.62.0 python tests/browser.py
+      - name: Preserve compatibility evidence, including failures
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: browser-evidence-${{ matrix.engine }}
+          path: test-results/
+          if-no-files-found: warn
+  validate:
+    needs: compatibility
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6

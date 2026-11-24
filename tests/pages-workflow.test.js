@@ -13,7 +13,10 @@ function contract(source){
     const start=lines.indexOf('  '+name+':',jobs+1);assert.ok(headings.includes(start),name+' missing');
     return lines.slice(start+1,headings.find(i=>i>start)??lines.length);
   };
-  const validate=get('validate'),deploy=get('deploy');
+  const validate=get('validate'),deploy=get('deploy'),compatibility=get('compatibility');
+  assert.ok(validate.includes('    needs: compatibility'),'Pages validation must depend on compatibility jobs');
+  assert.ok(compatibility.includes('        engine: [firefox, webkit]'));
+  assert.ok(compatibility.some(line=>line.includes('python tests/browser.py')));
   const steps=job=>{
     const start=job.indexOf('    steps:');assert.ok(start>=0);
     const body=job.slice(start+1),indices=body.map((s,i)=>/^      - /.test(s)?i:-1).filter(i=>i>=0);
@@ -39,6 +42,7 @@ test('Pages workflow guard rejects the pre-PR #4 ordering and lost main/dependen
   const position=old.indexOf('      - uses: actions/deploy-pages@');
   assert.throws(()=>contract(old.slice(0,position)+moved+old.slice(position)));
   assert.throws(()=>contract(workflow.replace('    needs: validate','    needs: other')));
+  assert.throws(()=>contract(workflow.replace('    needs: compatibility','    needs: other')));
   assert.throws(()=>contract(workflow.replace('    if: '+gate+'\n    needs:', '    if: always()\n    needs:')));
   assert.throws(()=>contract(workflow.replace('        if: '+gate,'        if: always()')));
 });
