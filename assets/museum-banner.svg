@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="340" viewBox="0 0 1440 340" role="img" aria-labelledby="title desc">
+<title id="title">SynergeticGames — The Living Museum</title><desc id="desc">A dark teal and gold banner with tetrahedral wireframe, lattice and information nodes. Construct, measure, infer, verify.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#091e29"/><stop offset="1" stop-color="#1b4d50"/></linearGradient><pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="#8caeb0" stroke-opacity=".09"/></pattern></defs>
+<rect width="1440" height="340" rx="12" fill="url(#bg)"/><rect width="1440" height="340" rx="12" fill="url(#grid)"/>
+<path d="M0 319H1440" stroke="#d9a64f" stroke-width="2"/><path d="M62 54H116" stroke="#d9a64f" stroke-width="4"/>
+<g font-family="Arial,Helvetica,sans-serif"><text x="62" y="84" fill="#a5c6c2" font-size="16" letter-spacing="4">QSOL-IMC / INDEPENDENT OPEN SCIENCE</text>
+<text x="58" y="150" fill="#f3ecd9" font-weight="700" font-size="56" letter-spacing="-1.5">SynergeticGames</text><text x="62" y="200" fill="#e6b35d" font-weight="700" font-size="39">The Living Museum</text>
+<text x="62" y="245" fill="#cfdfd8" font-size="20">A modular science museum to clone, audit, play and extend.</text>
+<text x="62" y="293" fill="#91b5b0" font-size="15" letter-spacing="2">CONSTRUCT  /  MEASURE  /  INFER  /  VERIFY</text></g>
+<g transform="translate(1078 170)" stroke-linejoin="round">
+<g fill="none" stroke="#74aaa9" stroke-opacity=".25" stroke-width="1.2">
+<path d="M-250 0L-125 -130L0 0L125 -130L250 0L125 130L0 0L-125 130Z M-125 -130V130M125 -130V130M-250 0H250M-125 -130H125M-125 130H125"/>
+<path d="M-187 -65L-62 -65L62 -65L187 -65M-187 65H187M-187 -65L-62 65L62 -65L187 65M-187 65L-62 -65L62 65L187 -65"/></g>
+<g stroke="#68d3c5" stroke-width="2.5" fill="#68d3c5" fill-opacity=".06"><path d="M0 -124L-137 91L137 91Z"/><path d="M0 -124L0 33L-137 91M0 33L137 91"/><path d="M-137 91L0 33L137 91" fill="#d9a64f" fill-opacity=".13"/></g>
+<g fill="#d9a64f" stroke="#f2dbad" stroke-width="1.5"><circle cy="-124" r="7"/><circle cx="-137" cy="91" r="7"/><circle cx="137" cy="91" r="7"/><circle cy="33" r="7"/></g>
+<g fill="#b4adff"><circle cx="-250" r="4"/><circle cx="250" r="4"/><circle cx="-125" cy="-130" r="4"/><circle cx="125" cy="-130" r="4"/><circle cx="-125" cy="130" r="4"/><circle cx="125" cy="130" r="4"/></g>
+<g fill="#dce7da" font-family="monospace" font-size="13"><text x="12" y="-132">A</text><text x="-158" y="111">B</text><text x="147" y="111">C</text><text x="12" y="28">D</text></g></g></svg>

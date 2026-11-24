@@ -34,9 +34,9 @@ export const soundCues=Object.freeze({
   victory:cueScore([392,524,660,784,1048,1318],{gap:7200,duration:18000,gain:2100})
 });
 export function audioSystem(report){
-  let context=null,player=null,effects=null,enabled=false,failed=false;
+  let context=null,player=null,effects=null,enabled=false,failed=false,attempt=0;
   function fail(error){
-    failed=true;
+    failed=true;attempt++;
     try{player?.dispose();}catch{}
     try{effects?.dispose();}catch{}
     try{context?.close()?.catch(()=>{});}catch{}
@@ -45,11 +45,11 @@ export function audioSystem(report){
   }
   return {
     async toggle(){
-      enabled=!enabled;failed=false;
+      const current=++attempt;enabled=!enabled;failed=false;
       if(!enabled){this.stop();return false;}
       try{
         if(!context){context=new (globalThis.AudioContext||globalThis.webkitAudioContext)();player=createSoundtrackPlayer(context,soundtrack);effects=createEffectPlayer(context);}
-        await context.resume();
+        context.resume().catch(error=>{if(current===attempt)fail(error);});
       }catch(error){fail(error);}
       return enabled;
     },

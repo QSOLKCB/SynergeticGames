@@ -15,7 +15,7 @@ A sketch or public notebook is welcome. Do not upload confidential correspondenc
 
 ## Implement an exhibit
 
-Read AGENTS.md, ROADMAP.md, docs/MUSEUM.md and docs/EXHIBITS.md. The modular contract is proposed until MUSEUM-001 implements it; avoid inventing incompatible plugin APIs in the meantime. Use a focused branch and PR. Keep Concentric working. Prefer native browser code, small pure model functions and independent test oracles; reuse pinned engine modules only after inspecting their contracts and licence.
+Read AGENTS.md, ROADMAP.md, docs/MUSEUM.md and docs/EXHIBITS.md. Start with the [authoring guide](docs/AUTHORING_GUIDE.md), [modding guide](docs/MODDING_GUIDE.md), [teaching guide](docs/TEACHING_GUIDE.md) and implemented [SDK](docs/SDK.md). Data packs are never executable. Use a focused branch and PR. Keep Concentric working. Prefer native browser code, small pure model functions and independent test oracles; reuse pinned engine modules only after inspecting their contracts and licence.
 
 For gameplay changes run the Node and pinned Python Playwright checks in README.md. Record commands, tested SHA, actual results and failures; distinguish executed evidence from inspection. Update provenance and notices for adapted or vendored files, and service-worker inventory/version for shipped runtime changes.
 

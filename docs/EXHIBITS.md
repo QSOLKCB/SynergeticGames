@@ -4,7 +4,7 @@ The initial reviewed-source registry and data-only route/save schemas are specif
 
 ## Minimum exhibit
 
-An exhibit answers one question with an interaction. A proposed module has:
+An exhibit answers one question with an interaction. A reviewed native module has:
 - Stable namespaced ID, schema and exhibit version, title, gallery, intended audience and source references.
 - Learning question, optional prediction, resettable manipulation, observation, explanation and a declared success criterion (or explicit free exploration).
 - Model with initial state, validated actions, bounded deterministic transitions where appropriate, serialisable state and explicit numerical conventions.
@@ -12,7 +12,7 @@ An exhibit answers one question with an interaction. A proposed module has:
 - Tests and independent reference cases including incorrect inputs, boundary cases and reset behaviour.
 - Licence, attribution and limitations; evidence export policy.
 
-Suggested layout (subject to host PR):
+Suggested author source layout (adapt under js/museum/ for runtime imports):
 
 ```text
 exhibits/<id>/

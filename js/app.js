@@ -8,6 +8,7 @@ import {createRenderer,drawLab} from './render.js';
 import {audioSystem,soundtrack} from './music.js';
 import {connectMuseum} from './museum/catalogue.js';
 import {applyMuseumIdentity} from './museum/museum-config.js';
+import {downloadFile as download} from './museum/browser-io.js';
 applyMuseumIdentity(document);
 const $=id=>document.getElementById(id),STORAGE='concentric.expedition.v1';
 let state=createGame(),started=false,paused=false,labId=null,pair=null,victoryShown=false,importGeneration=0;
@@ -36,7 +37,6 @@ function focusWorld(){$('world').focus({preventScroll:true});}
 function updateTools(){for(const id of ['pause','switch','face'])$(id).disabled=!started;}
 function begin(){started=true;paused=false;$('intro').hidden=true;$('paused').hidden=true;updateTools();focusWorld();}
 function setPause(value){if(!started)return;paused=value;$('paused').hidden=!value;$('pause').textContent=value?'Resume':'Pause P';stopTime();if(value){if(!$('museum').open)$('resume').focus();}else focusWorld();}
-function download(bytes,name,type){const url=URL.createObjectURL(new Blob([bytes],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function newExpedition(){
   importGeneration++;stopTime();state=createGame();victoryShown=false;lastHUD='';$('victory').hidden=true;$('confirm-restart').hidden=true;
   $('notebook').close();begin();saveLocal();status('New expedition. The Department has misplaced everything again.');
@@ -187,9 +187,12 @@ function frame(now){
     if(state.tick===MAX_TICK){setPause(true);status('This expedition reached its 10-hour simulation limit. Save it or start a new one.');}
   }
   audio.sync(state.tick,running&&!state.won);
-  if(now-lastRender>=33||lastRender===0){renderer.draw(state,{reduced:$('motion').checked,activeExhibit:blocked()?null:nearestExhibit(state)?.id});if(labId&&$('lab').open)drawLab($('lab-canvas'),labId,state,$('motion').checked?.65:now/2200);updateHUD();lastRender=now;}
+  if(document.hidden||$('museum').open||$('notebook').open){lastRender=0;}
+  else if(now-lastRender>=($('economy').checked?66:33)||lastRender===0){renderer.draw(state,{reduced:$('motion').checked||$('economy').checked,activeExhibit:blocked()?null:nearestExhibit(state)?.id});if(labId&&$('lab').open)drawLab($('lab-canvas'),labId,state,$('motion').checked?.65:now/2200);updateHUD();lastRender=now;}
   requestAnimationFrame(frame);
 }
 updateHUD(true);requestAnimationFrame(frame);
-new ResizeObserver(()=>{const rect=$('world').getBoundingClientRect(),width=Math.min(960,Math.round(rect.width));if(width>0){$('world').width=width;$('world').height=Math.round(width*rect.height/rect.width);}}).observe($('world'));
+function resizeWorld(){const canvas=$('world'),rect=canvas.getBoundingClientRect(),width=Math.min($('economy').checked?640:960,Math.round(rect.width));if(width<=0||rect.height<=0)return;const height=Math.max(1,Math.round(width*rect.height/rect.width));if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;lastRender=0;}}
+if(typeof ResizeObserver==='function')new ResizeObserver(resizeWorld).observe($('world'));
+window.addEventListener('resize',resizeWorld);$('economy').addEventListener('change',resizeWorld);resizeWorld();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>status('Offline caching is unavailable. The expedition still runs online.'));

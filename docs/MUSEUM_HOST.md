@@ -27,3 +27,5 @@ Node tests cover registry, models, route validation, frozen snapshots, reset and
 ## v1 extension surface
 
 Reviewed source additions enter contributions.js. Local data packs use a session-scoped overlay with the same registry read interface, preserving mounted state and existing route ordering; see SDK.md. Imported pack data never changes the reviewed registry. Workshop preview uses the real template model. The optional evidence inspector is read-only.
+
+MUSEUM-002B adds search in free exploration without altering route order or progress totals, and caches only completion flags for immutable model state. Descriptions must remain pure and deterministic. Browser acceptance is parameterized across Chromium, Firefox and WebKit.

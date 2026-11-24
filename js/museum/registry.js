@@ -55,28 +55,30 @@ export function validateRoute(registry,input){
   return freezeData(r);
 }
 export function createSession(registry){
-  const states=new Map();let active=null;
+  const states=new Map(),statuses=new Map();let active=null;
+  // Cache only the completion bit for immutable state, not mutable readouts/actions.
+  const described=(id,d)=>{const state=states.get(id),view=d.describe(state);statuses.set(id,{state,done:view.done===true});return view;};
   const model=id=>{const d=registry.get(id);if(d.manifest.kind!=='lab')throw new TypeError('expedition is not a standalone lab');return d;};
   const checked=(d,s)=>freezeData(ownData(d.validate(ownData(s))));
   const current=()=>{if(active===null)throw new Error('no mounted exhibit');return model(active);};
   return Object.freeze({
     get active(){return active;},
     status(id){const d=registry.get(id);if(d.manifest.kind==='expedition')return 'expedition';
-      if(!states.has(id))return 'unvisited';return d.describe(states.get(id)).done===true?'complete':'visited';},
+      if(!states.has(id))return 'unvisited';const cached=statuses.get(id),state=states.get(id);const done=cached&&cached.state===state?cached.done:described(id,d).done===true;return done?'complete':'visited';},
     mount(id){const d=model(id);if(!states.has(id))states.set(id,checked(d,d.initial()));active=id;return states.get(id);},
     unmount(){active=null;},
     snapshot(){current();return states.get(active);},
-    describe(){return current().describe(states.get(active));},
-    reset(){const d=current(),next=checked(d,d.initial());states.set(active,next);return next;},
+    describe(){return described(active,current());},
+    reset(){const d=current(),next=checked(d,d.initial());states.set(active,next);statuses.delete(active);return next;},
     dispatch(action){const d=current(),result=d.transition(states.get(active),ownData(action));
-      const next=checked(d,result.state);states.set(active,next);return {ok:result.ok,message:result.message};},
+      const next=checked(d,result.state);states.set(active,next);statuses.delete(active);return {ok:result.ok,message:result.message};},
     export(){const d=current();return ownData({kind:'museum.exhibit.v1',schema:1,id:active,version:d.manifest.version,state:states.get(active)});},
     restore(input){
       const r=ownData(input);fields(r,['kind','schema','id','version','state']);
       if(r.kind!=='museum.exhibit.v1'||r.schema!==1||!validId(r.id))throw new TypeError('unsupported exhibit record');
       const d=model(r.id);if(r.version!==d.manifest.version)throw new TypeError('unsupported exhibit version');
       const next=checked(d,r.state); // No mutation before validation completes.
-      states.set(r.id,next);active=r.id;return next;
+      states.set(r.id,next);statuses.delete(r.id);active=r.id;return next;
     }
   });
 }

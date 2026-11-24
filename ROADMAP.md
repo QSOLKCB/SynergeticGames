@@ -72,7 +72,7 @@ Source/permission gate before use of unpublished or privately circulated materia
 
 Two PRs: A delivers the authoring contract, local data packs, native contribution hook, configuration, route editor and evidence inspector. B is compatibility, performance, quality of life and release acceptance. Do not tag until both are merged, exact-head review and CI pass, and owner acceptance includes actual Safari where available.
 
-Stabilise the exhibit registry and pack format; add a local authoring workflow, example pack, catalogue/route editor, standalone inspection where practical and evidence export/import validation. Allow a second contributor to build an exhibit without altering the host or unrelated model code. Validate offline, keyboard and touch behaviour, reader-oriented explanations, storage failure and optional renderer fallbacks. Run clean-checkout reproducibility, complete visitor playthrough and curator review. No cloud or mandatory runtime framework.
+Candidate implementation: reviewed native contribution hook and data-only pack format, local authoring workflow, example pack, searchable catalogue, route editor, read-only evidence inspector, native SDK and practical contributor guides. Three-engine acceptance and manual Safari gate remain required. Allow a second contributor to build an exhibit without altering the host or unrelated model code. Validate offline, keyboard and touch behaviour, reader-oriented explanations, storage failure and optional renderer fallbacks. Run clean-checkout reproducibility, complete visitor playthrough and curator review. No cloud or mandatory runtime framework.
 
 ## Every release
 

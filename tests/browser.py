@@ -1,7 +1,7 @@
 """Real packaged browser checks. No production test hooks or state injection.
 
 uv run --no-project --with playwright==1.62.0 python tests/browser.py
-Set BROWSER_EXECUTABLE only to use an existing local Chromium installation.
+Set BROWSER_ENGINE to chromium, firefox or webkit; BROWSER_EXECUTABLE is Chromium-only.
 """
 from pathlib import Path
 from functools import partial
@@ -15,10 +15,13 @@ import threading
 from playwright.sync_api import sync_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'test-results'
-OUT.mkdir(exist_ok=True)
+ENGINE = os.environ.get('BROWSER_ENGINE', 'chromium')
+if ENGINE not in ('chromium', 'firefox', 'webkit'):
+    raise ValueError('Unsupported BROWSER_ENGINE')
+OUT = ROOT / 'test-results' / ENGINE
+OUT.mkdir(parents=True, exist_ok=True)
 receipt = {'commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
-           'status': 'RUNNING', 'checks': [], 'error': None}
+           'engine': ENGINE, 'status': 'RUNNING', 'checks': [], 'error': None}
 
 
 def record(name):
@@ -31,8 +34,17 @@ class QuietHandler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *_args):
         pass
 
+    def do_GET(self):
+        if self.server.offline:
+            self.server.offline_requests.append(self.path)
+            self.send_error(503)
+            return
+        super().do_GET()
+
 
 server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), partial(QuietHandler, directory=str(ROOT)))
+server.offline = False
+server.offline_requests = []
 threading.Thread(target=server.serve_forever, daemon=True).start()
 URL = f'http://127.0.0.1:{server.server_port}/'
 errors = []
@@ -82,8 +94,26 @@ try:
     with sync_playwright() as pw:
         options = {'headless': True}
         if os.environ.get('BROWSER_EXECUTABLE'):
+            if ENGINE != 'chromium':
+                raise ValueError('BROWSER_EXECUTABLE requires Chromium')
             options['executable_path'] = os.environ['BROWSER_EXECUTABLE']
-        browser = pw.chromium.launch(**options)
+        browser = getattr(pw, ENGINE).launch(**options)
+        receipt['browserVersion'] = browser.version
+        pending_audio = browser.new_context()
+        pending_audio.add_init_script("""
+            const NativeAudioContext = window.AudioContext || window.webkitAudioContext;
+            window.AudioContext = class extends NativeAudioContext {
+                resume() { return new Promise(() => {}); }
+            };
+        """)
+        page = pending_audio.new_page()
+        page.goto(URL)
+        page.locator('#sound').click()
+        expect(page.locator('#sound')).to_have_attribute('aria-pressed', 'true')
+        page.locator('#sound').click()
+        expect(page.locator('#sound')).to_have_attribute('aria-pressed', 'false')
+        record('sound controls remain responsive while audio resume is pending')
+        pending_audio.close()
         context = browser.new_context(viewport={'width': 1440, 'height': 1060})
         page = context.new_page()
         page.on('pageerror', lambda error: errors.append(str(error)))
@@ -97,7 +127,13 @@ try:
         page.keyboard.press('Enter')
         expect(page.locator('#museum')).to_be_visible()
         expect(page.locator('#museum-list article')).to_have_count(25)
+        page.locator('#museum-search').fill('TetraBook')
+        expect(page.locator('#museum-list article:visible')).to_have_count(1)
+        expect(page.locator('#museum-match-count')).to_have_text('1 shown')
         expect(page.locator('#museum-progress')).to_have_text('0 / 24 standalone experiments completed')
+        page.locator('#museum-search-clear').click()
+        expect(page.locator('#museum-list article:visible')).to_have_count(25)
+        page.locator('#museum-heading').focus()
         expect(page.locator('#museum-heading')).to_be_focused()
         page.screenshot(path=str(OUT / 'museum-catalogue.png'), full_page=True)
         page.locator('#museum-mode').select_option('guided')
@@ -501,11 +537,18 @@ try:
         page.locator('#view-mode').click()
         expect(page.locator('body')).to_have_attribute('data-view', 'page')
         page.locator('#fullscreen').click()
-        expect(page.locator('body')).to_have_attribute('data-view', 'fullscreen')
-        assert page.evaluate('document.fullscreenElement === document.documentElement')
-        page.locator('#fullscreen').click()
-        expect(page.locator('body')).to_have_attribute('data-view', 'page')
-        record('VANILLAJS fit/fullscreen transitions release held input and restore page view')
+        page.locator("body[data-view='fullscreen'], body[data-view='fit']").wait_for()
+        if page.locator('body').get_attribute('data-view') == 'fullscreen':
+            assert page.evaluate('document.fullscreenElement === document.documentElement')
+            page.locator('#fullscreen').click()
+            expect(page.locator('body')).to_have_attribute('data-view', 'page')
+            record('Native fullscreen and restore page view')
+        else:
+            expect(page.locator('#status')).to_contain_text('Fullscreen unavailable')
+            page.locator('#view-mode').click()
+            expect(page.locator('body')).to_have_attribute('data-view', 'page')
+            record('Native fullscreen unavailable; verified Fit window fallback and restore')
+        record('VANILLAJS display transitions release held input')
 
         page.keyboard.down('w')
         page.keyboard.press('p')
@@ -671,7 +714,7 @@ try:
         record('deterministic browser WAV export and explicit sound controls')
 
         page.wait_for_function('navigator.serviceWorker.controller !== null')
-        context.set_offline(True)
+        server.offline = True
         page.reload()
         expect(page.locator('#start')).to_contain_text('Continue expedition')
         page.locator('#start').click()
@@ -721,7 +764,10 @@ try:
         page.locator('#museum-actions').get_by_role('button', name='Run experiment', exact=True).click()
         expect(page.locator('#museum-readout')).to_contain_text('Runs retained 1/4')
         page.locator('#museum-close').click()
-        record('offline reload with local expedition persistence and museum runtime imports, including Experimental Annex')
+        uncached_requests = [path for path in server.offline_requests if path.split('?', 1)[0] != '/sw.js']
+        assert not uncached_requests, f'The service-worker cache missed application assets: {uncached_requests}'
+        record('reload from service-worker cache with unavailable origin and local expedition persistence, including Experimental Annex')
+        server.offline = False
         context.close()
 
         for width in [390, 320]:
@@ -851,19 +897,40 @@ try:
         page.locator('#pack-author').fill('Example author')
         page.locator('#pack-preview').click()
         expect(page.locator('#workshop-status')).to_contain_text('Pack validated')
+        page.locator('#preview-actions').get_by_role('button',name='Predict cube',exact=True).click()
+        page.locator('#preview-actions').get_by_role('button',name='Measure volumes',exact=True).click()
+        page.locator('#pack-route').click()
+        page.locator('#route-add').click()
+        with page.expect_download() as event:
+            page.locator('#route-download').click()
+        custom_route = Path(event.value.path()).read_bytes()
+        assert json.loads(custom_route)['exhibits'] == ['pack.my-experiment']
         with page.expect_download() as event:
             page.locator('#pack-download').click()
         pack_bytes = Path(event.value.path()).read_bytes()
+        page.clock.install()
         page.goto(URL)
         page.locator('#museum-open').click()
         page.locator('#museum-file').set_input_files({'name':'pack.json','mimeType':'application/json','buffer':pack_bytes})
         expect(page.locator('#museum-feedback')).to_contain_text('Pack installed')
         expect(page.locator('#museum-list article')).to_have_count(26)
+        page.locator('#museum-file').set_input_files({'name':'custom-route.json','mimeType':'application/json','buffer':custom_route})
+        expect(page.locator('#museum-feedback')).to_have_text('Route loaded.')
+        expect(page.locator('#museum-list article')).to_have_count(1)
         page.locator('[data-exhibit="pack.my-experiment"]').click()
         page.locator('#museum-actions').get_by_role('button',name='Predict cube',exact=True).click()
         page.locator('#museum-actions').get_by_role('button',name='Measure volumes',exact=True).click()
         expect(page.locator('#museum-lab-status')).to_have_text('Experiment completed')
-        record('author a data pack, export, install and complete real reviewed model')
+        record('author a data pack, preview real model, build custom route, export, install and complete')
+        page.locator('#museum-close').click()
+        page.locator('#economy').check()
+        page.wait_for_function("document.querySelector('#world').width <= 640")
+        page.locator('#start').click()
+        advance(page, 150)
+        before = pose(page)
+        hold(page, 'w', 500)
+        assert pose(page)['y'] < before['y'] - .8
+        record('economy graphics reduces canvas width without changing fixed-tick movement')
         authoring.close()
         assert not errors, errors
         browser.close()

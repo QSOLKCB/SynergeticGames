@@ -8,7 +8,7 @@ Clone or fork, run a static HTTP server (uv run --no-project python -m http.serv
 
 Exact fields: kind museum.pack.v1, schema 1, id pack.<lowercase slug up to 32 chars>, title <=100, gallery <=64, question <=512, author <=100, license one of CC0-1.0, CC-BY-4.0, Apache-2.0, MIT, template an allowlisted reviewed ID, templateVersion 1, initial validated template state. Text is rendered as text, not HTML. The source link is the reviewed template source. Imported content cannot supply URLs, JavaScript, expressions, new model definitions or remote assets. Author/license identify the pack's original content, not a relicensing of the template.
 
-Local install is page-session-only; duplicate IDs rejected, max catalogue 32 including expedition, no replacement or eviction. Save exhibit embeds the normalized pack identity and model state; install the identical pack before restoring. Packs do not modify built-in labs. Reload clears local packs. A route referencing a pack requires that pack installed first; route editor lists reviewed built-in/native exhibits only. Existing route/save schemas preserved. Curators can share the pack file or integrate reviewed native source separately.
+Local install is page-session-only; duplicate IDs rejected, max catalogue 32 including expedition, no replacement or eviction. Save exhibit embeds the normalized pack identity and model state; install the identical pack before restoring. Packs do not modify built-in labs. Reload clears local packs. A route referencing a pack requires that pack installed first; the route editor can include reviewed built-in/native exhibits and locally validated packs made available through its explicit button. Existing route/save schemas preserved. Curators can share the pack file or integrate reviewed native source separately.
 
 ## Native source SDK
 
@@ -20,7 +20,7 @@ Edit the reviewed plain-text js/museum/museum-config.js (title, brand, descripti
 
 ## Routes and evidence
 
-Workshop route editor supports adding, removing, reordering reviewed exhibits and loading/exporting validated v1 routes. Evidence inspector recomputes RESEARCH-001 records before displaying their full contents. No state restoration, digital signature or scientific certification. Use node scripts/validate-museum.mjs RECORD.json for local CLI validation (Node is development-only). No external code, private research or service dependencies. See docs/EXPERIMENTAL_ANNEX.md for exact reproducibility scope.
+Workshop route editor supports adding, removing, reordering reviewed exhibits and locally registered packs, and loading/exporting validated v1 routes. Install referenced packs first on each page. Evidence inspector recomputes RESEARCH-001 records before displaying their full contents. No state restoration, digital signature or scientific certification. Use node scripts/validate-museum.mjs RECORD.json for local CLI validation (Node is development-only). No external code, private research or service dependencies. See docs/EXPERIMENTAL_ANNEX.md for exact reproducibility scope.
 
 ## Release acceptance
 

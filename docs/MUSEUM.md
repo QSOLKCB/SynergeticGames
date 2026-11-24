@@ -27,4 +27,4 @@ Public teaching references: [School of Tomorrow](https://github.com/4dsolutions/
 
 ## Scope
 
-The museum is independent, open-source, offline-first and inspectable. It is not an official School of Tomorrow or OMSI publication, does not represent all of Synergetics, and does not claim any new theory of physics. Concentric is the founding collection; the modular host and Volume Exchange are implemented, with further galleries planned in ROADMAP.md.
+The museum is independent, open-source, offline-first and inspectable. It is not an official School of Tomorrow or OMSI publication, does not represent all of Synergetics, and does not claim any new theory of physics. Concentric is the founding collection; the six expanded galleries and Contributor Workshop are implemented in the v1.0.0 candidate. The [teaching guide](TEACHING_GUIDE.md) describes how to turn research into small interactive lessons. Release acceptance remains gated by ROADMAP.md.

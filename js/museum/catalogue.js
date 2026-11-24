@@ -39,10 +39,16 @@ function connectCatalogue({dialog,stop,returnToStation,download,local}){
   const statuses={unvisited:'Not yet visited',visited:'Ready to revisit',complete:'Experiment completed',expedition:'Expedition challenge'};
   const visibleIds=()=>mode==='guided'?route.exhibits:registry.list.map(m=>m.id);
   function updateProgress(){const summary=visitSummary(registry,session,visibleIds());$('museum-progress').textContent=summary.complete+' / '+summary.total+' standalone experiments completed';return summary;}
+  function filterCatalogue(){
+    const q=$('museum-search').value.trim().toLowerCase();let count=0;
+    for(const card of $('museum-list').children){card.hidden=mode==='free'&&q.length>0&&!card.textContent.toLowerCase().includes(q);if(!card.hidden)count++;}
+    $('museum-match-count').textContent=count+' shown';
+  }
   function catalogue(){
     session.unmount();$('museum-list').hidden=false;$('museum-lab').hidden=true;
     $('museum-heading').textContent=museumConfig.title;$('museum-route').textContent=mode==='guided'?'Guided route: '+route.title:'Free exploration';
     $('museum-list').replaceChildren();$('museum-route-tools').hidden=mode!=='guided';
+    $('museum-filter-tools').hidden=mode!=='free';
     const summary=updateProgress();
     for(const [i,{manifest:m,status}] of summary.entries.entries()){
       const card=document.createElement('article'),heading=document.createElement('h3'),brief=document.createElement('p'),meta=document.createElement('p'),state=document.createElement('p'),button=document.createElement('button');
@@ -53,9 +59,11 @@ function connectCatalogue({dialog,stop,returnToStation,download,local}){
       button.textContent=m.kind==='lab'?'Explore '+m.title:'Return to Concentric finale';button.dataset.exhibit=m.id;
       button.addEventListener('click',()=>enter(m.id));card.append(meta,heading,brief,state,button);$('museum-list').append(card);
     }
+    filterCatalogue();
   }
   function paint(focusIndex=null){
     const id=session.active,d=registry.get(id),v=session.describe(),m=d.manifest;
+    $('museum-filter-tools').hidden=true;
     $('museum-heading').textContent=m.title;$('museum-question').textContent=m.question;$('museum-readout').textContent=v.readout;
     $('museum-source').href=m.source;$('museum-explanation').textContent=v.explanation;
     $('museum-explanation').hidden=!$('museum-reveal').checked;
@@ -67,7 +75,7 @@ function connectCatalogue({dialog,stop,returnToStation,download,local}){
     for(const [index,a] of v.actions.entries()){
       const b=document.createElement('button');b.textContent=a.label;b.disabled=a.disabled;
       if(a.pressed!==null&&a.pressed!==undefined)b.setAttribute('aria-pressed',String(a.pressed));
-      b.addEventListener('click',()=>{if(session.active!==id)return;generation++;const wasDone=session.describe().done;const r=session.dispatch(a.action);if(!wasDone&&session.describe().done)$('museum-reveal').checked=true;message(r.message);paint(index);});
+      b.addEventListener('click',()=>{if(session.active!==id)return;generation++;const wasDone=session.status(id)==='complete';const r=session.dispatch(a.action);if(!wasDone&&session.status(id)==='complete')$('museum-reveal').checked=true;message(r.message);paint(index);});
       $('museum-actions').append(b);
     }
     const position=route.exhibits.indexOf(id);
@@ -89,6 +97,8 @@ function connectCatalogue({dialog,stop,returnToStation,download,local}){
   function open(source){
     if(dialog.open)return;opener=source;stop();catalogue();message('Choose an exhibit. All experiments can be revisited.');dialog.showModal();focusTitle();
   }
+  $('museum-search').addEventListener('input',filterCatalogue);
+  $('museum-search-clear').addEventListener('click',()=>{$('museum-search').value='';filterCatalogue();$('museum-search').focus();});
   $('museum-close').addEventListener('click',()=>close());
   dialog.addEventListener('cancel',e=>{e.preventDefault();close();});
   $('museum-back').addEventListener('click',()=>{generation++;catalogue();message('Returned to catalogue.');focusTitle();});
