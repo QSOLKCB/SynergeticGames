@@ -1,70 +1,71 @@
-# SynergeticGames — Concentric
+# SynergeticGames — The Living Museum
 
-**The Department of Unnecessary Cubes has a paperwork problem.**
+**A modular science museum that can be cloned, audited, played and extended.**
 
-A small 2.5D adventure about a whole different way to see. Explore a geometric field station, restore four interactive exhibits, and bring two survey probes into a shared perspective. Hilarious where possible. Correct where it counts.
+Discover mathematics by doing mathematics. Walk through interactive exhibits, change a representation, make a prediction, test a relationship and inspect the evidence. A museum is not a textbook with a movement controller: the interaction itself should reveal the idea.
 
-**Built for the School of Tomorrow. Created by QSOL-IMC as independent contributors to open science. We are not members of the School of Tomorrow.** This is an independent contribution, not an official School of Tomorrow publication or endorsement.
+Built for the School of Tomorrow by QSOL-IMC as independent contributors to open science. **We are not members of the School of Tomorrow.** This is an independent contribution, not an official publication, affiliation or endorsement.
 
-[Play on GitHub Pages](https://qsolkcb.github.io/SynergeticGames/) · [Teaching reference](https://qsolkcb.github.io/synergetics2/#/home) · [Sources and scope](docs/SOURCES.md)
+[Play the current museum expedition](https://qsolkcb.github.io/SynergeticGames/) · [Roadmap](ROADMAP.md) · [Design charter](docs/MUSEUM.md) · [Exhibit authoring](docs/EXHIBITS.md) · [Sources](docs/SOURCES.md) · [Verification](docs/VERIFICATION.md)
 
-**v0.2 — The Field Station Edition.** Follow coloured floor trails through lit exhibit rooms, with shaded holograms, quiet particles, and a compass towards your next connection. The large gold **E / INSPECT** button lights up when an experiment is within reach; a prompt in the view makes the keyboard and touch action explicit. Seven original VANILLAJS cues distinguish selections, connections, mistakes, discoveries, probe switches and the finale. **Fit window** and **Fullscreen** give the station more room.
+## Open today: Concentric — The Field Station Edition
 
-## The expedition
+The released v0.2.0 game is the founding exhibit collection. Pip and Mica explore a 2.5D geometric field station, restore four experiments and link their perspectives. The Department of Unnecessary Cubes still has a paperwork problem.
 
-You control **Pip** and **Mica**, two geometric survey probes with a remarkable ability to make a simple task require two perspectives.
+| Exhibit | Interactive discovery |
+| --- | --- |
+| The Minimum Department | Construct a tetrahedron from four vertices and six struts. |
+| The Volume Bureau | Discover equal-edge tetravolume ratios 1 : 4 : 20. |
+| Neighbourhood Watch | Pair the twelve FCC/IVM nearest-neighbour directions. |
+| The Coordinate Office | Remove a shared Quadray offset without moving the point. |
+| The Concentric Engine | Bring both probes into mutual visibility and alignment. |
 
-| Exhibit | What you do | What you discover |
-|---|---|---|
-| The Minimum Department | Join four vertices with six struts | A tetrahedron closes four triangular faces |
-| The Volume Bureau | Calibrate two targets in tetrahedral units | Equal-edge tetrahedron : octahedron : cuboctahedron volumes are 1 : 4 : 20 |
-| Neighbourhood Watch | Match twelve directions into six opposite pairs | The nearest-neighbour geometry of the FCC / isotropic vector matrix |
-| The Coordinate Office | Remove shared offsets from a Quadray address | Different four-number addresses can represent the same point |
-| The Concentric Engine | Park both probes near the core, face each other, and link | Two viewpoints can contribute to one working system |
+There is no combat, countdown, account or penalty for experimenting. The final relay is fiction, not a physical law. Volume comparisons do not assert that whole regular tetrahedra tile a regular octahedron.
 
-There is no countdown, combat, account, or score penalty for trying something. The relay is a fictional game mechanic, not a proposed physical law. The volume experiment compares quantities; it does not assert that four regular tetrahedra tile a regular octahedron.
-
-## Play
-
-Follow a coloured floor trail toward an exhibit. When the gold **E / INSPECT** button lights up, press **E** or tap it to open the experiment. The compass indicates the next unfinished exhibit; use the map for the route through the rooms. Experiments can be completed in any order. Once all four are restored, bring both probes near the central engine, turn each toward its partner, and hold the link control for two seconds.
+### Visitor controls
 
 | Control | Action |
-|---|---|
-| W / S or ↑ / ↓ | Move forward / backward |
-| A / D | Strafe left / right |
-| ← / → or drag the view | Turn |
-| E | Inspect a nearby exhibit |
-| Q | Switch the controlled probe |
+| --- | --- |
+| W / S or up / down | Move forward / backward |
+| A / D | Strafe |
+| Left / right or drag | Turn |
+| E / Inspect | Open a nearby exhibit |
+| Q | Switch probe |
 | F | Face the other probe |
 | Space | Hold to synchronise |
 | P / Escape | Pause / resume |
-| Tab | Move keyboard focus normally |
+| Tab | Normal keyboard focus |
 
-Touch controls, reduced motion, pause on focus loss, local saves, JSON download/restore and an original WAV soundtrack export are included. Enable **Sound** explicitly. The game works without audio or browser storage; downloadable saves remain available. Offline play is available after the first complete HTTP(S) load and service-worker installation. External reference links need a connection.
+Follow the coloured trails; the compass points towards the next unfinished exhibit. Finish all four, bring both probes near the central engine, face each other and hold the link for two seconds. Touch, reduced motion, fit window, fullscreen, local saves, JSON download/restore and original WAV export are supported. Sound is opt-in. See [the original Field Station README](README_HISTORY.md).
 
-## Run locally
+## The museum we are building
 
-No build, npm install, CDN, Docker, or server application is required. Serve the files with Python:
+**Planned, not yet implemented:** a shared museum host with independently testable exhibits. A visitor may explore freely, follow an educational route, or open a research workbench. The same exhibit should support an accessible first encounter and an inspectable mathematical explanation; advanced tools are optional.
+
+| Gallery | Planned exhibits |
+| --- | --- |
+| Geometry | Quadray construction, IVM/FCC, concentric polyhedra and coordinate perspective |
+| Measurement | S3 Volume Exchange, Pythagorean area transfer, TetraBook |
+| Information | Observer-specific visibility, selective revelation, exact inference and belief propagation |
+| Topology | Simplicial complexes, boundary operators, cycles and holes |
+| Research annex | Numerical model reproduction, parameter sweeps, evidence exports; candidate elastic-loop work subject to source review and permission |
+| Workshop | Author, validate, test and share local exhibit packs |
+
+Our teaching inspiration includes [Kirby Urner's School of Tomorrow](https://github.com/4dsolutions/School_of_Tomorrow), [Ryan's RayShare](https://github.com/RyanJBuchanan/RayShare) and [Synergetics 95](https://qsolkcb.github.io/synergetics2/#/home). Public source materials are references, not a blanket licence to copy everything or a claim of contributor endorsement.
+
+## Clone and play
+
+No npm install, CDN, Docker, account or application server required. Native HTML/CSS/JavaScript; Python serves static files.
 
 ```sh
-uv run --no-project python -m http.server 8765
+git clone https://github.com/QSOLKCB/SynergeticGames.git
+cd SynergeticGames
+uv run --no-project python -m http.server 8765 --bind 127.0.0.1
 ```
 
-Open `http://localhost:8765`. A static HTTP server is needed because the game uses native JavaScript modules; opening `index.html` through `file://` is not supported.
+Open http://localhost:8765. A static HTTP origin is required for native modules; file:// is not supported. After a complete HTTP(S) load and service-worker installation the current game supports offline reload. External reference links require connectivity.
 
-## The actual ingredients
-
-- **[Ryan Jamie’s RayShare](https://github.com/RyanJBuchanan/RayShare)**: adapted DDA raycasting and mutual-facing connection mechanics, with grid-exact sight checks and disk collision added here. MIT notice retained.
-- **[QSOL-IMC VANILLAJS](https://github.com/QSOLKCB/VANILLAJS)**: unchanged math, fixed clock, integer PCM synthesis, soundtrack, audio playback and display-controller modules. Facet lighting uses the math module; the runtime uses these modules directly.
-- **[Synergetics 95](https://qsolkcb.github.io/synergetics2/#/home)**: unchanged tested geometry helpers, plus the educator edition as the reference for the original game explanations. MPL-2.0 source and notices retained.
-- **[Kirby Urner’s channel](https://www.youtube.com/@kirbyurner)**: curriculum inspiration, especially [The Proposal (Martian Math Portfolio)](https://www.youtube.com/watch?v=wxMmUJygIRg).
-- **[Polydactica’s Earthbound Music playlist](https://www.youtube.com/playlist?list=PLbcn_8NsfcIrKQPqpC8VTEeTPBVlRe0E4)**: musical mood reference. The game contains a new composition, *A Small Department on a Very Large Planet*, with no EarthBound melodies, samples, or recordings.
-
-Exact source commits and file hashes are recorded in [vendor/PROVENANCE.json](vendor/PROVENANCE.json). The raycast world is 2.5D; its floating geometric exhibits use projected 3D vertices. All visuals are procedural Canvas 2D, so WebGL is not required.
-
-## Validate
-
-The browser needs no Node runtime. Development checks use Node's built-in test runner, and browser checks use Python with a pinned Playwright version:
+## Audit
 
 ```sh
 node --test tests/*.test.js
@@ -72,12 +73,16 @@ uv run --no-project --python 3.12 --with playwright==1.62.0 python -m playwright
 uv run --no-project --python 3.12 --with playwright==1.62.0 python tests/browser.py
 ```
 
-Browser checks traverse the station and complete the actual UI, then exercise the relay, saves, malformed input, offline reload, sound controls, missing audio/storage and 390/320 px layouts. Each run writes a current PASS or FAIL receipt and screenshots under `test-results/`. See [verification notes](docs/VERIFICATION.md) for the executed evidence and limits.
+Node is a development test runner only. Browser checks exercise actual gameplay, save validation, offline reload, sound, layout and focus. Current receipts and screenshots are written under test-results/. See [verification scope](docs/VERIFICATION.md); historical PASS results do not certify a new commit.
 
-Pull requests validate without deploying. Every change merged to `main` runs the checks and then the GitHub Pages deployment. Pages must use **GitHub Actions** as its source. No merge or repository-settings change is performed by this contribution.
+[Source provenance](vendor/PROVENANCE.json) records pinned upstream revisions and file hashes. Current runtime uses selected older VANILLAJS modules. [VANILLAJS v3.5.0](https://github.com/QSOLKCB/VANILLAJS/releases/tag/v3.5.0) is the next integration baseline, not a claim that it is already installed.
 
-## Open science, open source
+## Extend
 
-Original game code, score, graphics and writing: **Apache-2.0**. Retained RayShare files/adaptation: **MIT**. Retained Synergetics 95 geometry: **MPL-2.0**. See [NOTICE.md](NOTICE.md).
+Start with [CONTRIBUTING.md](CONTRIBUTING.md) and the proposed [exhibit contract](docs/EXHIBITS.md). An exhibit should have a question, an interaction, a mathematical or experimental model, source attribution and a way to check its result. Educators can propose an exhibit without writing code.
 
-For the School of Tomorrow, from independent contributors to open science. Geometry is a team sport. :-)
+Pull requests validate; only main deploys through GitHub Actions. No merge without owner authorization.
+
+Original code, score, graphics and writing are Apache-2.0. Retained RayShare code is MIT and retained Synergetics 95 geometry is MPL-2.0; see [NOTICE.md](NOTICE.md). Preserve licences and provenance at the file level.
+
+**Geometry is a team sport. Science is something you can do. :-)**
