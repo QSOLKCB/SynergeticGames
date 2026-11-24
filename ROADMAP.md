@@ -19,7 +19,7 @@ Versions are targets, not release commitments. A gated research exhibit may be d
 
 ## MUSEUM-001 — first implementation release
 
-Engine bridge candidate: existing runtime byte identities checked against v3.5.0; exact-rational/graph integrated for tested museum model foundations. The Pages workflow regression guard accompanies this work. The host, visitor-facing exhibits and polish remain separate follow-up work; this is not a completed v0.3.0 release.
+Engine bridge merged (PR #5). MUSEUM-001B adds the first host, independent founding labs, bounded local route/save records and catalogue navigation. Volume Exchange and polish remain separate follow-up work; this is not a completed v0.3.0 release.
 
 Four sequential reviewable PRs, each based on accepted main (no overlapping unmerged dependencies):
 

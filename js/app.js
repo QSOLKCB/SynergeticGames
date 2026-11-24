@@ -6,6 +6,7 @@ import {createGame,step,seals,completed,nearestExhibit,linkStatus,labAction,swit
 import {EXHIBITS,DIRECTIONS,GEO,SOURCE,CORE} from './world.js';
 import {createRenderer,drawLab} from './render.js';
 import {audioSystem,soundtrack} from './music.js';
+import {connectMuseum} from './museum/catalogue.js';
 const $=id=>document.getElementById(id),STORAGE='concentric.expedition.v1';
 let state=createGame(),started=false,paused=false,labId=null,pair=null,victoryShown=false,importGeneration=0;
 const keyboard=new Set(),touches=new Map();let drag=null;
@@ -15,7 +16,7 @@ const status=message=>{$('status').textContent=message;};
 const audio=audioSystem(status);
 const reducedQuery=matchMedia('(prefers-reduced-motion: reduce)');$('motion').checked=reducedQuery.matches;
 let lastRender=0,lastHUD='',lastTime=performance.now();
-function blocked(){return !started||paused||$('lab').open||$('notebook').open||!$('victory').hidden;}
+function blocked(){return !started||paused||$('lab').open||$('notebook').open||$('museum').open||!$('victory').hidden;}
 function clearInput(){keyboard.clear();touches.clear();drag=null;state.sync=state.won?120:0;}
 function stopTime(){clearInput();clock.setPaused(true);audio.stop();}
 const display=createDisplayController({root:document.documentElement,initial:'page',onTransition:stopTime,onChange(view){
@@ -120,6 +121,8 @@ function updateHUD(force=false){
   $('sync-progress').value=state.sync;
   $('world').dataset.position=JSON.stringify(state.probes[state.active]);$('world').dataset.tick=String(state.tick);$('world').dataset.seals=String(count);
 }
+const museum=connectMuseum({dialog:$('museum'),stop:stopTime,returnToStation:()=>{if(!started)begin();else if(paused)$('resume').focus();else if(!$('victory').hidden)$('continue').focus();else focusWorld();updateHUD(true);},download});
+$('museum-open').addEventListener('click',()=>museum.open($('museum-open')));
 $('start').addEventListener('click',()=>{begin();updateHUD(true);});
 $('pause').addEventListener('click',()=>setPause(!paused));$('resume').addEventListener('click',()=>setPause(false));
 $('switch').addEventListener('click',()=>{if(!blocked()){clearInput();switchProbe(state);audio.cue('switch');updateHUD(true);saveLocal();}focusWorld();});
@@ -144,7 +147,7 @@ $('restart').addEventListener('click',()=>{$('confirm-restart').hidden=false;$('
 $('continue').addEventListener('click',()=>{$('victory').hidden=true;focusWorld();});
 const movement=new Set(['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space']);
 window.addEventListener('keydown',event=>{
-  if(event.target.closest?.('input,textarea,select')||event.target.isContentEditable||$('lab').open||$('notebook').open)return;
+  if(event.target.closest?.('input,textarea,select')||event.target.isContentEditable||$('lab').open||$('notebook').open||$('museum').open)return;
   // Pausing focuses Resume; the same shortcuts must work from that button.
   if(event.code==='KeyP'||event.code==='Escape'){if(!event.repeat&&started){event.preventDefault();setPause(!paused);}return;}
   if(event.target.closest?.('button,a,summary'))return;
@@ -156,8 +159,8 @@ window.addEventListener('keydown',event=>{
   if(event.code==='KeyF'){event.preventDefault();facePartner(state);}
 });
 window.addEventListener('keyup',e=>keyboard.delete(e.code));
-window.addEventListener('blur',()=>{stopTime();if(started&&!$('lab').open&&!$('notebook').open)setPause(true);});
-document.addEventListener('visibilitychange',()=>{if(document.hidden){stopTime();if(started)setPause(true);saveLocal();}});
+window.addEventListener('blur',()=>{stopTime();if(started&&!$('lab').open&&!$('notebook').open&&!$('museum').open)setPause(true);});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){stopTime();if(started&&!$('museum').open)setPause(true);saveLocal();}});
 window.addEventListener('pagehide',()=>{stopTime();saveLocal();});
 for(const b of document.querySelectorAll('[data-hold]')){
   b.addEventListener('pointerdown',e=>{e.preventDefault();if(blocked()||e.button>0)return;touches.set(e.pointerId,b.dataset.hold);b.setPointerCapture(e.pointerId);});

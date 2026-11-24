@@ -1,6 +1,6 @@
-# Exhibit authoring contract — proposed v1
+# Exhibit authoring contract — v1 host and future SDK
 
-This is the design contract for MUSEUM-001, not an implemented SDK. The first host PR must define concrete schemas and tests before external packs are supported.
+The initial reviewed-source registry and data-only route/save schemas are specified in [MUSEUM_HOST.md](MUSEUM_HOST.md). The broader external exhibit-pack SDK below remains proposed; imported records cannot register executable models.
 
 ## Minimum exhibit
 

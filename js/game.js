@@ -44,6 +44,10 @@ export function switchProbe(s){s.active=1-s.active;if(!s.won)s.sync=0;}
 export function facePartner(s){const p=s.probes[s.active],b=s.probes[1-s.active];p.angle=Math.atan2(b.y-p.y,b.x-p.x);}
 export function labAction(s,id,action,value){
   if(s.won||nearestExhibit(s)?.id!==id)return {ok:false,message:'Walk closer to the exhibit first.'};
+  return applyLabAction(s,id,action,value);
+}
+// Shared puzzle transitions; callers own access policy and isolated state.
+export function applyLabAction(s,id,action,value){
   if(completed(s,id))return {ok:false,message:'Exhibit restored. The paperwork is finally finished.'};
   if(id==='tetra'&&action==='edge'&&EDGES.includes(value)){
     if(s.labs.tetra.includes(value))return {ok:false,message:'That strut is already installed.'};
