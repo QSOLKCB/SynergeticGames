@@ -1,8 +1,10 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 const PREFIX='concentric-'+new URL(self.registration.scope).pathname+'-';
-const CACHE=PREFIX+'v0.2.0-2';
+const CACHE=PREFIX+'v0.3.0-host-1';
 const ASSETS=['./','./index.html','./style.css','./assets/icon.svg',
   './js/app.js','./js/game.js','./js/world.js','./js/render.js','./js/music.js',
+  './js/museum/registry.js','./js/museum/catalogue.js','./js/museum/founding.js','./js/museum/topology.js',
+  './vendor/vanillajs/modules/exact-graph/index.js','./vendor/vanillajs/modules/exact-rational/index.js',
   './vendor/rayshare/raycast.js','./vendor/synergetics95/js/math.js',
   './vendor/vanillajs/modules/math/index.js','./vendor/vanillajs/modules/time/index.js',
   './vendor/vanillajs/modules/audio2d/index.js','./vendor/vanillajs/modules/soundtrack/index.js',

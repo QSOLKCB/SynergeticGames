@@ -19,7 +19,7 @@
     <div class="heading-row"><div><p class="eyebrow">THE DEPARTMENT OF UNNECESSARY CUBES PRESENTS</p><h1>Concentric<span>.</span></h1></div><p class="tagline">A small adventure.<br>A whole different way to see.</p></div>
     <div class="toolbar" aria-label="Expedition tools">
       <div class="tool-group"><button id="pause" disabled>Pause <kbd>P</kbd></button><button id="switch" disabled>Switch probe <kbd>Q</kbd></button><button id="face" disabled>Face partner <kbd>F</kbd></button></div>
-      <div class="tool-group"><button id="sound" aria-pressed="false">Sound off</button><button id="view-mode" aria-pressed="false">Fit window</button><button id="fullscreen">Fullscreen ⛶</button><button id="notes">Field notes</button><button id="save">Save</button><button id="load">Load</button><input id="file" type="file" accept="application/json,.json" hidden></div>
+      <div class="tool-group"><button id="sound" aria-pressed="false">Sound off</button><button id="view-mode" aria-pressed="false">Fit window</button><button id="fullscreen">Fullscreen ⛶</button><button id="museum-open">Museum catalogue</button><button id="notes">Field notes</button><button id="save">Save</button><button id="load">Load</button><input id="file" type="file" accept="application/json,.json" hidden></div>
     </div>
     <div class="expedition">
       <section class="viewport" aria-label="Expedition view">
@@ -80,6 +80,22 @@
     <p><a href="https://www.youtube.com/playlist?list=PLbcn_8NsfcIrKQPqpC8VTEeTPBVlRe0E4" target="_blank" rel="noopener">Polydactica’s Earthbound Music playlist</a> is a mood reference. Our score, <em>A Small Department on a Very Large Planet</em>, is original procedural music, made with <a href="https://github.com/QSOLKCB/VANILLAJS" target="_blank" rel="noopener">VANILLAJS</a>.</p>
     <div class="notebook-actions"><button id="wav">Download original soundtrack</button><button id="restart">Start a new expedition</button><button id="confirm-restart" hidden>Confirm new expedition</button></div>
     <p class="smallprint">Game code: Apache-2.0. RayShare adaptation: MIT. Synergetics 95 geometry: MPL-2.0. Source and retained notices are in the repository. This game explores Fuller’s geometry; it does not model Haken’s separate synergetics tradition.</p>
+  </dialog>
+  <dialog id="museum" aria-labelledby="museum-heading">
+    <div class="dialog-top"><p class="eyebrow">SYNERGETICGAMES / THE LIVING MUSEUM</p><button id="museum-close" aria-label="Close museum">×</button></div>
+    <h2 id="museum-heading" tabindex="-1">The Living Museum</h2>
+    <div class="museum-tools"><label for="museum-mode">Visit mode</label><select id="museum-mode"><option value="free">Free exploration</option><option value="guided">Guided route</option></select><button id="museum-load">Load exhibit or route</button><input id="museum-file" type="file" accept="application/json,.json" hidden></div>
+    <p id="museum-route"></p>
+    <div id="museum-list" class="museum-list"></div>
+    <section id="museum-lab" hidden>
+      <p id="museum-question"></p><canvas id="museum-canvas" width="640" height="300" aria-label="Geometric model; values are described below"></canvas>
+      <p id="museum-readout" class="readout" aria-live="polite"></p><div id="museum-actions" class="lab-controls"></div>
+      <label><input type="checkbox" id="museum-reveal"> Reveal explanation</label><p id="museum-explanation" hidden></p>
+      <p><a id="museum-source" target="_blank" rel="noopener">Source reference ↗</a></p>
+      <div class="museum-tools"><button id="museum-reset">Reset exhibit</button><button id="museum-export">Save exhibit</button><button id="museum-back">Back to catalogue</button><button id="museum-next" hidden>Next stop</button></div>
+    </section>
+    <p id="museum-feedback" role="status" aria-live="polite"></p>
+    <p class="smallprint">Standalone experiments do not affect your expedition. The Concentric Engine remains an expedition-only challenge.</p>
   </dialog>
   <noscript>This expedition needs JavaScript. Its code and geometry run locally in your browser.</noscript>
   <script type="module" src="js/app.js"></script>

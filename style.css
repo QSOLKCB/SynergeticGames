@@ -53,3 +53,16 @@ body:is([data-view=fit],[data-view=fullscreen]) footer{margin-top:0;padding-top:
   .inspect-hint{bottom:125px;padding:9px 12px;font-size:11px;gap:8px}.wayfinder{max-width:190px;top:38px;padding:6px 9px}.wayfinder strong{font-size:10px}
   .toolbar button{min-height:38px}#fullscreen{font-size:9px}
 }
+
+/* MUSEUM-001B: catalogue and bounded local exhibit views. */
+#museum{max-width:760px;width:calc(100% - 24px);max-height:90dvh;overflow:auto}
+#museum [hidden]{display:none!important}
+.museum-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0}
+.museum-tools select{font:inherit;max-width:100%;min-height:44px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:4px;padding:6px}
+#museum button{min-height:44px;white-space:normal}
+.museum-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;margin:12px 0}
+.museum-list article{border:1px solid var(--line);border-radius:5px;padding:14px;min-width:0;display:flex;flex-direction:column;align-items:start}
+.museum-list article button{margin-top:auto;text-align:left}
+#museum-canvas{display:block;width:100%;height:auto;background:#102d38;border:1px solid #52756e;border-radius:5px}
+#museum-feedback{margin-top:14px;overflow-wrap:anywhere}
+#museum-readout{overflow-wrap:anywhere}
