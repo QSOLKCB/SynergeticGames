@@ -420,12 +420,12 @@ try:
         lab.get_by_role('button', name='Run experiment', exact=True).click()
         with page.expect_download() as event:
             page.locator('#museum-evidence-export').click()
-        receipt = Path(event.value.path()).read_bytes()
-        parsed = json.loads(receipt)
+        evidence_receipt = Path(event.value.path()).read_bytes()
+        parsed = json.loads(evidence_receipt)
         assert parsed['kind'] == 'museum.research.evidence.v1'
         assert len(parsed['runs']) == 2
         assert parsed['runs'][0]['rows'][0]['status'] == 'FAIL'
-        page.locator('#museum-file').set_input_files({'name': 'evidence.json', 'mimeType': 'application/json', 'buffer': receipt})
+        page.locator('#museum-file').set_input_files({'name': 'evidence.json', 'mimeType': 'application/json', 'buffer': evidence_receipt})
         expect(page.locator('#museum-feedback')).to_contain_text('Evidence reproduced: quadrature; 2 run(s)')
         expect(page.locator('#museum-readout')).to_contain_text('Runs retained 2/4')
         parsed['runs'][0]['rows'][0]['error'] = 0
