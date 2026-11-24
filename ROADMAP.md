@@ -19,6 +19,8 @@ Versions are targets, not release commitments. A gated research exhibit may be d
 
 ## MUSEUM-001 — first implementation release
 
+Engine bridge candidate: existing runtime byte identities checked against v3.5.0; exact-rational/graph integrated for tested museum model foundations. The Pages workflow regression guard accompanies this work. The host, visitor-facing exhibits and polish remain separate follow-up work; this is not a completed v0.3.0 release.
+
 Four sequential reviewable PRs, each based on accepted main (no overlapping unmerged dependencies):
 
 1. **Engine bridge.** Audit and selectively vendor from VANILLAJS v3.5.0 commit `9d95d74b355ec17add32db0b55f0f71130f9c004`. Check actual API contracts, dependencies, licensing and file hashes; retain existing versions where replacement adds no benefit. Candidate modules: exact-rational, exact-geometry, exact-graph, input/gamepad, scene-graph and render-lit. Evaluate optional render-webgl/fx-pipe later against measured needs; preserve Canvas 2D fallback. No rendering-authority coupling. Demonstrate equivalent legacy gameplay, saves and WAV bytes.
