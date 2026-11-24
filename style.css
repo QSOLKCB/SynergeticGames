@@ -69,7 +69,7 @@ body:is([data-view=fit],[data-view=fullscreen]) footer{margin-top:0;padding-top:
 
 /* MUSEUM-001D: a museum entrance, not just a field-station toolbar. */
 .museum-entrance h1{font-size:clamp(36px,4.6vw,68px);letter-spacing:-.055em}
-.museum-entry{background:#1a6662;color:#fff;border-color:#1a6662;order:-1}
+.museum-entry{background:#1a6662;color:#fff;border-color:#1a6662}
 .museum-entry:hover{background:#124c49}
 #museum{max-width:850px}
 #museum-heading:focus-visible,#museum select:focus-visible,#museum input:focus-visible{outline:3px solid #a26416;outline-offset:3px}
